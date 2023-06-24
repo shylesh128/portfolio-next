@@ -1,38 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Personal Portfolio
 
-## Getting Started
+This is my personal portfolio showcasing my projects, skills, and experiences.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- [About](#about)
+- [Projects](#projects)
+- [Skills](#skills)
+- [Experience](#experience)
+- [Contact](#contact)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## About
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+In this section, provide a brief introduction about yourself and your background. Talk about your passion for programming, your interests, and any other relevant information you would like to share.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Projects
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+List and describe the projects you have worked on. Include details such as the project name, a brief description, technologies used, and any notable achievements or outcomes. You can also include screenshots or links to the live demos or repositories of your projects.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Project 1
 
-## Learn More
+- Name: My Project 1
+- Description: This project is a web application that allows users to create and share recipes. It was built using React.js, Node.js, and MongoDB. It features a responsive design, user authentication, and real-time updates.
+- Demo: [Live Demo](https://www.example.com)
+- Repository: [GitHub Repository](https://www.github.com/username/project1)
 
-To learn more about Next.js, take a look at the following resources:
+### Project 2
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Name: My Project 2
+- Description: This project is a mobile app for task management. It was developed using React Native and Firebase. It supports push notifications, offline mode, and data synchronization across multiple devices.
+- Demo: [Live Demo](https://www.example.com)
+- Repository: [GitHub Repository](https://www.github.com/username/project2)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Skills
 
-## Deploy on Vercel
+Outline the programming languages, frameworks, tools, or other relevant skills you possess. Provide a brief description of each skill and your proficiency level. You can use a scale such as beginner, intermediate, or advanced.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- JavaScript (Advanced)
+- Python (Intermediate)
+- HTML/CSS (Advanced)
+- React.js (Advanced)
+- Node.js (Intermediate)
+- SQL (Intermediate)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Experience
+
+List your previous work experiences related to programming, internships, or any other relevant positions. Include the company name, your job title, and a brief description of your responsibilities and achievements.
+
+- Company: XYZ Software
+
+  - Job Title: Software Developer
+  - Description: Developed web applications using React.js and integrated APIs for data retrieval. Collaborated with a team of developers to deliver high-quality software within tight deadlines.
+
+- Company: ABC Startup
+  - Job Title: Intern
+  - Description: Assisted in front-end development tasks and conducted unit testing. Participated in code reviews and gained practical experience in an agile development environment.
+
+## Contact
+
+Provide your contact information, such as your email address, LinkedIn profile, or any other preferred method of communication. Encourage visitors to reach out to you for collaborations, job opportunities, or any other inquiries.
+
+- Email: example@example.com
+- LinkedIn: [Your LinkedIn Profile](https://www.linkedin.com/in/yourname)
+
+Feel free to reach out to me. I'm always open to new opportunities and collaborations!
