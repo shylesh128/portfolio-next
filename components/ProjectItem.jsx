@@ -1,4 +1,3 @@
-// components/ProjectItem.js
 import { motion } from "framer-motion";
 
 const itemVariants = {
@@ -6,7 +5,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-const ProjectItem = ({ title, description, link }) => {
+const ProjectItem = ({ title, description, link, preview }) => {
   return (
     <motion.div
       className="project-item"
@@ -14,11 +13,14 @@ const ProjectItem = ({ title, description, link }) => {
       animate="visible"
       variants={itemVariants}
     >
-      <h3>{title}</h3>
-      <p>{description}</p>
-      <a href={link} target="_blank" rel="noopener noreferrer">
-        Learn More
-      </a>
+      <img src={preview} alt={title} className="project-preview" />
+      <div className="project-info">
+        <h3>{title}</h3>
+        <p>{description}</p>
+        <a href={link} target="_blank" rel="noopener noreferrer">
+          Learn More
+        </a>
+      </div>
     </motion.div>
   );
 };

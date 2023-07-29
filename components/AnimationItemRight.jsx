@@ -3,7 +3,7 @@ import { useAnimation, motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const squareVariants = {
-  visible: { opacity: 1, x: 0, transition: { duration: 1 } },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, delay: 1 } }, // Added delay here
   hidden: { opacity: 0, x: "100%" },
 };
 

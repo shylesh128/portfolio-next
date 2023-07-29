@@ -1,5 +1,7 @@
-// components/Projects.js
 import { motion } from "framer-motion";
+import ProjectItem from "./ProjectItem";
+import { AnimationItemRight } from "./AnimationItemRight";
+import { AnimationItemLeft } from "./AnimationItemLeft";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -8,7 +10,7 @@ const sectionVariants = {
 
 const Projects = ({ projects }) => {
   return (
-    <section>
+    <section className="projects-section">
       <motion.div
         className="projects-content"
         initial="hidden"
@@ -16,15 +18,29 @@ const Projects = ({ projects }) => {
         variants={sectionVariants}
       >
         <h2>Projects</h2>
-        {projects.map((project, index) => (
-          <div key={index}>
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <a href={project.link} target="_blank" rel="noopener noreferrer">
-              Learn More
-            </a>
-          </div>
-        ))}
+        <div className="projects-grid">
+          {projects.map((project, index) =>
+            index % 2 !== 0 ? (
+              <AnimationItemRight key={index}>
+                <ProjectItem
+                  title={project.title}
+                  description={project.description}
+                  link={project.link}
+                  preview={project.preview}
+                />
+              </AnimationItemRight>
+            ) : (
+              <AnimationItemLeft key={index}>
+                <ProjectItem
+                  title={project.title}
+                  description={project.description}
+                  link={project.link}
+                  preview={project.preview}
+                />
+              </AnimationItemLeft>
+            )
+          )}
+        </div>
       </motion.div>
     </section>
   );

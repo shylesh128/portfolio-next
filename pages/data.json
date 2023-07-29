@@ -1,7 +1,7 @@
 {
   "name": "Shylesh S",
   "title": "Full Stack Developer",
-  "description": "An ambitious JavaScript Developer with knowledge in the MERN and Next JS stack; keenly interested in full stack development. Exploring potential career paths in blockchain development.",
+  "description": "Hii, I am a Full stack Developer with knowledge in the MERN and Next JS stack. Exploring potential career paths in Machine learning.",
   "image": "/shylesh.jpg",
   "contact": {
     "email": "shyleshstylo@gmail.com",
@@ -47,16 +47,71 @@
   ],
   "projects": [
     {
-      "title": "Pathway to Passion - Wildlife Awareness Club",
-      "description": "Developed a website for a club promoting wildlife awareness and conservation, including user login, event registration, and news updates. Technologies used: HTML, CSS, JavaScript, PHP & MySQL."
+      "title": "Wildlife Awareness And Conservation Club",
+      "description": "Developed a website for a club promoting wildlife awareness and conservation, including user login, event registration, and news updates. Technologies used: HTML, CSS, JavaScript, PHP & MySQL.",
+      "link": "https://github.com/shylesh128/wacc-project/tree/main",
+      "preview": "/projects/waac-project.png"
     },
     {
       "title": "ARTY Client-side Website",
-      "description": "Built a website with Selling, Buying & Learning, Cart, and Favorite list features. Technologies used: HTML, CSS & JavaScript."
+      "description": "Built a website with Selling, Buying & Learning, Cart, and Favorite list features. Technologies used: HTML, CSS & JavaScript.",
+      "link": "https://arty-shop.vercel.app/",
+      "preview": "/projects/arty-shop.png"
     },
     {
       "title": "Thesis on Cyber Criminology and Cyber Laws",
-      "description": "Completed a thesis based on cyber criminology and cyber laws contribution to modern cyber-crimes and laws."
+      "description": "Completed a thesis based on cyber criminology and cyber laws contribution to modern cyber-crimes and laws.",
+      "link": "https://drive.google.com/file/d/1Pu571YfC7iRthM4EWi4QWIpK9kO4-BXs/view",
+      "preview": "/projects/cyber-criminology-and-cyber-laws.png"
+    },
+    {
+      "preview": "/projects/code-editor.png",
+      "altText": "JavaScript Code Compiler Preview",
+      "title": "JavaScript Code Compiler",
+      "description": "Compile and run JavaScript code with ease using our simple code editor. Test your programming skills and see instant results!",
+      "link": "./code-editor-js/index.html"
+    },
+    {
+      "preview": "/projects/painter.png",
+      "altText": "Paint Tool Preview",
+      "title": "Paint Tool",
+      "description": "Unleash your creativity with our easy-to-use paint tool. Create beautiful digital artwork and let your imagination soar!",
+      "link": "https://animation-portfolio-omega.vercel.app/painter/index.html"
+    },
+    {
+      "preview": "/projects/interactive-balls-animation.png",
+      "altText": "Animation: The Collision Craze",
+      "title": "The Collision Craze",
+      "description": "Watch an exciting animation of balls colliding, bouncing, and creating fascinating patterns. It's a visual treat for all!",
+      "link": "https://animation-portfolio-omega.vercel.app/ball/index.html"
+    },
+    {
+      "preview": "/projects/basic-cube.png",
+      "altText": "Simple 3D Cube Preview",
+      "title": "3D Cube",
+      "description": "Explore a rotating 3D cube in a basic yet mesmerizing animation. Discover the magic of simple 3D graphics!",
+      "link": "https://animation-portfolio-omega.vercel.app/basic-cube/index.html"
+    },
+    {
+      "preview": "/projects/multiple-rubics.png",
+      "altText": "Animation: 3D Rubik's Cubes",
+      "title": "3D Rubik's Cubes",
+      "description": "Witness multiple Rubik's cubes twisting and turning in a captivating animation. It's a delight for puzzle enthusiasts!",
+      "link": "https://animation-portfolio-omega.vercel.app/multi/rubkis.html"
+    },
+    {
+      "preview": "/projects/circles-circles.png",
+      "altText": "Circles Animation Preview",
+      "title": "Circles spray",
+      "description": "Experience the joy of painting with clicks in a mesmerizing animation of colorful circles. Create your own abstract masterpiece!",
+      "link": "https://animation-portfolio-omega.vercel.app/paint/index.html"
+    },
+    {
+      "preview": "/projects/single-4x4-rubics.png",
+      "altText": "Preview: 4x4 Rubik's Cube",
+      "title": "4x4 Rubik's Cube",
+      "description": "Challenge yourself with a 4x4 Rubik's cube and unravel its secrets. Can you solve this classic puzzle?",
+      "link": "https://animation-portfolio-omega.vercel.app/single-cube/index.html"
     }
   ],
   "education": [
@@ -73,7 +128,6 @@
       "institution": "St. Joseph’s Pre-University College, Bengaluru"
     }
   ],
-
   "interests": ["Graphic Designing", "Charcoal Sketching", "Glass Painting"],
   "certificates": [
     {
