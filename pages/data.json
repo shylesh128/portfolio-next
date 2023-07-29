@@ -1,0 +1,177 @@
+{
+  "name": "Shylesh S",
+  "title": "Full Stack Developer",
+  "description": "An ambitious JavaScript Developer with knowledge in the MERN and Next JS stack; keenly interested in full stack development. Exploring potential career paths in blockchain development.",
+  "image": "/shylesh.jpg",
+  "contact": {
+    "email": "shyleshstylo@gmail.com",
+    "phone": "+91 7760043578",
+    "location": "Bengaluru, India",
+    "LinkedIn": "https://www.linkedin.com/in/s-shylesh/"
+  },
+  "skills": [
+    "HTML/CSS",
+    "NEXT JS",
+    "NODE JS",
+    "SQL",
+    "REACT JS",
+    "EXPRESS JS",
+    "PYTHON",
+    "MONGO DB"
+  ],
+  "experiences": [
+    {
+      "title": "Junior Full Stack Developer",
+      "company": "ANSR Source India Private Limited, Bengaluru",
+      "logo": "ansr-logo.png",
+      "dates": "April 2023 – Present",
+      "description": "As a Junior Full Stack Developer, I led various projects aimed at improving our platform's tools and user interfaces.",
+      "works": [
+        "Developed a proprietary Plagiarism Tool using Next JS and Express, improving content originality and accountability within our platform.",
+        "Spearheaded the improvement of Front End styles for the GranuLearn app, leading to a more engaging and user-friendly interface.",
+        "Designed and implemented an innovative authoring tool and player with Next JS, empowering content creators and enhancing the learning experience for users."
+      ]
+    },
+    {
+      "title": "Full Stack Developer Intern",
+      "company": "ANSR Source India Private Limited, Bengaluru",
+      "logo": "ansr-logo.png",
+      "dates": "Oct 2022 – March 2023",
+      "description": "As a Full Stack Developer Intern, I was instrumental in modernizing key components of the platform from traditional web technologies to Next JS.",
+      "works": [
+        "Executed a successful migration of the admin portal to Next JS, enhancing its manageability and performance.",
+        "Upgraded the player to Next JS, resulting in notable performance improvements and a better user experience.",
+        "Revamped the GranuLearn frontend using Next JS, enhancing the user interface and experience."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Pathway to Passion - Wildlife Awareness Club",
+      "description": "Developed a website for a club promoting wildlife awareness and conservation, including user login, event registration, and news updates. Technologies used: HTML, CSS, JavaScript, PHP & MySQL."
+    },
+    {
+      "title": "ARTY Client-side Website",
+      "description": "Built a website with Selling, Buying & Learning, Cart, and Favorite list features. Technologies used: HTML, CSS & JavaScript."
+    },
+    {
+      "title": "Thesis on Cyber Criminology and Cyber Laws",
+      "description": "Completed a thesis based on cyber criminology and cyber laws contribution to modern cyber-crimes and laws."
+    }
+  ],
+  "education": [
+    {
+      "degree": "B. Sc. in Computers, Math, Electronics",
+      "percentage": "75.59%",
+      "dates": "2019-2022",
+      "institution": "St. Joseph’s College, Bengaluru"
+    },
+    {
+      "degree": "PUC in PCME",
+      "percentage": "82.33%",
+      "dates": "2017-2019",
+      "institution": "St. Joseph’s Pre-University College, Bengaluru"
+    }
+  ],
+
+  "interests": ["Graphic Designing", "Charcoal Sketching", "Glass Painting"],
+  "certificates": [
+    {
+      "platform": "freeCodeCamp",
+      "logo": "freeCodeCamp logo",
+      "title": "Front End Development Libraries",
+      "issuedDate": "Jun 2023",
+      "skills": ["Bootstrap", "jQuery", "React.js", "redux", "SASS"],
+      "link": "https://www.freecodecamp.org/certification/shyleshstylo/front-end-development-libraries",
+      "image": "/cert/front-end-libraries.png"
+    },
+    {
+      "platform": "Udemy",
+      "logo": "Udemy logo",
+      "title": "Node.js, Express, MongoDB & More: The Complete Bootcamp 2023",
+      "issuedDate": "Jun 2023",
+      "credentialId": "UC-15f95138-f169-4715-aa92-2b79d6518292",
+      "skills": ["MongoDB", "Node js", "Express.js"],
+      "link": "https://ude.my/UC-15f95138-f169-4715-aa92-2b79d6518292"
+    },
+    {
+      "platform": "Cisco thingQbator RGIPT",
+      "logo": "Cisco thingQbator RGIPT logo",
+      "title": "FULL STACK DEVELOPMENT WITH MERN",
+      "issuedDate": "Nov 2022",
+      "credentialId": "1668707081301",
+      "link": "https://thingqbator.s3.ap-south-1.amazonaws.com/1668707081301_Shylesh_Course-Excellence.jpg"
+    },
+    {
+      "platform": "Great Learning",
+      "logo": "Great Learning logo",
+      "title": "Front end web development",
+      "issuedDate": "Feb 2022",
+      "credentialId": "6HXFGR2BIM",
+      "link": "https://dtmvamahs40ux.cloudfront.net/ComplementaryCourseCertificate/794046/original/Shylesh._S20220215-23539-ojcdo8.jpg"
+    },
+    {
+      "platform": "freeCodeCamp",
+      "logo": "freeCodeCamp logo",
+      "title": "JavaScript Algorithms and Data Structures",
+      "issuedDate": "Jan 2022",
+      "link": "https://www.freecodecamp.org/certification/shyleshstylo/javascript-algorithms-and-data-structures"
+    },
+
+    {
+      "platform": "LinkedIn",
+      "logo": "LinkedIn logo",
+      "title": "Become a Software Developer",
+      "issuedDate": "Jun 2022",
+      "skills": ["Software Development", "Programming"],
+      "link": "https://www.linkedin.com/learning/certificates/a1c00fd686a2f53af816d7d982eb734c9e25b601551050106055106f0dd7c5a1?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bin3tDrCEQX2fCN3Zl9Tq1g%3D%3D"
+    },
+    {
+      "platform": "freeCodeCamp",
+      "logo": "freeCodeCamp logo",
+      "title": "Responsive Web Design",
+      "issuedDate": "Dec 2021",
+      "link": "https://www.freecodecamp.org/certification/shyleshstylo/responsive-web-design"
+    },
+    {
+      "platform": "LinkedIn",
+      "logo": "LinkedIn logo",
+      "title": "Master In-Demand Professional Soft Skills",
+      "issuedDate": "Sep 2021",
+      "link": "https://www.linkedin.com/learning/certificates/12c2101c2913d27645bde638a5b5f02de1c1dfb9c55ee408d5eda142589efce8?trk=backfilled_certificate&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bin3tDrCEQX2fCN3Zl9Tq1g%3D%3D"
+    },
+    {
+      "platform": "Coursera",
+      "logo": "Coursera logo",
+      "title": "Mathematics for Machine Learning: Linear Algebra",
+      "issuedDate": "Oct 2020",
+      "credentialId": "3899db6f8da16901a1034affc2c4cbd1",
+      "image-link": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~6FJJ6JUK6EMM/CERTIFICATE_LANDING_PAGE~6FJJ6JUK6EMM.jpeg",
+      "link": "https://www.coursera.org/account/accomplishments/verify/6FJJ6JUK6EMM?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course"
+    },
+    {
+      "platform": "Coursera",
+      "logo": "Coursera logo",
+      "title": "Using Python to Access Web Data",
+      "issuedDate": "Oct 2020",
+      "credentialId": "05986ce925849c650d3dfde95e4fb98a",
+      "link": "https://coursera.org/share/05986ce925849c650d3dfde95e4fb98a"
+    },
+    {
+      "platform": "edX",
+      "logo": "edX logo",
+      "title": "IBM Python Basics for Data Science",
+      "issuedDate": "Aug 2020",
+      "credentialId": "ed0af9c433954a7baa154febbcbc938f",
+      "link": "https://courses.edx.org/certificates/ed0af9c433954a7baa154febbcbc938f"
+    },
+    {
+      "platform": "Coursera",
+      "logo": "Coursera logo",
+      "title": "Python Data Structures",
+      "issuedDate": "Oct 2008",
+      "credentialId": "4b80c44ece5a072f1b09f52d533041bb",
+      "link": "https://coursera.org/share/4b80c44ece5a072f1b09f52d533041bb"
+    }
+  ]
+}
