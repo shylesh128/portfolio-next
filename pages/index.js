@@ -64,15 +64,15 @@ export default function Home() {
             ],
           })}
         </script>
+        <meta
+          name="keywords"
+          content="Fullstack Developer portfolio website,Freelance Fullstack Developer portfolio,Web Developer portfolio examples,Online portfolio for Fullstack Developers,Best Fullstack Developer portfolios,Creative portfolio website for Developers,Fullstack Developer showcase website,Portfolio design for Freelance Developers,Web Developer portfolio inspiration,Fullstack Developer portfolio for hire,Shylesh S portfolio website,Fullstack Developer portfolio design ideas,Portfolio website development for Freelancers,Best practices for building a Fullstack Developer portfolio,How to create a Freelance Fullstack Developer portfolio,Fullstack Developer portfolio tips and tricks,Portfolio website templates for Fullstack Developers,How to showcase your skills as a Fullstack Developer,Building a portfolio website for Web Developers,Online portfolio tools for Freelance Developers, MERN stack development services, Expert MERN stack developer for hire, Full-stack JavaScript developer, React developer for hire, Node.js developer for hire, MERN stack web application development, Custom MERN stack development, Full-stack development services, MERN stack e-commerce development, Affordable MERN stack development, Shylesh S, Shylesh S, MERN stack website development, MERN stack mobile app development, MERN stack front-end development, MERN stack back-end development, MERN stack UI/UX design, MERN stack API development, MERN stack LMS development, MERN stack plugin development, MERN stack integration services, MERN stack support and maintenance"
+        ></meta>
         <meta property="og:title" content={data.name} />
         <meta property="og:description" content={data.description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://shylesh-s.vercel.app/" />
         <meta property="og:image" content="public/shylesh.jpg" />
-        <meta
-          name="keywords"
-          content="full, stack, developer, shylesh, portfolio"
-        />
       </Head>
 
       <Navigation />
