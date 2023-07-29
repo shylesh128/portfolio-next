@@ -64,7 +64,6 @@ export default function Home() {
             ],
           })}
         </script>
-        {/* Open Graph Tags for Social Media */}
         <meta property="og:title" content={data.name} />
         <meta property="og:description" content={data.description} />
         <meta property="og:type" content="website" />
@@ -74,8 +73,6 @@ export default function Home() {
           name="keywords"
           content="full, stack, developer, shylesh, portfolio"
         />
-
-        {/* Twitter Card Tags */}
       </Head>
 
       <Navigation />
