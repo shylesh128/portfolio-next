@@ -119,7 +119,7 @@ body {
   }
 
   .nav-container {
-    position: relative;
+    justify-content: flex-start;
   }
 
   .nav-links {
