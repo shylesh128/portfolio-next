@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import Head from "next/head";
 import Header from "../components/Header";
-import AboutMe from "../components/AboutMe";
 import ProjectsSection from "../components/ProjectsSection";
 import InterestsSection from "../components/InterestsSection";
 import ExperienceSection from "../components/ExperienceSection";
@@ -11,6 +10,7 @@ import data from "./data.json";
 import EducationStudies from "@/components/EducationStudies";
 import CertificatesSection from "@/components/CertificatesSection";
 import Navigation from "@/components/Navigation";
+import Contact from "@/components/contact";
 
 export default function Home() {
   const headerRef = useRef(null);
@@ -47,10 +47,35 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>My Portfolio</title>
-        <meta name="description" content="Creative and Enjoyable Portfolio" />
+        <title>{data.name}</title>
+        <meta name="description" content={data.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org/",
+            "@type": "Person",
+            name: "Shylesh S",
+            jobTitle: "Full Stack Developer",
+            url: "https://shylesh-s.vercel.app/",
+            sameAs: [
+              "https://www.linkedin.com/in/s-shylesh/",
+              "https://github.com/shylesh128",
+            ],
+          })}
+        </script>
+        {/* Open Graph Tags for Social Media */}
+        <meta property="og:title" content={data.name} />
+        <meta property="og:description" content={data.description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://shylesh-s.vercel.app/" />
+        <meta property="og:image" content="public/shylesh.jpg" />
+        <meta
+          name="keywords"
+          content="full, stack, developer, shylesh, portfolio"
+        />
+
+        {/* Twitter Card Tags */}
       </Head>
 
       <Navigation />
@@ -98,6 +123,12 @@ export default function Home() {
       <AnimationItem>
         <div id="interests">
           <InterestsSection interests={data.interests} />
+        </div>
+      </AnimationItem>
+
+      <AnimationItem>
+        <div id="contact">
+          <Contact contact={data.contact} />
         </div>
       </AnimationItem>
     </>

@@ -13,7 +13,6 @@
   --scrollbar-thumb-color: #757575;
 }
 
-/* Check if system prefers dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --background-color: #212121;
@@ -505,15 +504,33 @@ body {
   transform: none;
 }
 
-/* Scroll Animations */
-.about-me-content,
-.projects-content,
-.studies-content,
-.interests-content,
-.experience-content,
-.skills-content {
-  opacity: 0;
-  transform: translateY(30px);
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+.contact-content {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-icons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.contact-icon {
+  font-size: 2em;
+  color: var(--text-color);
+}
+
+.contact-icon:hover {
+  color: var(--link-hover-color);
 }
 
 body::-webkit-scrollbar {

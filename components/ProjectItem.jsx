@@ -18,7 +18,7 @@ const ProjectItem = ({ title, description, link, preview }) => {
         <h3>{title}</h3>
         <p>{description}</p>
         <a href={link} target="_blank" rel="noopener noreferrer">
-          Learn More
+          View
         </a>
       </div>
     </motion.div>
