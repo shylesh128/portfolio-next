@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -13,7 +14,13 @@ const ProjectItem = ({ title, description, link, preview }) => {
       animate="visible"
       variants={itemVariants}
     >
-      <img src={preview} alt={title} className="project-preview" />
+      <Image
+        src={preview}
+        alt={title}
+        className="project-preview"
+        width={500}
+        height={500}
+      />
       <div className="project-info">
         <h3>{title}</h3>
         <p>{description}</p>
