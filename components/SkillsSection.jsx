@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaHtml5,
   FaCss3,
@@ -13,6 +14,11 @@ import { SiNextdotjs, SiExpress, SiMongodb } from "react-icons/si"; // Feather i
 const sectionVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+};
+
+const iconVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 const SkillsSection = ({ skills }) => {
@@ -37,15 +43,24 @@ const SkillsSection = ({ skills }) => {
       >
         <h2>Skills</h2>
         <ul className="skill-list">
-          {skills.map((skill, index) => {
-            const IconComponent = skillIcons[skill];
-            return (
-              <li key={index} className="skill-item">
-                <IconComponent size={48} />
-                <p>{skill}</p>
-              </li>
-            );
-          })}
+          <AnimatePresence>
+            {skills.map((skill, index) => {
+              const IconComponent = skillIcons[skill];
+              return (
+                <motion.li
+                  key={index}
+                  className="skill-item"
+                  variants={iconVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                >
+                  <IconComponent size={48} />
+                  <p>{skill}</p>
+                </motion.li>
+              );
+            })}
+          </AnimatePresence>
         </ul>
       </motion.div>
     </section>

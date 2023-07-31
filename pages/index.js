@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import Header from "../components/Header";
 import ProjectsSection from "../components/ProjectsSection";
@@ -6,11 +6,11 @@ import InterestsSection from "../components/InterestsSection";
 import ExperienceSection from "../components/ExperienceSection";
 import SkillsSection from "../components/SkillsSection";
 import { AnimationItem } from "../components/AnimationItem";
-import data from "./data.json";
 import EducationStudies from "@/components/EducationStudies";
 import CertificatesSection from "@/components/CertificatesSection";
 import Navigation from "@/components/Navigation";
 import Contact from "@/components/contact";
+import Loading from "@/components/Loading";
 
 export default function Home() {
   const headerRef = useRef(null);
@@ -19,6 +19,20 @@ export default function Home() {
   const interestsRef = useRef(null);
   const experienceRef = useRef(null);
   const skillsRef = useRef(null);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const resumeData = await fetchResumeData();
+        setData(resumeData);
+      } catch (error) {
+        console.error("Error fetching resume data:", error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const refs = [
@@ -43,6 +57,28 @@ export default function Home() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  async function fetchResumeData() {
+    try {
+      const response = await fetch(
+        "https://shylesh128.github.io/json-files.io/resume.json"
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok.");
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching resume data:", error.message);
+      return null;
+    }
+  }
+
+  // Render loading or error state if data is not yet available
+  if (!data) {
+    return <Loading />;
+  }
 
   return (
     <>
