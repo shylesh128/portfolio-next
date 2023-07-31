@@ -294,12 +294,6 @@ body {
   margin: 0 auto;
   padding: 40px;
 }
-
-.interests-content h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
 .interests-content ul {
   list-style: none;
   padding: 0;
@@ -308,6 +302,26 @@ body {
 .interests-content li {
   margin-bottom: 10px;
   color: var(--secondary-text-color);
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.interests-content li:hover {
+  color: var(--link-color);
+}
+
+/* Add scrollbar styles for the interests list (optional) */
+.interests-content ul {
+  overflow-y: auto;
+  max-height: 300px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-color);
+}
+
+/* Style the scrollbar thumb */
+.interests-content ul::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: 6px;
 }
 
 /* Experience Section */

@@ -1,7 +1,9 @@
+import * as React from "react";
 import { motion } from "framer-motion";
 import ProjectItem from "./ProjectItem";
 import { AnimationItemRight } from "./AnimationItemRight";
 import { AnimationItemLeft } from "./AnimationItemLeft";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -9,6 +11,8 @@ const sectionVariants = {
 };
 
 const Projects = ({ projects }) => {
+  const isLargeScreen = useMediaQuery("(min-width: 768px)");
+
   return (
     <section className="projects-section">
       <motion.div
@@ -20,7 +24,27 @@ const Projects = ({ projects }) => {
         <h2>Projects</h2>
         <div className="projects-grid">
           {projects.map((project, index) =>
-            index % 2 !== 0 ? (
+            isLargeScreen ? (
+              index % 2 !== 0 ? (
+                <AnimationItemRight key={index}>
+                  <ProjectItem
+                    title={project.title}
+                    description={project.description}
+                    link={project.link}
+                    preview={project.preview}
+                  />
+                </AnimationItemRight>
+              ) : (
+                <AnimationItemLeft key={index}>
+                  <ProjectItem
+                    title={project.title}
+                    description={project.description}
+                    link={project.link}
+                    preview={project.preview}
+                  />
+                </AnimationItemLeft>
+              )
+            ) : (
               <AnimationItemRight key={index}>
                 <ProjectItem
                   title={project.title}
@@ -29,15 +53,6 @@ const Projects = ({ projects }) => {
                   preview={project.preview}
                 />
               </AnimationItemRight>
-            ) : (
-              <AnimationItemLeft key={index}>
-                <ProjectItem
-                  title={project.title}
-                  description={project.description}
-                  link={project.link}
-                  preview={project.preview}
-                />
-              </AnimationItemLeft>
             )
           )}
         </div>

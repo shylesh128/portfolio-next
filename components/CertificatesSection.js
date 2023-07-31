@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import CertificatesCard from "./CertificatesCard";
 import { AnimationItemLeft } from "./AnimationItemLeft";
 import { AnimationItemRight } from "./AnimationItemRight";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -9,9 +10,10 @@ const sectionVariants = {
 };
 
 const CertificatesSection = ({ certificates }) => {
+  const isLargeScreen = useMediaQuery("(min-width: 768px)");
+
   return (
     <section>
-      {/* Use the new class for h2 tag */}
       <motion.h2
         className="section-title"
         initial="hidden"
@@ -22,16 +24,20 @@ const CertificatesSection = ({ certificates }) => {
       </motion.h2>
       <div className="certificate-content">
         {certificates.map((certificate, index) =>
-          // Conditional rendering based on index
-          index % 2 !== 0 ? ( // Even index, use AnimationItemRight
+          isLargeScreen ? (
+            index % 2 !== 0 ? (
+              <AnimationItemRight key={index}>
+                <CertificatesCard certificate={certificate} />
+              </AnimationItemRight>
+            ) : (
+              <AnimationItemLeft key={index}>
+                <CertificatesCard certificate={certificate} />
+              </AnimationItemLeft>
+            )
+          ) : (
             <AnimationItemRight key={index}>
               <CertificatesCard certificate={certificate} />
             </AnimationItemRight>
-          ) : (
-            // Odd index, use AnimationItemLeft
-            <AnimationItemLeft key={index}>
-              <CertificatesCard certificate={certificate} />
-            </AnimationItemLeft>
           )
         )}
       </div>
