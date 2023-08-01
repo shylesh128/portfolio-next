@@ -12,7 +12,7 @@ const ChatBox = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const socket = io("http://localhost:5000");
+  const socket = io("https://chat-socket-ten.vercel.app");
 
   useEffect(() => {
     socket.on("message", (data) => {
