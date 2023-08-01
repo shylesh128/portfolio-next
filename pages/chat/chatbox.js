@@ -1,37 +1,17 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { TextField, Button, List, ListItem, ListItemText } from "@mui/material";
 import axios from "axios";
 import Loading from "@/components/Loading";
-import io from "socket.io-client";
 
 const ChatBox = () => {
   const router = useRouter();
   const { chatId } = router.query;
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const socket = io("https://chat-socket-ten.vercel.app");
-
-  useEffect(() => {
-    socket.on("message", (data) => {
-      setMessages((prevMessages) => {
-        // Check if the message already exists in the messages list
-        const existingMessage = prevMessages.find(
-          (msg) => msg.text === data.text
-        );
-        if (!existingMessage) {
-          return [...prevMessages, data];
-        }
-        return prevMessages;
-      });
-    });
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState(""); // Retrieve the username from localStorage
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
@@ -44,8 +24,10 @@ const ChatBox = () => {
       const data = {
         chatId,
         messages,
+        username, // Include the username in the data sent to the backend
       };
 
+      console.log(data);
       await axios.post(backendApiUrl, data);
 
       console.log("Messages sent successfully!");
@@ -57,21 +39,45 @@ const ChatBox = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const timestamp = new Date().toISOString();
-    const user = "shylesh" || "No body";
-    const newMessage = {
-      text: message,
-      timestamp,
-      user,
-    };
-
+    const timestamp = new Date().toISOString(); // Get the current timestamp
+    const newMessage = `${username} - ${formatTimestamp(
+      timestamp
+    )}: ${message}`; // Include username and formatted timestamp in the message
     const arr = messages.concat(newMessage);
     setMessages(arr);
     sendMessagesToBackend(arr);
     setMessage("");
-
-    socket.emit("message", newMessage);
   };
+
+  const formatTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  };
+
+  useEffect(() => {
+    // Fetch old messages when the page loads
+    const fetchOldMessages = async () => {
+      try {
+        const backendApiUrl = `/api/oldmessage?chatId=${chatId}`;
+        const response = await axios.get(backendApiUrl);
+        setMessages(response.data.messages);
+        setLoading(false); // Mark loading as false once messages are fetched
+      } catch (error) {
+        console.error("Error fetching old messages:", error);
+        setLoading(false); // Mark loading as false even if an error occurs
+      }
+    };
+
+    if (chatId) {
+      fetchOldMessages();
+    }
+
+    // Retrieve the username from localStorage
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, [chatId]);
 
   if (loading) {
     return <Loading />;
@@ -90,10 +96,7 @@ const ChatBox = () => {
         <List className="chat-messages">
           {messages.map((msg, index) => (
             <ListItem key={index} className="chat-message">
-              <ListItemText
-                primary={`${msg.user}: ${msg.text}`}
-                secondary={new Date(msg.timestamp).toLocaleTimeString()}
-              />
+              <ListItemText primary={msg} />
             </ListItem>
           ))}
         </List>

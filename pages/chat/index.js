@@ -4,10 +4,14 @@ import { useRouter } from "next/router";
 const Home = () => {
   const router = useRouter();
   const [chatId, setChatId] = useState("");
+  const [username, setUsername] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (chatId.trim() !== "") {
+    if (chatId.trim() !== "" && username.trim() !== "") {
+      // Store the chatId and username in localStorage
+      localStorage.setItem("chatId", chatId);
+      localStorage.setItem("username", username);
       router.push(`/chat/chatbox?chatId=${chatId}`);
     }
   };
@@ -22,6 +26,13 @@ const Home = () => {
             value={chatId}
             onChange={(e) => setChatId(e.target.value)}
             placeholder="Chat ID"
+            className="input"
+          />
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
             className="input"
           />
           <button type="submit" className="start-chat-btn">
