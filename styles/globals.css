@@ -596,3 +596,5 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover {
   background-color: var(--scrollbar-thumb-color);
 }
+
+/* Add the styles for the ChatBox component here */
