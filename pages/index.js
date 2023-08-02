@@ -11,6 +11,7 @@ import CertificatesSection from "@/components/CertificatesSection";
 import Navigation from "@/components/Navigation";
 import Contact from "@/components/contact";
 import Loading from "@/components/Loading";
+import publicJson from "/public/data.json";
 
 export default function Home() {
   const headerRef = useRef(null);
@@ -24,7 +25,8 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resumeData = await fetchResumeData();
+        // const resumeData = await fetchResumeData();
+        const resumeData = publicJson;
         setData(resumeData);
       } catch (error) {
         console.error("Error fetching resume data:", error.message);

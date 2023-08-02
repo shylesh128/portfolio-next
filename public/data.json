@@ -65,11 +65,23 @@
       "preview": "/projects/cyber-criminology-and-cyber-laws.png"
     },
     {
+      "title": "HTML Compiler with preview",
+      "description": "An interactive code editor offering real-time previews, code suggestions, and handy formatting tools for web development.",
+      "link": "https://animation-portfolio-omega.vercel.app/html/index.html",
+      "preview": "/projects/html-complier.png"
+    },
+    {
+      "title": "Canva Compiler",
+      "description": "An interactive code editor offering real-time previews, code suggestions, and handy formatting tools for Canva development.",
+      "link": "https://animation-portfolio-omega.vercel.app/canva/index.html",
+      "preview": "/projects/canva-complier.png"
+    },
+    {
       "preview": "/projects/code-editor.png",
       "altText": "JavaScript Code Compiler Preview",
       "title": "JavaScript Code Compiler",
       "description": "Compile and run JavaScript code with ease using our simple code editor. Test your programming skills and see instant results!",
-      "link": "./code-editor-js/index.html"
+      "link": "https://animation-portfolio-omega.vercel.app/code-editor-js/index.html"
     },
     {
       "preview": "/projects/painter.png",
