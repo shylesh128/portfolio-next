@@ -59,10 +59,22 @@
       "preview": "/projects/arty-shop.png"
     },
     {
+      "title": "Serpent's Feast",
+      "description": "Play this Serpent, guiding a snake through mazes to eat glowing food. Choose to control or set it on an automatic path for fun and strategy.",
+      "link": "https://animation-portfolio-omega.vercel.app/snake/index.html",
+      "preview": "/projects/snake-auto.png"
+    },
+    {
       "title": "Thesis on Cyber Criminology and Cyber Laws",
       "description": "Completed a thesis based on cyber criminology and cyber laws contribution to modern cyber-crimes and laws.",
       "link": "https://drive.google.com/file/d/1Pu571YfC7iRthM4EWi4QWIpK9kO4-BXs/view",
       "preview": "/projects/cyber-criminology-and-cyber-laws.png"
+    },
+    {
+      "title": "React Compiler with preview",
+      "description": "An interactive code editor offering real-time previews, code suggestions, and handy formatting tools for web development.",
+      "link": "https://compilers-seven.vercel.app/compiler/react",
+      "preview": "/projects/react.png"
     },
     {
       "title": "HTML Compiler with preview",
