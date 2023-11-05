@@ -480,6 +480,23 @@ body {
   padding: 40px;
 }
 
+.skill-card {
+  width: 200px;
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgb(0, 0, 0, 0.1);
+}
+
+.skill-content {
+  text-align: center;
+  font-weight: bolder;
+}
+
 .skills-content h2 {
   font-size: 24px;
   margin-bottom: 20px;

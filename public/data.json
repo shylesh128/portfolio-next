@@ -10,14 +10,62 @@
     "LinkedIn": "https://www.linkedin.com/in/s-shylesh/"
   },
   "skills": [
-    "HTML/CSS",
-    "NEXT JS",
-    "NODE JS",
-    "SQL",
-    "REACT JS",
-    "EXPRESS JS",
-    "PYTHON",
-    "MONGO DB"
+    {
+      "skill": "HTML",
+      "rating": 7
+    },
+    {
+      "skill": "CSS",
+      "rating": 7
+    },
+    {
+      "skill": "JavaScript",
+      "rating": 8
+    },
+    {
+      "skill": "NEXT JS",
+      "rating": 9
+    },
+    {
+      "skill": "MONGO DB",
+      "rating": 8
+    },
+    {
+      "skill": "NODE JS",
+      "rating": 8
+    },
+    {
+      "skill": "REACT JS",
+      "rating": 8
+    },
+    {
+      "skill": "EXPRESS JS",
+      "rating": 7
+    },
+    {
+      "skill": "PYTHON",
+      "rating": 7
+    },
+    {
+      "skill": "SQL",
+      "rating": 6
+    },
+    {
+      "skill": "OpenAI Customizations",
+      "rating": 9
+    },
+    {
+      "skill": "LangChain",
+      "rating": 6
+    },
+    {
+      "skill": "React Native",
+      "rating": 7
+    },
+    {
+      "skill": "AWS (S3)",
+      "rating": 7
+    }
   ],
   "experiences": [
     {
