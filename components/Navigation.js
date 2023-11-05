@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-scroll";
-import { Switch } from "@mui/material";
+import { IconButton, Switch } from "@mui/material";
 import { RiMenuLine, RiCloseLine } from "react-icons/ri";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 
@@ -15,7 +15,7 @@ const Navigation = ({ isDarkMode, toggleMode }) => {
     { id: "interests", label: "Interests" },
   ];
 
-  const [activeLink, setActiveLink] = useState("");
+  const [activeLink, setActiveLink] = useState("Header");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavLinkClick = (targetId) => {
@@ -32,6 +32,9 @@ const Navigation = ({ isDarkMode, toggleMode }) => {
       <div className="nav-container">
         <button className="menu-toggle" onClick={toggleMenu}>
           {isMenuOpen ? <RiCloseLine /> : <RiMenuLine />}
+        </button>
+        <button className="menu-toggle" onClick={toggleMode}>
+          {isDarkMode ? <MdDarkMode /> : <MdLightMode />}
         </button>
         <ul className={`nav-links ${isMenuOpen ? "open" : ""}`}>
           {navigationLinks.map(({ id, label }) => (
@@ -51,15 +54,8 @@ const Navigation = ({ isDarkMode, toggleMode }) => {
               </Link>
             </li>
           ))}
-
           <li>
-            <Link
-              spy={true}
-              smooth={true}
-              duration={500}
-              className="nav-link-text"
-              onClick={toggleMode}
-            >
+            <Link className="nav-link-text" onClick={toggleMode}>
               {isDarkMode ? <MdDarkMode /> : <MdLightMode />}
             </Link>
           </li>

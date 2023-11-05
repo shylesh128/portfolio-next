@@ -15,7 +15,7 @@ import publicJson from "/public/data.json";
 import { Button } from "@mui/material";
 
 export default function Home() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const headerRef = useRef(null);
   const aboutMeRef = useRef(null);
   const projectsRef = useRef(null);
@@ -158,14 +158,6 @@ export default function Home() {
           <Header data={data} />
         </div>
       </AnimationItem>
-
-      {/* <Button
-        onClick={() => {
-          setIsDarkMode(!isDarkMode);
-        }}
-      >
-        Theme
-      </Button> */}
 
       {/* Skills Section */}
       <AnimationItem>
