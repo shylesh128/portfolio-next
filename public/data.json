@@ -27,9 +27,11 @@
       "dates": "April 2023 – Present",
       "description": "As a Junior Full Stack Developer, I led various projects aimed at improving our platform's tools and user interfaces.",
       "works": [
-        "Developed a proprietary Plagiarism Tool using Next JS and Express, improving content originality and accountability within our platform.",
-        "Spearheaded the improvement of Front End styles for the GranuLearn app, leading to a more engaging and user-friendly interface.",
-        "Designed and implemented an innovative authoring tool and player with Next JS, empowering content creators and enhancing the learning experience for users."
+        "Alt Text Image Generator: Led the creation of an AI model to enhance our E-learning platform's accessibility, utilizing OpenAI API, Langchain, Blip Model Cloud Vision AI, and Hugging Face API. This effort resulted in a more inclusive learning experience.",
+        "AI Model Customization: Specialized in customizing AI models, harnessing the power of OpenAI's LLM, GooglePaLM, and fine-tuned custom data. These enhancements significantly improved the performance of AI applications, such as chatbots, for personalized interactions.",
+        "AnsrEagle Plagiarism Tool: Pioneered the development of a widely embraced tool that authenticates educational materials, efficiently detects plagiarism, and ensures content originality.",
+        "GranuLearn Learning Management System Enhancement: Revamped the GranuLearn LMS by enhancing the admin UI, incorporating AI-driven course creation features, and introducing an interactive player to provide an enriched learning experience.",
+        "Mobile App Development: Contributed to the development of the GranuLearn App using React Native and Expo, resulting in a seamless and immersive mobile learning experience for users. This effort significantly improved the user experience."
       ]
     },
     {

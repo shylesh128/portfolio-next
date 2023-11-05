@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-scroll";
+import { Switch } from "@mui/material";
 import { RiMenuLine, RiCloseLine } from "react-icons/ri";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
-const Navigation = () => {
+const Navigation = ({ isDarkMode, toggleMode }) => {
   const navigationLinks = [
     { id: "Header", label: "Profile" },
     { id: "skills", label: "Skills" },
@@ -49,6 +51,18 @@ const Navigation = () => {
               </Link>
             </li>
           ))}
+
+          <li>
+            <Link
+              spy={true}
+              smooth={true}
+              duration={500}
+              className="nav-link-text"
+              onClick={toggleMode}
+            >
+              {isDarkMode ? <MdDarkMode /> : <MdLightMode />}
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

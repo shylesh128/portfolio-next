@@ -12,8 +12,10 @@ import Navigation from "@/components/Navigation";
 import Contact from "@/components/contact";
 import Loading from "@/components/Loading";
 import publicJson from "/public/data.json";
+import { Button } from "@mui/material";
 
 export default function Home() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const headerRef = useRef(null);
   const aboutMeRef = useRef(null);
   const projectsRef = useRef(null);
@@ -21,6 +23,10 @@ export default function Home() {
   const experienceRef = useRef(null);
   const skillsRef = useRef(null);
   const [data, setData] = useState(null);
+
+  const toggleMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,6 +41,37 @@ export default function Home() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (document) {
+      const root = document.documentElement;
+      if (isDarkMode) {
+        // Dark mode variables
+        root.style.setProperty("--background-color", "#212121");
+        root.style.setProperty("--text-color", "#ffffff");
+        root.style.setProperty("--shadow-color", "rgba(0, 0, 0, 0.5");
+        root.style.setProperty("--border-color", "#d4d4d4");
+        root.style.setProperty("--link-color", "#87ceeb");
+        root.style.setProperty("--sub-text-color", "#bdbdbd");
+        root.style.setProperty("--secondary-text-color", "#bdbdbd");
+        root.style.setProperty("--scrollbar-color", "#757575");
+        root.style.setProperty("--scrollbar-thumb-color", "#757575");
+        // Add more dark mode variables as needed
+      } else {
+        // Light mode variables
+        root.style.setProperty("--background-color", "#f5f5f5");
+        root.style.setProperty("--text-color", "#212121");
+        root.style.setProperty("--shadow-color", "rgba(0, 0, 0, 0.7");
+        root.style.setProperty("--border-color", "#e0e0e0");
+        root.style.setProperty("--link-color", "#2f628a");
+        root.style.setProperty("--sub-text-color", "#757575");
+        root.style.setProperty("--secondary-text-color", "#757575");
+        root.style.setProperty("--scrollbar-color", "#bdbdbd");
+        root.style.setProperty("--scrollbar-thumb-color", "#757575");
+        // Add more light mode variables as needed
+      }
+    }
+  }, [isDarkMode]);
 
   useEffect(() => {
     const refs = [
@@ -113,13 +150,22 @@ export default function Home() {
         <meta property="og:image" content="public/shylesh.jpg" />
       </Head>
 
-      <Navigation />
+      <Navigation isDarkMode={isDarkMode} toggleMode={toggleMode} />
+
       {/* Header Section */}
       <AnimationItem>
         <div id="Header">
           <Header data={data} />
         </div>
       </AnimationItem>
+
+      {/* <Button
+        onClick={() => {
+          setIsDarkMode(!isDarkMode);
+        }}
+      >
+        Theme
+      </Button> */}
 
       {/* Skills Section */}
       <AnimationItem>
