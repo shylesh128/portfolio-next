@@ -1,5 +1,4 @@
 {
-  "version": "1",
   "name": "Shylesh S",
   "title": "Full Stack Developer",
   "description": "Hii, I am a Full stack Developer with knowledge in the MERN and Next JS stack. Exploring potential career paths in Machine learning.",
@@ -203,24 +202,14 @@
       "institution": "St. Joseph’s Pre-University College, Bengaluru"
     }
   ],
-  "interests": [
-    "Graphic Designing",
-    "Charcoal Sketching",
-    "Glass Painting"
-  ],
+  "interests": ["Graphic Designing", "Charcoal Sketching", "Glass Painting"],
   "certificates": [
     {
       "platform": "freeCodeCamp",
       "logo": "freeCodeCamp logo",
       "title": "Front End Development Libraries",
       "issuedDate": "Jun 2023",
-      "skills": [
-        "Bootstrap",
-        "jQuery",
-        "React.js",
-        "redux",
-        "SASS"
-      ],
+      "skills": ["Bootstrap", "jQuery", "React.js", "redux", "SASS"],
       "link": "https://www.freecodecamp.org/certification/shyleshstylo/front-end-development-libraries",
       "image": "/cert/front-end-libraries.png"
     },
@@ -230,11 +219,7 @@
       "title": "Node.js, Express, MongoDB & More: The Complete Bootcamp 2023",
       "issuedDate": "Jun 2023",
       "credentialId": "UC-15f95138-f169-4715-aa92-2b79d6518292",
-      "skills": [
-        "MongoDB",
-        "Node js",
-        "Express.js"
-      ],
+      "skills": ["MongoDB", "Node js", "Express.js"],
       "link": "https://ude.my/UC-15f95138-f169-4715-aa92-2b79d6518292"
     },
     {
@@ -260,15 +245,13 @@
       "issuedDate": "Jan 2022",
       "link": "https://www.freecodecamp.org/certification/shyleshstylo/javascript-algorithms-and-data-structures"
     },
+
     {
       "platform": "LinkedIn",
       "logo": "LinkedIn logo",
       "title": "Become a Software Developer",
       "issuedDate": "Jun 2022",
-      "skills": [
-        "Software Development",
-        "Programming"
-      ],
+      "skills": ["Software Development", "Programming"],
       "link": "https://www.linkedin.com/learning/certificates/a1c00fd686a2f53af816d7d982eb734c9e25b601551050106055106f0dd7c5a1?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bin3tDrCEQX2fCN3Zl9Tq1g%3D%3D"
     },
     {

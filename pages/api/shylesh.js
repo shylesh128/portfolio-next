@@ -2,8 +2,8 @@ import fs from "fs";
 import path from "path";
 
 export default function handler(req, res) {
-  // Check if the request is for the specific route you want to handle
   if (req.method === "GET") {
+    // Handle GET request to read data.json
     const jsonFilePath = path.join(process.cwd(), "public", "data.json");
 
     fs.readFile(jsonFilePath, "utf8", (err, data) => {
@@ -20,8 +20,21 @@ export default function handler(req, res) {
         }
       }
     });
+  } else if (req.method === "POST") {
+    // Handle POST request to update data.json
+    const jsonFilePath = path.join(process.cwd(), "public", "data.json");
+
+    try {
+      const newContent = req.body; // Assuming the new content is sent in the request body
+
+      fs.writeFileSync(jsonFilePath, JSON.stringify(newContent, null, 2));
+
+      res.status(200).json({ message: "Data updated successfully" });
+    } catch (writeError) {
+      console.error("Error writing to JSON file:", writeError);
+      res.status(500).json({ error: "Failed to update JSON file" });
+    }
   } else {
-    // If the route doesn't match, return a 404 Not Found response
     res.status(404).json({ error: "Not Found" });
   }
 }
