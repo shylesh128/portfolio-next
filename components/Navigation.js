@@ -13,6 +13,7 @@ const Navigation = ({ isDarkMode, toggleMode }) => {
     { id: "studies", label: "Education" },
     { id: "certificates", label: "Certificates" },
     { id: "interests", label: "Interests" },
+    { id: "contact", label: "Contact" },
   ];
 
   const [activeLink, setActiveLink] = useState("Header");

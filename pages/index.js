@@ -13,6 +13,7 @@ import Contact from "@/components/contact";
 import Loading from "@/components/Loading";
 import publicJson from "/public/data.json";
 import { Button } from "@mui/material";
+import ContactForm from "@/components/Message";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -51,7 +52,7 @@ export default function Home() {
         root.style.setProperty("--text-color", "#ffffff");
         root.style.setProperty("--shadow-color", "rgba(0, 0, 0, 0.5");
         root.style.setProperty("--border-color", "#d4d4d4");
-        root.style.setProperty("--link-color", "#87ceeb");
+        root.style.setProperty("--link-color", "#1c598a"); //#303f9f #87ceeb
         root.style.setProperty("--sub-text-color", "#bdbdbd");
         root.style.setProperty("--secondary-text-color", "#bdbdbd");
         root.style.setProperty("--scrollbar-color", "#757575");
@@ -202,6 +203,12 @@ export default function Home() {
       <AnimationItem>
         <div id="contact">
           <Contact contact={data.contact} />
+        </div>
+      </AnimationItem>
+
+      <AnimationItem>
+        <div id="message">
+          <ContactForm />
         </div>
       </AnimationItem>
     </>

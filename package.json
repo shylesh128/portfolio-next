@@ -12,14 +12,13 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.2",
-    "axios": "^1.4.0",
+    "axios": "^1.6.2",
     "framer-motion": "^10.15.0",
     "next": "13.4.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
     "react-intersection-observer": "^9.5.2",
-    "react-scroll": "^1.8.9",
-    "socket.io-client": "^4.7.1"
+    "react-scroll": "^1.8.9"
   }
 }
