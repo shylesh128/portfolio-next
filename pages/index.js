@@ -52,7 +52,9 @@ export default function Home() {
         root.style.setProperty("--text-color", "#ffffff");
         root.style.setProperty("--shadow-color", "rgba(0, 0, 0, 0.5");
         root.style.setProperty("--border-color", "#d4d4d4");
-        root.style.setProperty("--link-color", "#1c598a"); //#303f9f #87ceeb
+        root.style.setProperty("--link-color", "#87ceeb"); //#303f9f #87ceeb
+        root.style.setProperty("--text-active-color", "#000000");
+
         root.style.setProperty("--sub-text-color", "#bdbdbd");
         root.style.setProperty("--secondary-text-color", "#bdbdbd");
         root.style.setProperty("--scrollbar-color", "#757575");
@@ -65,6 +67,7 @@ export default function Home() {
         root.style.setProperty("--shadow-color", "rgba(0, 0, 0, 0.7");
         root.style.setProperty("--border-color", "#e0e0e0");
         root.style.setProperty("--link-color", "#2f628a");
+        root.style.setProperty("--text-active-color", "#ffffff");
         root.style.setProperty("--sub-text-color", "#757575");
         root.style.setProperty("--secondary-text-color", "#757575");
         root.style.setProperty("--scrollbar-color", "#bdbdbd");

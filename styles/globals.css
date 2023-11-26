@@ -5,6 +5,7 @@
   --text-color: #212121;
   --shadow-color: rgba(0, 0, 0, 0.7);
   --border-color: #e0e0e0;
+  --text-active-color: #ffffff;
   --link-color: #2f628a;
   --link-hover-color: #303f9f;
   --sub-text-color: #757575;
@@ -20,6 +21,7 @@
     --shadow-color: rgba(0, 0, 0, 0.5);
     --border-color: #d4d4d4;
     --link-color: #87ceeb;
+    --text-active-color: #000000;
     --sub-text-color: #bdbdbd;
     --secondary-text-color: #bdbdbd;
     --scrollbar-color: #757575;
@@ -110,7 +112,7 @@ body {
 
 .nav-link.active .nav-link-text {
   background-color: var(--link-color);
-  color: white;
+  color: var(--text-active-color);
 }
 
 @media (max-width: 600px) {
