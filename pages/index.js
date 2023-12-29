@@ -48,18 +48,17 @@ export default function Home() {
       const root = document.documentElement;
       if (isDarkMode) {
         // Dark mode variables
+        root.style.setProperty("--main-font", "Arial, sans-serif");
         root.style.setProperty("--background-color", "#212121");
         root.style.setProperty("--text-color", "#ffffff");
         root.style.setProperty("--shadow-color", "rgba(0, 0, 0, 0.5");
         root.style.setProperty("--border-color", "#d4d4d4");
-        root.style.setProperty("--link-color", "#87ceeb"); //#303f9f #87ceeb
+        root.style.setProperty("--link-color", "#87ceeb");
         root.style.setProperty("--text-active-color", "#000000");
-
         root.style.setProperty("--sub-text-color", "#bdbdbd");
         root.style.setProperty("--secondary-text-color", "#bdbdbd");
         root.style.setProperty("--scrollbar-color", "#757575");
         root.style.setProperty("--scrollbar-thumb-color", "#757575");
-        // Add more dark mode variables as needed
       } else {
         // Light mode variables
         root.style.setProperty("--background-color", "#f5f5f5");
@@ -100,23 +99,6 @@ export default function Home() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  async function fetchResumeData() {
-    try {
-      const response = await fetch(
-        "https://shylesh128.github.io/json-files.io/resume.json"
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok.");
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error fetching resume data:", error.message);
-      return null;
-    }
-  }
 
   // Render loading or error state if data is not yet available
   if (!data) {

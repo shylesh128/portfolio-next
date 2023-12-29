@@ -49,30 +49,29 @@ const ContactForm = () => {
       >
         <div className="message-container">
           <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Name:</label>
+            <label htmlFor={"name"}>Name:</label>
             <input
               type="text"
-              id="name"
-              name="name"
+              id={"name"}
               value={formData.name}
               onChange={handleChange}
               required
+              autoComplete="name"
             />
 
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="emails">Email:</label>
             <input
               type="email"
-              id="email"
-              name="email"
+              id={"emails"}
               value={formData.email}
               onChange={handleChange}
               required
+              autoComplete="email"
             />
 
-            <label htmlFor="message">Message:</label>
+            <label htmlFor="message-feedback">Message:</label>
             <textarea
-              id="message"
-              name="message"
+              id={"message-feedback"}
               value={formData.message}
               onChange={handleChange}
               required

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-scroll";
-import { IconButton, Switch } from "@mui/material";
 import { RiMenuLine, RiCloseLine } from "react-icons/ri";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { IconButton } from "@mui/material";
 
 const Navigation = ({ isDarkMode, toggleMode }) => {
   const navigationLinks = [
@@ -55,12 +55,26 @@ const Navigation = ({ isDarkMode, toggleMode }) => {
               </Link>
             </li>
           ))}
-          <li>
-            <Link className="nav-link-text" onClick={toggleMode}>
-              {isDarkMode ? <MdDarkMode /> : <MdLightMode />}
-            </Link>
-          </li>
         </ul>
+        <IconButton
+          className="nav-link-text"
+          sx={{
+            padding: 0,
+            marginLeft: "1rem",
+            display: {
+              xs: "none",
+              sm: "flex",
+              md: "flex",
+            },
+          }}
+          onClick={toggleMode}
+        >
+          {isDarkMode ? (
+            <MdDarkMode size={20} color="#FFF" />
+          ) : (
+            <MdLightMode size={20} color="#2f628a" />
+          )}
+        </IconButton>
       </div>
     </nav>
   );
