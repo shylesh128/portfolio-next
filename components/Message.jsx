@@ -1,5 +1,3 @@
-// components/ContactForm.js
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
@@ -11,27 +9,43 @@ const sectionVariants = {
 };
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
+  const [loading, setLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    switch (name) {
+      case "name":
+        setName(value);
+        break;
+      case "email":
+        setEmail(value);
+        break;
+      case "message":
+        setMessage(value);
+        break;
+      default:
+        break;
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("https://painhub.onrender.com/api/feedback", formData);
+      await axios.post("https://painhub.onrender.com/api/feedback", {
+        name,
+        email,
+        message,
+      });
       setSubmitStatus("success");
-      setFormData({ name: "", email: "", message: "" });
+      setName("");
+      setEmail("");
+      setMessage("");
       setLoading(false);
     } catch (error) {
       setSubmitStatus("error");
@@ -49,21 +63,23 @@ const ContactForm = () => {
       >
         <div className="message-container">
           <form onSubmit={handleSubmit}>
-            <label htmlFor={"name"}>Name:</label>
+            <label htmlFor="name">Name:</label>
             <input
               type="text"
-              id={"name"}
-              value={formData.name}
+              id="name"
+              name="name"
+              value={name}
               onChange={handleChange}
               required
               autoComplete="name"
             />
 
-            <label htmlFor="emails">Email:</label>
+            <label htmlFor="email">Email:</label>
             <input
               type="email"
-              id={"emails"}
-              value={formData.email}
+              id="email"
+              name="email"
+              value={email}
               onChange={handleChange}
               required
               autoComplete="email"
@@ -71,14 +87,15 @@ const ContactForm = () => {
 
             <label htmlFor="message-feedback">Message:</label>
             <textarea
-              id={"message-feedback"}
-              value={formData.message}
+              id="message-feedback"
+              name="message"
+              value={message}
               onChange={handleChange}
               required
             />
 
             <Button variant="contained" type="submit">
-              {loading ? "loading...." : "Submit"}
+              {loading ? "Loading...." : "Submit"}
             </Button>
           </form>
 
