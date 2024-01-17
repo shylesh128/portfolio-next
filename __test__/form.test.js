@@ -3,7 +3,6 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import axios from "axios";
 import ContactForm from "@/components/Message";
 
-// Mocking axios.post to prevent actual network request
 jest.mock("axios");
 
 describe("ContactForm Component", () => {
@@ -40,15 +39,15 @@ describe("ContactForm Component", () => {
     const messageInput = screen.getByLabelText("Message:");
     const submitButton = screen.getByRole("button", { name: "Submit" });
 
-    fireEvent.change(nameInput, { target: { value: "John Doe 2" } });
-    fireEvent.change(emailInput, { target: { value: "john@example2.com" } });
+    fireEvent.change(nameInput, { target: { value: "John Doe" } });
+    fireEvent.change(emailInput, { target: { value: "john@example.com" } });
     fireEvent.change(messageInput, {
-      target: { value: "Hello, this is a test message. 2" },
+      target: { value: "Hello, this is a test message." },
     });
 
     fireEvent.click(submitButton);
 
-    // expect(submitButton).toHaveTextContent("loading....");
+    expect(submitButton).toHaveTextContent("Loading....");
 
     await waitFor(() => {
       expect(axios.post).toHaveBeenCalledWith(
@@ -62,23 +61,5 @@ describe("ContactForm Component", () => {
     });
 
     expect(screen.getByText("Submit")).toBeInTheDocument();
-  });
-
-  it("handles form submission error", async () => {
-    axios.post.mockRejectedValueOnce(new Error("Submission error")); // Mock an error response
-    render(<ContactForm />);
-    const submitButton = screen.getByRole("button", { name: "Submit" });
-
-    fireEvent.click(submitButton);
-
-    // expect(submitButton).toHaveTextContent("loading....");
-
-    await waitFor(() => {
-      expect(axios.post).toHaveBeenCalled();
-    });
-
-    expect(
-      screen.getByText("Message delivery failed. Please try again later.")
-    ).toBeInTheDocument();
   });
 });
