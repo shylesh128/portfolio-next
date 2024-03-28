@@ -1,5 +1,3 @@
-// components/ContactForm.js
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
@@ -22,7 +20,11 @@ const ContactForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    // Use name to determine which field to update
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -53,6 +55,7 @@ const ContactForm = () => {
             <input
               type="text"
               id={"name"}
+              name="name"
               value={formData.name}
               onChange={handleChange}
               required
@@ -63,6 +66,7 @@ const ContactForm = () => {
             <input
               type="email"
               id={"emails"}
+              name="email"
               value={formData.email}
               onChange={handleChange}
               required
@@ -72,6 +76,7 @@ const ContactForm = () => {
             <label htmlFor="message-feedback">Message:</label>
             <textarea
               id={"message-feedback"}
+              name="message"
               value={formData.message}
               onChange={handleChange}
               required
