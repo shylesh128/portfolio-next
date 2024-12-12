@@ -32,7 +32,7 @@ const ContactForm = () => {
     setLoading(true);
     try {
       await axios.post(
-        "http://painpal.onrender.com/api/v1/other/feedback",
+        "https://painpal.onrender.com/api/v1/other/feedback",
         formData
       );
       setSubmitStatus("success");
