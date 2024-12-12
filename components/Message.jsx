@@ -31,7 +31,10 @@ const ContactForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("https://painhub.onrender.com/api/feedback", formData);
+      await axios.post(
+        "http://painpal.onrender.com/api/v1/other/feedback",
+        formData
+      );
       setSubmitStatus("success");
       setFormData({ name: "", email: "", message: "" });
       setLoading(false);
