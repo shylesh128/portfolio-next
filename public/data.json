@@ -2,10 +2,10 @@
   "version": "1",
   "name": "Shylesh S",
   "title": "Full Stack Developer",
-  "description": "Hii, I am a Full stack Developer with knowledge in the MERN and Next JS stack. Exploring potential career paths in Machine learning.",
+  "description": "Full Stack Developer specializing in web and mobile app development with ReactJS, NextJS, NodeJS, React Native, and TypeScript. Experienced in building scalable microservices, implementing CI/CD pipelines, and developing AI-powered solutions.",
   "image": "/shylesh.jpg",
   "contact": {
-    "email": "shyleshstylo@gmail.com",
+    "email": "shylesh.s.work@gmail.com",
     "phone": "+91 7760043578",
     "location": "Bengaluru, India",
     "LinkedIn": "https://www.linkedin.com/in/s-shylesh/"
@@ -66,37 +66,121 @@
     {
       "skill": "AWS (S3)",
       "rating": 7
+    },
+    {
+      "skill": "TypeScript",
+      "rating": 8
+    },
+    {
+      "skill": "Flask",
+      "rating": 7
+    },
+    {
+      "skill": "Jest",
+      "rating": 7
+    },
+    {
+      "skill": "Zustand",
+      "rating": 8
+    },
+    {
+      "skill": "Redis",
+      "rating": 7
+    },
+    {
+      "skill": "Docker",
+      "rating": 7
+    },
+    {
+      "skill": "AWS EC2",
+      "rating": 7
+    },
+    {
+      "skill": "CI/CD",
+      "rating": 8
+    },
+    {
+      "skill": "OAuth & JWT",
+      "rating": 8
+    },
+    {
+      "skill": "GraphQL",
+      "rating": 7
+    },
+    {
+      "skill": "WebSockets",
+      "rating": 7
+    },
+    {
+      "skill": "RESTful APIs",
+      "rating": 9
+    },
+    {
+      "skill": "Git",
+      "rating": 8
+    },
+    {
+      "skill": "Linux",
+      "rating": 7
     }
   ],
   "experiences": [
     {
-      "title": "Junior Full Stack Developer",
-      "company": "ANSR Source India Private Limited, Bengaluru",
+      "title": "Full Stack Developer",
+      "company": "ansrsource, Bengaluru",
       "logo": "ansr-logo.png",
-      "dates": "April 2023 – Present",
-      "description": "As a Junior Full Stack Developer, I led various projects aimed at improving our platform's tools and user interfaces.",
+      "dates": "Apr 2025 – Present",
+      "description": "Leading web and mobile app development with focus on deployment strategies and scalable microservices.",
       "works": [
-        "Alt Text Image Generator: Led the creation of an AI model to enhance our E-learning platform's accessibility, utilizing OpenAI API, Langchain, Blip Model Cloud Vision AI, and Hugging Face API. This effort resulted in a more inclusive learning experience.",
-        "AI Model Customization: Specialized in customizing AI models, harnessing the power of OpenAI's LLM, GooglePaLM, and fine-tuned custom data. These enhancements significantly improved the performance of AI applications, such as chatbots, for personalized interactions.",
-        "AnsrEagle Plagiarism Tool: Pioneered the development of a widely embraced tool that authenticates educational materials, efficiently detects plagiarism, and ensures content originality.",
-        "GranuLearn Learning Management System Enhancement: Revamped the GranuLearn LMS by enhancing the admin UI, incorporating AI-driven course creation features, and introducing an interactive player to provide an enriched learning experience.",
-        "Mobile App Development: Contributed to the development of the GranuLearn App using React Native and Expo, resulting in a seamless and immersive mobile learning experience for users. This effort significantly improved the user experience."
+        "Orchestrated web and mobile app development using ReactJS, NextJS, NodeJS, React Native (Expo), and TypeScript, reducing prototype-to-MVP time by 20% and enhancing cross-platform functionality.",
+        "Designed robust deployment strategies with AWS EC2, S3, Docker, and CI/CD pipelines, decreasing deployment errors by 40% and improving system reliability.",
+        "Engineered scalable microservices using Flask and Python, enhancing backend response time by 30% and supporting growth of concurrent users."
+      ]
+    },
+    {
+      "title": "Junior Full Stack Developer",
+      "company": "ansrsource, Bengaluru",
+      "logo": "ansr-logo.png",
+      "dates": "Apr 2023 – Mar 2025",
+      "description": "Led development of training management systems and AI-powered solutions, recognized with Star of the Quarter award.",
+      "works": [
+        "Led the development of ansrTMS, reducing on-boarding time by 35% and boosting training completion rates; received Spot Award for project success.",
+        "Recognized with Star of the Quarter award for developing a custom LLM and chatbot that boosted client interaction efficiency by 25% and reduced support response times.",
+        "Elevated code quality in ansrTMS by leading peer reviews and enforcing SOLID design principles to ensure maintainability and scalability."
       ]
     },
     {
       "title": "Full Stack Developer Intern",
-      "company": "ANSR Source India Private Limited, Bengaluru",
+      "company": "ansrsource, Bengaluru",
       "logo": "ansr-logo.png",
-      "dates": "Oct 2022 – March 2023",
-      "description": "As a Full Stack Developer Intern, I was instrumental in modernizing key components of the platform from traditional web technologies to Next JS.",
+      "dates": "Oct 2022 – Mar 2023",
+      "description": "Executed platform migrations and developed plagiarism detection tools while implementing comprehensive testing suites.",
       "works": [
-        "Executed a successful migration of the admin portal to Next JS, enhancing its manageability and performance.",
-        "Upgraded the player to Next JS, resulting in notable performance improvements and a better user experience.",
-        "Revamped the GranuLearn frontend using Next JS, enhancing the user interface and experience."
+        "Executed migration of GranuLearn Admin and Player platforms to NextJS, enhancing code-base maintainability.",
+        "Independently developed the ansrEagle plagiarism detection tool, improving detection accuracy by 40% and supporting academic integrity initiatives.",
+        "Implemented comprehensive automated testing suites with Jest, increasing test coverage by 35% and reducing production bugs by 25%."
       ]
     }
   ],
   "projects": [
+    {
+      "title": "ansrAccess - Accessibility Solution",
+      "description": "Enhanced data retrieval using optimized MongoDB aggregation pipelines, improving operational efficiency by 20%. Engineered AI-based alt-text generation to improve accessibility compliance, reducing manual effort by 40%. Implemented Redis caching strategies, reducing page load times by 25%. Technologies: NextJS, NodeJS, ExpressJS, MongoDB, Redis.",
+      "link": "https://ansraccess.com/",
+      "preview": "/projects/ansraccess.png"
+    },
+    {
+      "title": "ansrTMS - Training Scheduling & Management",
+      "description": "Designed and implemented a cohort-based training platform to automate scheduling, tracking, and completion of employee training, reducing manual oversight by 35%. Integrated Microsoft Teams and Outlook for scheduling, enabling automatic notifications and invites. Programmed a skill-based matching algorithm to auto-assign hosts to events, reducing manual scheduling overhead by 30%. Technologies: NextJS, NodeJS, MongoDB.",
+      "link": "https://ansrsource.com/ansrtms-training-scheduling-management/",
+      "preview": "/projects/ansrTMS.png"
+    },
+    {
+      "title": "GranuLearn - Learning Management System",
+      "description": "Developed and enhanced GranuLearn LMS, a comprehensive learning platform for training and building high-performing teams. Executed migration of admin portal and player to NextJS, enhancing code-base maintainability and performance. Created media-rich tools, gamified learning environment, and cross-platform sync across devices. Built collaborative features with secure messaging for interaction and knowledge sharing. Technologies: NextJS, ReactJS, NodeJS, MongoDB.",
+      "link": "https://granulearn.com/",
+      "preview": "/projects/granulearn.png"
+    },
     {
       "title": "Wildlife Awareness And Conservation Club",
       "description": "Developed a website for a club promoting wildlife awareness and conservation, including user login, event registration, and news updates. Technologies used: HTML, CSS, JavaScript, PHP & MySQL.",
@@ -203,24 +287,14 @@
       "institution": "St. Joseph’s Pre-University College, Bengaluru"
     }
   ],
-  "interests": [
-    "Graphic Designing",
-    "Charcoal Sketching",
-    "Glass Painting"
-  ],
+  "interests": ["Graphic Designing", "Charcoal Sketching", "Glass Painting"],
   "certificates": [
     {
       "platform": "freeCodeCamp",
       "logo": "freeCodeCamp logo",
       "title": "Front End Development Libraries",
       "issuedDate": "Jun 2023",
-      "skills": [
-        "Bootstrap",
-        "jQuery",
-        "React.js",
-        "redux",
-        "SASS"
-      ],
+      "skills": ["Bootstrap", "jQuery", "React.js", "redux", "SASS"],
       "link": "https://www.freecodecamp.org/certification/shyleshstylo/front-end-development-libraries",
       "image": "/cert/front-end-libraries.png"
     },
@@ -230,11 +304,7 @@
       "title": "Node.js, Express, MongoDB & More: The Complete Bootcamp 2023",
       "issuedDate": "Jun 2023",
       "credentialId": "UC-15f95138-f169-4715-aa92-2b79d6518292",
-      "skills": [
-        "MongoDB",
-        "Node js",
-        "Express.js"
-      ],
+      "skills": ["MongoDB", "Node js", "Express.js"],
       "link": "https://ude.my/UC-15f95138-f169-4715-aa92-2b79d6518292"
     },
     {
@@ -265,10 +335,7 @@
       "logo": "LinkedIn logo",
       "title": "Become a Software Developer",
       "issuedDate": "Jun 2022",
-      "skills": [
-        "Software Development",
-        "Programming"
-      ],
+      "skills": ["Software Development", "Programming"],
       "link": "https://www.linkedin.com/learning/certificates/a1c00fd686a2f53af816d7d982eb734c9e25b601551050106055106f0dd7c5a1?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bin3tDrCEQX2fCN3Zl9Tq1g%3D%3D"
     },
     {

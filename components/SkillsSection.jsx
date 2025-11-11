@@ -7,11 +7,27 @@ import {
   FaNodeJs,
   FaPython,
   FaAws,
+  FaDocker,
+  FaGitAlt,
+  FaLinux,
 } from "react-icons/fa";
 import { FiDatabase } from "react-icons/fi";
-import { SiNextdotjs, SiExpress, SiMongodb, SiOpenai } from "react-icons/si";
+import { 
+  SiNextdotjs, 
+  SiExpress, 
+  SiMongodb, 
+  SiOpenai, 
+  SiTypescript,
+  SiFlask,
+  SiJest,
+  SiRedis,
+  SiGraphql,
+  SiJsonwebtokens,
+} from "react-icons/si";
 import { RiJavascriptFill } from "react-icons/ri";
 import { PiBird } from "react-icons/pi";
+import { TbApi, TbWebhook } from "react-icons/tb";
+import { MdOutlineIntegrationInstructions } from "react-icons/md";
 import { LinearProgress } from "@mui/material";
 
 const sectionVariants = {
@@ -45,6 +61,20 @@ const SkillsSection = ({ skills }) => {
     LangChain: PiBird,
     "React Native": FaReact,
     "AWS (S3)": FaAws,
+    TypeScript: SiTypescript,
+    Flask: SiFlask,
+    Jest: SiJest,
+    Zustand: MdOutlineIntegrationInstructions,
+    Redis: SiRedis,
+    Docker: FaDocker,
+    "AWS EC2": FaAws,
+    "CI/CD": MdOutlineIntegrationInstructions,
+    "OAuth & JWT": SiJsonwebtokens,
+    GraphQL: SiGraphql,
+    WebSockets: TbWebhook,
+    "RESTful APIs": TbApi,
+    Git: FaGitAlt,
+    Linux: FaLinux,
   };
 
   return (
@@ -59,7 +89,7 @@ const SkillsSection = ({ skills }) => {
         <ul className="skill-list">
           <AnimatePresence>
             {skills.map((skill, index) => {
-              const IconComponent = skillIcons[skill.skill];
+              const IconComponent = skillIcons[skill.skill] || TbApi;
               return (
                 <motion.li
                   key={index}
@@ -70,7 +100,7 @@ const SkillsSection = ({ skills }) => {
                   exit="hidden"
                 >
                   <div className="skill-icon">
-                    <IconComponent size={48} />
+                    {IconComponent && <IconComponent size={48} />}
                   </div>
                   <div className="skill-details">
                     <div className="skill-content">
