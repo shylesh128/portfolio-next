@@ -12,23 +12,15 @@
   },
   "skills": [
     {
-      "skill": "HTML",
-      "rating": 7
-    },
-    {
-      "skill": "CSS",
-      "rating": 7
-    },
-    {
-      "skill": "JavaScript",
-      "rating": 8
-    },
-    {
       "skill": "NEXT JS",
       "rating": 9
     },
     {
-      "skill": "MONGO DB",
+      "skill": "REACT JS",
+      "rating": 8
+    },
+    {
+      "skill": "TypeScript",
       "rating": 8
     },
     {
@@ -36,64 +28,16 @@
       "rating": 8
     },
     {
-      "skill": "REACT JS",
+      "skill": "JavaScript",
       "rating": 8
     },
     {
-      "skill": "EXPRESS JS",
-      "rating": 7
-    },
-    {
-      "skill": "PYTHON",
-      "rating": 7
-    },
-    {
-      "skill": "SQL",
-      "rating": 6
-    },
-    {
-      "skill": "OpenAI Customizations",
-      "rating": 9
-    },
-    {
-      "skill": "LangChain",
-      "rating": 6
-    },
-    {
-      "skill": "React Native",
-      "rating": 7
-    },
-    {
-      "skill": "AWS (S3)",
-      "rating": 7
-    },
-    {
-      "skill": "TypeScript",
+      "skill": "MONGO DB",
       "rating": 8
-    },
-    {
-      "skill": "Flask",
-      "rating": 7
-    },
-    {
-      "skill": "Jest",
-      "rating": 7
     },
     {
       "skill": "Zustand",
       "rating": 8
-    },
-    {
-      "skill": "Redis",
-      "rating": 7
-    },
-    {
-      "skill": "Docker",
-      "rating": 7
-    },
-    {
-      "skill": "AWS EC2",
-      "rating": 7
     },
     {
       "skill": "CI/CD",
@@ -104,6 +48,50 @@
       "rating": 8
     },
     {
+      "skill": "React Native",
+      "rating": 7
+    },
+    {
+      "skill": "PYTHON",
+      "rating": 7
+    },
+    {
+      "skill": "Flask",
+      "rating": 7
+    },
+    {
+      "skill": "Docker",
+      "rating": 7
+    },
+    {
+      "skill": "HTML",
+      "rating": 7
+    },
+    {
+      "skill": "CSS",
+      "rating": 7
+    },
+    {
+      "skill": "EXPRESS JS",
+      "rating": 7
+    },
+    {
+      "skill": "Redis",
+      "rating": 7
+    },
+    {
+      "skill": "AWS EC2",
+      "rating": 7
+    },
+    {
+      "skill": "AWS (S3)",
+      "rating": 7
+    },
+    {
+      "skill": "Jest",
+      "rating": 7
+    },
+    {
       "skill": "GraphQL",
       "rating": 7
     },
@@ -112,16 +100,16 @@
       "rating": 7
     },
     {
-      "skill": "RESTful APIs",
-      "rating": 9
-    },
-    {
-      "skill": "Git",
-      "rating": 8
-    },
-    {
       "skill": "Linux",
       "rating": 7
+    },
+    {
+      "skill": "LangChain",
+      "rating": 6
+    },
+    {
+      "skill": "SQL",
+      "rating": 6
     }
   ],
   "experiences": [

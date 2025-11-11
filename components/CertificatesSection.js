@@ -14,15 +14,14 @@ const CertificatesSection = ({ certificates }) => {
 
   return (
     <section>
-      <motion.h2
-        className="section-title"
-        initial="hidden"
-        animate="visible"
-        variants={sectionVariants}
-      >
-        Certificates
-      </motion.h2>
       <div className="certificate-content">
+        <motion.h2
+          initial="hidden"
+          animate="visible"
+          variants={sectionVariants}
+        >
+          Certificates
+        </motion.h2>
         {certificates.map((certificate, index) =>
           isLargeScreen ? (
             index % 2 !== 0 ? (
