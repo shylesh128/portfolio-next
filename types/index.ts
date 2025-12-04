@@ -25,6 +25,7 @@ export interface Project {
   link: string;
   preview: string;
   altText?: string;
+  techStack?: string[]; // NEW: Tech stack for filtering and badges
 }
 
 export interface Education {

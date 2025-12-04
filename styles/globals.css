@@ -187,12 +187,17 @@ body {
   border: 1px solid var(--border-color);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   height: 400px; /* New Line */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.project-item:hover {
+  border-color: var(--link-color);
 }
 
 .project-preview {

@@ -11,6 +11,8 @@ const sectionVariants = {
 };
 
 import { Project } from "../types";
+import { usePortfolioStore } from "@/store/usePortfolioStore";
+import ProjectFilters from "@/components/features/ProjectFilters";
 
 interface ProjectsProps {
   projects: Project[];
@@ -18,6 +20,42 @@ interface ProjectsProps {
 
 const Projects = ({ projects }: ProjectsProps) => {
   const isLargeScreen = useMediaQuery("(min-width: 768px)");
+  const { filters } = usePortfolioStore();
+
+  // Extract unique tech stack from all projects
+  const availableTechStack = React.useMemo(() => {
+    const techSet = new Set<string>();
+    projects.forEach((project) => {
+      project.techStack?.forEach((tech) => techSet.add(tech));
+    });
+    return Array.from(techSet).sort();
+  }, [projects]);
+
+  // Filter projects based on search and tech stack
+  const filteredProjects = React.useMemo(() => {
+    return projects.filter((project) => {
+      // Search filter
+      const searchQuery = filters?.searchQuery || '';
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        const matchesSearch =
+          project.title.toLowerCase().includes(query) ||
+          project.description.toLowerCase().includes(query);
+        if (!matchesSearch) return false;
+      }
+
+      // Tech stack filter
+      const selectedTechStack = filters?.selectedTechStack || [];
+      if (selectedTechStack.length > 0) {
+        const hasTech = selectedTechStack.some((tech) =>
+          project.techStack?.includes(tech)
+        );
+        if (!hasTech) return false;
+      }
+
+      return true;
+    });
+  }, [projects, filters?.searchQuery, filters?.selectedTechStack]);
 
   return (
     <section className="projects-section">
@@ -28,8 +66,14 @@ const Projects = ({ projects }: ProjectsProps) => {
         variants={sectionVariants}
       >
         <h2>Projects</h2>
-        <div className="projects-grid">
-          {projects.map((project, index) =>
+        <ProjectFilters availableTechStack={availableTechStack} />
+        {filteredProjects.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--sub-text-color)' }}>
+            No projects found matching your filters.
+          </div>
+        ) : (
+          <div className="projects-grid">
+            {filteredProjects.map((project, index) =>
             isLargeScreen ? (
               index % 2 !== 0 ? (
                 <AnimationItemRight key={index}>
@@ -62,6 +106,7 @@ const Projects = ({ projects }: ProjectsProps) => {
             )
           )}
         </div>
+        )}
       </motion.div>
     </section>
   );

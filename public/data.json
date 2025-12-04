@@ -167,19 +167,22 @@
       "title": "ansrAccess - Accessibility Solution",
       "description": "Enhanced data retrieval using optimized MongoDB aggregation pipelines, improving operational efficiency by 20%. Engineered AI-based alt-text generation to improve accessibility compliance, reducing manual effort by 40%. Implemented Redis caching strategies, reducing page load times by 25%. Technologies: NextJS, NodeJS, ExpressJS, MongoDB, Redis.",
       "link": "https://ansraccess.com/",
-      "preview": "/projects/ansraccess.png"
+      "preview": "/projects/ansraccess.png",
+      "techStack": ["Next.js", "Node.js", "Express.js", "MongoDB", "Redis", "AI/ML"]
     },
     {
       "title": "ansrTMS - Training Scheduling & Management",
       "description": "Designed and implemented a cohort-based training platform to automate scheduling, tracking, and completion of employee training, reducing manual oversight by 35%. Integrated Microsoft Teams and Outlook for scheduling, enabling automatic notifications and invites. Programmed a skill-based matching algorithm to auto-assign hosts to events, reducing manual scheduling overhead by 30%. Technologies: NextJS, NodeJS, MongoDB.",
       "link": "https://ansrsource.com/ansrtms-training-scheduling-management/",
-      "preview": "/projects/ansrTMS.png"
+      "preview": "/projects/ansrTMS.png",
+      "techStack": ["Next.js", "Node.js", "MongoDB", "TypeScript"]
     },
     {
       "title": "GranuLearn - Learning Management System",
       "description": "Developed and enhanced GranuLearn LMS, a comprehensive learning platform for training and building high-performing teams. Executed migration of admin portal and player to NextJS, enhancing code-base maintainability and performance. Created media-rich tools, gamified learning environment, and cross-platform sync across devices. Built collaborative features with secure messaging for interaction and knowledge sharing. Technologies: NextJS, ReactJS, NodeJS, MongoDB.",
       "link": "https://granulearn.com/",
-      "preview": "/projects/granulearn.png"
+      "preview": "/projects/granulearn.png",
+      "techStack": ["Next.js", "React.js", "Node.js", "MongoDB"]
     },
     {
       "title": "Wildlife Awareness And Conservation Club",

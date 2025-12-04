@@ -14,6 +14,8 @@ import Loading from "@/components/Loading";
 import publicJson from "../public/data.json";
 import { Button } from "@mui/material";
 import ContactForm from "@/components/Message";
+import ScrollProgress from "@/components/layout/ScrollProgress";
+import StatsDashboard from "@/components/features/StatsDashboard";
 
 import { PortfolioData } from "../types";
 
@@ -155,12 +157,20 @@ export default function Home() {
         <meta property="og:image" content="public/shylesh.jpg" />
       </Head>
 
+      <ScrollProgress />
       <Navigation isDarkMode={isDarkMode} toggleMode={toggleMode} />
 
       {/* Header Section */}
       <AnimationItem>
         <div id="Header">
           <Header data={data} />
+        </div>
+      </AnimationItem>
+
+      {/* Stats Dashboard */}
+      <AnimationItem>
+        <div id="stats">
+          <StatsDashboard />
         </div>
       </AnimationItem>
 

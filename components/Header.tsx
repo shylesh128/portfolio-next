@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import DownloadResumeButton from "@/components/features/DownloadResumeButton";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -71,6 +72,14 @@ const Header = ({ data }: HeaderProps) => {
             variants={sectionVariants}
           >
             <p>{data.description}</p>
+            <div style={{ 
+              marginTop: '2rem', 
+              display: 'flex', 
+              justifyContent: 'center',
+              gap: '1rem',
+            }}>
+              <DownloadResumeButton variant="primary" size="lg" />
+            </div>
           </motion.div>
         </Box>
       </motion.div>

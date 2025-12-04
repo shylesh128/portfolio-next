@@ -7,14 +7,20 @@ const itemVariants = {
 };
 
 import { Project } from "../types";
+import Badge from "@/components/ui/Badge";
 
-const ProjectItem = ({ title, description, link, preview }: Project) => {
+const ProjectItem = ({ title, description, link, preview, techStack }: Project) => {
   return (
     <motion.div
       className="project-item"
       initial="hidden"
       animate="visible"
       variants={itemVariants}
+      whileHover={{ 
+        y: -8,
+        boxShadow: '0 12px 24px rgba(0, 0, 0, 0.15)',
+      }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <Image
         src={preview}
@@ -25,9 +31,29 @@ const ProjectItem = ({ title, description, link, preview }: Project) => {
       />
       <div className="project-info">
         <h3>{title}</h3>
+        {techStack && techStack.length > 0 && (
+          <div style={{ 
+            display: 'flex', 
+            flexWrap: 'wrap', 
+            gap: '0.75rem', 
+            marginBottom: '1rem',
+            marginTop: '0.5rem',
+          }}>
+            {techStack.slice(0, 4).map((tech) => (
+              <Badge key={tech} variant="primary" size="sm">
+                {tech}
+              </Badge>
+            ))}
+            {techStack.length > 4 && (
+              <Badge variant="default" size="sm">
+                +{techStack.length - 4}
+              </Badge>
+            )}
+          </div>
+        )}
         <p>{description}</p>
         <a href={link} target="_blank" rel="noopener noreferrer">
-          View
+          View Project →
         </a>
       </div>
     </motion.div>
