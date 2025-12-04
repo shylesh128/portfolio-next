@@ -13,7 +13,13 @@ const sectionVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-const Header = ({ data }) => {
+import { PortfolioData } from "../types";
+
+interface HeaderProps {
+  data: PortfolioData;
+}
+
+const Header = ({ data }: HeaderProps) => {
   return (
     <header>
       <motion.div

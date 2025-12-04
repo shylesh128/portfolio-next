@@ -1,4 +1,5 @@
 // components/Contact.js
+import { Contact as ContactType } from "../types";
 import { motion } from "framer-motion";
 import {
   FaEnvelope,
@@ -12,7 +13,11 @@ const sectionVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-const Contact = ({ contact }) => {
+interface ContactProps {
+  contact: ContactType;
+}
+
+const Contact = ({ contact }: ContactProps) => {
   return (
     <section className="contact-section">
       <motion.div

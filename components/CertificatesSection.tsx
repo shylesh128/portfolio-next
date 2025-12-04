@@ -9,7 +9,13 @@ const sectionVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-const CertificatesSection = ({ certificates }) => {
+import { Certificate } from "../types";
+
+interface CertificatesSectionProps {
+  certificates: Certificate[];
+}
+
+const CertificatesSection = ({ certificates }: CertificatesSectionProps) => {
   const isLargeScreen = useMediaQuery("(min-width: 768px)");
 
   return (

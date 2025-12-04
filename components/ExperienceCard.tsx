@@ -1,7 +1,13 @@
 import { motion } from "framer-motion";
 import { BiCalendar, BiCheck } from "react-icons/bi";
 
-const ExperienceCard = ({ experience }) => {
+import { Experience } from "../types";
+
+interface ExperienceCardProps {
+  experience: Experience;
+}
+
+const ExperienceCard = ({ experience }: ExperienceCardProps) => {
   return (
     <div className="experience-item">
       <div className="experience-header">

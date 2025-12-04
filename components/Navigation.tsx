@@ -4,7 +4,12 @@ import { RiMenuLine, RiCloseLine } from "react-icons/ri";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { IconButton } from "@mui/material";
 
-const Navigation = ({ isDarkMode, toggleMode }) => {
+interface NavigationProps {
+  isDarkMode: boolean;
+  toggleMode: () => void;
+}
+
+const Navigation = ({ isDarkMode, toggleMode }: NavigationProps) => {
   const navigationLinks = [
     { id: "Header", label: "Profile" },
     { id: "skills", label: "Skills" },
@@ -19,7 +24,7 @@ const Navigation = ({ isDarkMode, toggleMode }) => {
   const [activeLink, setActiveLink] = useState("Header");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleNavLinkClick = (targetId) => {
+  const handleNavLinkClick = (targetId: string) => {
     setActiveLink(targetId);
     setIsMenuOpen(false);
   };

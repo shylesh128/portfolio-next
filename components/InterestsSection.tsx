@@ -6,7 +6,11 @@ const sectionVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-const InterestsSection = ({ interests }) => {
+interface InterestsSectionProps {
+  interests: string[];
+}
+
+const InterestsSection = ({ interests }: InterestsSectionProps) => {
   return (
     <section>
       <motion.div

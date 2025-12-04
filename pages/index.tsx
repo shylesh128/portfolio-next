@@ -11,30 +11,89 @@ import CertificatesSection from "@/components/CertificatesSection";
 import Navigation from "@/components/Navigation";
 import Contact from "@/components/contact";
 import Loading from "@/components/Loading";
-import publicJson from "/public/data.json";
+import publicJson from "../public/data.json";
+import { Button } from "@mui/material";
+import ContactForm from "@/components/Message";
+
+import { PortfolioData } from "../types";
 
 export default function Home() {
-  const headerRef = useRef(null);
-  const aboutMeRef = useRef(null);
-  const projectsRef = useRef(null);
-  const interestsRef = useRef(null);
-  const experienceRef = useRef(null);
-  const skillsRef = useRef(null);
-  const [data, setData] = useState(null);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const aboutMeRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
+  const interestsRef = useRef<HTMLDivElement>(null);
+  const experienceRef = useRef<HTMLDivElement>(null);
+  const skillsRef = useRef<HTMLDivElement>(null);
+  const [data, setData] = useState<PortfolioData | null>(null);
+
+  const toggleMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  async function getStatus() {
+    try {
+      const response = await fetch(
+        "https://painpal.onrender.com/api/v1/status",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error fetching status:", error);
+    }
+  }
 
   useEffect(() => {
+    getStatus();
     const fetchData = async () => {
       try {
         // const resumeData = await fetchResumeData();
         const resumeData = publicJson;
         setData(resumeData);
       } catch (error) {
-        console.error("Error fetching resume data:", error.message);
+        console.error("Error fetching resume data:", (error as Error).message);
       }
     };
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (document) {
+      const root = document.documentElement;
+      if (isDarkMode) {
+        // Dark mode variables
+        root.style.setProperty("--main-font", "Arial, sans-serif");
+        root.style.setProperty("--background-color", "#212121");
+        root.style.setProperty("--text-color", "#ffffff");
+        root.style.setProperty("--shadow-color", "rgba(0, 0, 0, 0.5");
+        root.style.setProperty("--border-color", "#d4d4d4");
+        root.style.setProperty("--link-color", "#87ceeb");
+        root.style.setProperty("--text-active-color", "#000000");
+        root.style.setProperty("--sub-text-color", "#bdbdbd");
+        root.style.setProperty("--secondary-text-color", "#bdbdbd");
+        root.style.setProperty("--scrollbar-color", "#757575");
+        root.style.setProperty("--scrollbar-thumb-color", "#757575");
+      } else {
+        // Light mode variables
+        root.style.setProperty("--background-color", "#f5f5f5");
+        root.style.setProperty("--text-color", "#212121");
+        root.style.setProperty("--shadow-color", "rgba(0, 0, 0, 0.7");
+        root.style.setProperty("--border-color", "#e0e0e0");
+        root.style.setProperty("--link-color", "#2f628a");
+        root.style.setProperty("--text-active-color", "#ffffff");
+        root.style.setProperty("--sub-text-color", "#757575");
+        root.style.setProperty("--secondary-text-color", "#757575");
+        root.style.setProperty("--scrollbar-color", "#bdbdbd");
+        root.style.setProperty("--scrollbar-thumb-color", "#757575");
+        // Add more light mode variables as needed
+      }
+    }
+  }, [isDarkMode]);
 
   useEffect(() => {
     const refs = [
@@ -59,23 +118,6 @@ export default function Home() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  async function fetchResumeData() {
-    try {
-      const response = await fetch(
-        "https://shylesh128.github.io/json-files.io/resume.json"
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok.");
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error fetching resume data:", error.message);
-      return null;
-    }
-  }
 
   // Render loading or error state if data is not yet available
   if (!data) {
@@ -113,7 +155,8 @@ export default function Home() {
         <meta property="og:image" content="public/shylesh.jpg" />
       </Head>
 
-      <Navigation />
+      <Navigation isDarkMode={isDarkMode} toggleMode={toggleMode} />
+
       {/* Header Section */}
       <AnimationItem>
         <div id="Header">
@@ -137,7 +180,7 @@ export default function Home() {
       {/* Projects Section */}
       <AnimationItem>
         <div id="projects">
-          <ProjectsSection projects={data.projects} id="projects" />
+          <ProjectsSection projects={data.projects} />
         </div>
       </AnimationItem>
 
@@ -164,6 +207,12 @@ export default function Home() {
       <AnimationItem>
         <div id="contact">
           <Contact contact={data.contact} />
+        </div>
+      </AnimationItem>
+
+      <AnimationItem>
+        <div id="message">
+          <ContactForm />
         </div>
       </AnimationItem>
     </>

@@ -1,6 +1,12 @@
 import { BiCalendar, BiCheck, BiLink } from "react-icons/bi";
 
-const CertificatesCard = ({ certificate }) => {
+import { Certificate } from "../types";
+
+interface CertificatesCardProps {
+  certificate: Certificate;
+}
+
+const CertificatesCard = ({ certificate }: CertificatesCardProps) => {
   return (
     <div className="certificate-item">
       <div className="certificate-header">

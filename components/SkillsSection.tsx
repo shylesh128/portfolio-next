@@ -45,8 +45,15 @@ const cardVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.1 } },
 };
 
-const SkillsSection = ({ skills }) => {
-  const skillIcons = {
+import { Skill } from "../types";
+import { IconType } from "react-icons";
+
+interface SkillsSectionProps {
+  skills: Skill[];
+}
+
+const SkillsSection = ({ skills }: SkillsSectionProps) => {
+  const skillIcons: { [key: string]: IconType } = {
     HTML: FaHtml5,
     CSS: FaCss3,
     JavaScript: RiJavascriptFill,

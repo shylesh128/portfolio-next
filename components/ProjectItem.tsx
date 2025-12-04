@@ -6,7 +6,9 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-const ProjectItem = ({ title, description, link, preview }) => {
+import { Project } from "../types";
+
+const ProjectItem = ({ title, description, link, preview }: Project) => {
   return (
     <motion.div
       className="project-item"

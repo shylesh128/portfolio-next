@@ -14,7 +14,13 @@ const cardVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-const EducationStudies = ({ studies }) => {
+import { Education } from "../types";
+
+interface EducationStudiesProps {
+  studies: Education[];
+}
+
+const EducationStudies = ({ studies }: EducationStudiesProps) => {
   return (
     <motion.section
       className="studies-content"

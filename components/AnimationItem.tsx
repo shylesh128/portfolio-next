@@ -1,16 +1,22 @@
+// components/AnimationItem.js
+
 import React, { useEffect } from "react";
 import { useAnimation, motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const squareVariants = {
-  visible: { opacity: 1, x: 0, transition: { duration: 1, delay: 1 } },
-  hidden: { opacity: 0, x: "-100%" },
+  visible: { opacity: 1, transition: { duration: 1 } },
+  hidden: { opacity: 0 },
 };
 
-export function AnimationItemLeft(props) {
+interface AnimationItemProps {
+  children: React.ReactNode;
+}
+
+export function AnimationItem(props: AnimationItemProps) {
   const controls = useAnimation();
   const [ref, inView] = useInView({
-    triggerOnce: true,
+    triggerOnce: true, // This will trigger the animation only once when it comes into view
   });
 
   useEffect(() => {

@@ -7,7 +7,13 @@ const sectionVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-const ExperienceSection = ({ experiences }) => {
+import { Experience } from "../types";
+
+interface ExperienceSectionProps {
+  experiences: Experience[];
+}
+
+const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
   return (
     <section>
       <motion.div

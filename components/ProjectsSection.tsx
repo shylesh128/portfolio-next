@@ -10,7 +10,13 @@ const sectionVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-const Projects = ({ projects }) => {
+import { Project } from "../types";
+
+interface ProjectsProps {
+  projects: Project[];
+}
+
+const Projects = ({ projects }: ProjectsProps) => {
   const isLargeScreen = useMediaQuery("(min-width: 768px)");
 
   return (

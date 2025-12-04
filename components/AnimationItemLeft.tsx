@@ -3,11 +3,15 @@ import { useAnimation, motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const squareVariants = {
-  visible: { opacity: 1, x: 0, transition: { duration: 1, delay: 0.5 } }, // Added delay here
-  hidden: { opacity: 0, x: "100%" },
+  visible: { opacity: 1, x: 0, transition: { duration: 1, delay: 1 } },
+  hidden: { opacity: 0, x: "-100%" },
 };
 
-export function AnimationItemRight(props) {
+interface AnimationItemLeftProps {
+  children: React.ReactNode;
+}
+
+export function AnimationItemLeft(props: AnimationItemLeftProps) {
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
