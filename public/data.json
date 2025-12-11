@@ -164,6 +164,18 @@
   ],
   "projects": [
     {
+      "title": "EndX - Web Security Analysis Platform",
+      "description": "Full-stack SaaS platform for automated web security reconnaissance featuring 10+ scanning modules (web crawling, subdomain enumeration, JS analysis, GraphQL introspection, and more). Implements real-time scan results via WebSockets, Stripe-powered subscriptions with 3 tiers, and a Reddit-style community platform with posts, messaging, and chat rooms. Traffic is anonymized through a pool of 10 Tor proxies with HAProxy load balancing. Technologies: React, TypeScript, Node.js, Express, MongoDB, Redis, Docker, Socket.IO, Stripe, Puppeteer.",
+      "link": "https://github.com/shylesh128/EndX",
+      "preview": "/projects/EndX.png"
+    },
+    {
+      "title": "PainAI Test Recorder",
+      "description": "Chrome extension for recording user interactions and generating automated test scripts. Features Playwright-compatible selectors, Shadow DOM support, intelligent context detection for UI patterns, session management with IndexedDB, and automated playback with visual highlighting. Supports multi-page recording and keyboard shortcuts for seamless QA testing workflows. Technologies: React 19, TypeScript, Chrome Extension Manifest V3, Zustand, Webpack, IndexedDB.",
+      "link": "https://github.com/shylesh128/PainPal-Ext",
+      "preview": "/projects/PainAI.png"
+    },
+    {
       "title": "ansrAccess - Accessibility Solution",
       "description": "Enhanced data retrieval using optimized MongoDB aggregation pipelines, improving operational efficiency by 20%. Engineered AI-based alt-text generation to improve accessibility compliance, reducing manual effort by 40%. Implemented Redis caching strategies, reducing page load times by 25%. Technologies: NextJS, NodeJS, ExpressJS, MongoDB, Redis.",
       "link": "https://ansraccess.com/",
