@@ -1,220 +1,241 @@
-import { useEffect, useRef, useState } from "react";
-import Head from "next/head";
-import Header from "../components/Header";
-import ProjectsSection from "../components/ProjectsSection";
-import InterestsSection from "../components/InterestsSection";
-import ExperienceSection from "../components/ExperienceSection";
-import SkillsSection from "../components/SkillsSection";
-import { AnimationItem } from "../components/AnimationItem";
-import EducationStudies from "@/components/EducationStudies";
-import CertificatesSection from "@/components/CertificatesSection";
-import Navigation from "@/components/Navigation";
-import Contact from "@/components/contact";
-import Loading from "@/components/Loading";
-import publicJson from "../public/data.json";
-import { Button } from "@mui/material";
-import ContactForm from "@/components/Message";
+import { useEffect, useState, Suspense, lazy } from 'react';
+import Head from 'next/head';
+import dynamic from 'next/dynamic';
+import { AnimatePresence, motion } from 'framer-motion';
 
-import { PortfolioData } from "../types";
+// Components
+import Navigation from '../components/Navigation';
+import HeroSection from '../components/sections/HeroSection';
+import SkillsSection from '../components/SkillsSection';
+import ExperienceSection from '../components/ExperienceSection';
+import ProjectsSection from '../components/ProjectsSection';
+import EducationStudies from '@/components/EducationStudies';
+import CertificatesSection from '@/components/CertificatesSection';
+import InterestsSection from '@/components/InterestsSection';
+import Contact from '@/components/contact';
+import ContactForm from '@/components/Message';
+import Loading from '@/components/Loading';
+import CustomCursor from '@/components/ui/CustomCursor';
+
+// Hooks
+import { useScrollProgress } from '@/hooks/useScrollProgress';
+
+// Data
+import publicJson from '../public/data.json';
+import { PortfolioData } from '../types';
+
+// Dynamic import for 3D Scene (reduces initial bundle size)
+const Scene = dynamic(() => import('../components/3d/Scene'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const aboutMeRef = useRef<HTMLDivElement>(null);
-  const projectsRef = useRef<HTMLDivElement>(null);
-  const interestsRef = useRef<HTMLDivElement>(null);
-  const experienceRef = useRef<HTMLDivElement>(null);
-  const skillsRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<PortfolioData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const { progress } = useScrollProgress();
 
   const toggleMode = () => {
     setIsDarkMode(!isDarkMode);
   };
 
+  // Wake up backend server
   async function getStatus() {
     try {
-      const response = await fetch(
-        "https://painpal.onrender.com/api/v1/status",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      await fetch('https://painpal.onrender.com/api/v1/status', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
     } catch (error) {
-      console.error("Error fetching status:", error);
+      console.error('Error fetching status:', error);
     }
   }
 
   useEffect(() => {
     getStatus();
-    const fetchData = async () => {
+    
+    const loadData = async () => {
       try {
-        // const resumeData = await fetchResumeData();
         const resumeData = publicJson;
         setData(resumeData);
+        
+        // Simulate minimum loading time for effect
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        setIsLoading(false);
       } catch (error) {
-        console.error("Error fetching resume data:", (error as Error).message);
+        console.error('Error loading data:', (error as Error).message);
+        setIsLoading(false);
       }
     };
 
-    fetchData();
+    loadData();
   }, []);
 
   useEffect(() => {
-    if (document) {
+    if (typeof document !== 'undefined') {
       const root = document.documentElement;
+      
       if (isDarkMode) {
-        // Dark mode variables
-        root.style.setProperty("--main-font", "Arial, sans-serif");
-        root.style.setProperty("--background-color", "#212121");
-        root.style.setProperty("--text-color", "#ffffff");
-        root.style.setProperty("--shadow-color", "rgba(0, 0, 0, 0.5");
-        root.style.setProperty("--border-color", "#d4d4d4");
-        root.style.setProperty("--link-color", "#87ceeb");
-        root.style.setProperty("--text-active-color", "#000000");
-        root.style.setProperty("--sub-text-color", "#bdbdbd");
-        root.style.setProperty("--secondary-text-color", "#bdbdbd");
-        root.style.setProperty("--scrollbar-color", "#757575");
-        root.style.setProperty("--scrollbar-thumb-color", "#757575");
+        // Dark mode (default) - uses CSS variables from globals.css
+        root.style.setProperty('--bg-primary', '#0a0a0a');
+        root.style.setProperty('--bg-secondary', '#111111');
+        root.style.setProperty('--bg-elevated', '#1a1a1a');
+        root.style.setProperty('--bg-card', '#0f0f0f');
+        root.style.setProperty('--text-primary', '#ffffff');
+        root.style.setProperty('--text-secondary', '#a0a0a0');
+        root.style.setProperty('--text-muted', '#555555');
+        root.style.setProperty('--border', 'rgba(255, 255, 255, 0.08)');
+        root.style.setProperty('--border-hover', 'rgba(255, 255, 255, 0.15)');
+        root.style.setProperty('--border-active', 'rgba(255, 255, 255, 0.25)');
       } else {
-        // Light mode variables
-        root.style.setProperty("--background-color", "#f5f5f5");
-        root.style.setProperty("--text-color", "#212121");
-        root.style.setProperty("--shadow-color", "rgba(0, 0, 0, 0.7");
-        root.style.setProperty("--border-color", "#e0e0e0");
-        root.style.setProperty("--link-color", "#2f628a");
-        root.style.setProperty("--text-active-color", "#ffffff");
-        root.style.setProperty("--sub-text-color", "#757575");
-        root.style.setProperty("--secondary-text-color", "#757575");
-        root.style.setProperty("--scrollbar-color", "#bdbdbd");
-        root.style.setProperty("--scrollbar-thumb-color", "#757575");
-        // Add more light mode variables as needed
+        // Light mode
+        root.style.setProperty('--bg-primary', '#f8f8f8');
+        root.style.setProperty('--bg-secondary', '#ffffff');
+        root.style.setProperty('--bg-elevated', '#ffffff');
+        root.style.setProperty('--bg-card', '#ffffff');
+        root.style.setProperty('--text-primary', '#111111');
+        root.style.setProperty('--text-secondary', '#555555');
+        root.style.setProperty('--text-muted', '#888888');
+        root.style.setProperty('--border', 'rgba(0, 0, 0, 0.08)');
+        root.style.setProperty('--border-hover', 'rgba(0, 0, 0, 0.15)');
+        root.style.setProperty('--border-active', 'rgba(0, 0, 0, 0.25)');
       }
     }
   }, [isDarkMode]);
 
-  useEffect(() => {
-    const refs = [
-      headerRef,
-      aboutMeRef,
-      projectsRef,
-      interestsRef,
-      experienceRef,
-      skillsRef,
-    ];
-    const onScroll = () => {
-      refs.forEach((ref) => {
-        if (ref.current) {
-          const elementTop = ref.current.getBoundingClientRect().top;
-          const isShown = elementTop < window.innerHeight - 100;
-          if (isShown) {
-            ref.current.classList.add("visible");
-          }
-        }
-      });
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Render loading or error state if data is not yet available
-  if (!data) {
+  // Show loading screen
+  if (isLoading || !data) {
     return <Loading />;
   }
 
   return (
     <>
       <Head>
-        <title>{data.name}</title>
+        <title>{data.name} | Full Stack Developer</title>
         <meta name="description" content={data.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        
+        {/* SEO */}
         <script type="application/ld+json">
           {JSON.stringify({
-            "@context": "https://schema.org/",
-            "@type": "Person",
-            name: "Shylesh S",
-            jobTitle: "Full Stack Developer",
-            url: "https://shylesh-s.vercel.app/",
+            '@context': 'https://schema.org/',
+            '@type': 'Person',
+            name: 'Shylesh S',
+            jobTitle: 'Full Stack Developer',
+            url: 'https://shylesh-s.vercel.app/',
             sameAs: [
-              "https://www.linkedin.com/in/s-shylesh/",
-              "https://github.com/shylesh128",
+              'https://www.linkedin.com/in/s-shylesh/',
+              'https://github.com/shylesh128',
             ],
           })}
         </script>
+        
         <meta
           name="keywords"
-          content="Fullstack Developer portfolio website,Freelance Fullstack Developer portfolio,Web Developer portfolio examples,Online portfolio for Fullstack Developers,Best Fullstack Developer portfolios,Creative portfolio website for Developers,Fullstack Developer showcase website,Portfolio design for Freelance Developers,Web Developer portfolio inspiration,Fullstack Developer portfolio for hire,Shylesh S portfolio website,Fullstack Developer portfolio design ideas,Portfolio website development for Freelancers,Best practices for building a Fullstack Developer portfolio,How to create a Freelance Fullstack Developer portfolio,Fullstack Developer portfolio tips and tricks,Portfolio website templates for Fullstack Developers,How to showcase your skills as a Fullstack Developer,Building a portfolio website for Web Developers,Online portfolio tools for Freelance Developers, MERN stack development services, Expert MERN stack developer for hire, Full-stack JavaScript developer, React developer for hire, Node.js developer for hire, MERN stack web application development, Custom MERN stack development, Full-stack development services, MERN stack e-commerce development, Affordable MERN stack development, Shylesh S, Shylesh S, MERN stack website development, MERN stack mobile app development, MERN stack front-end development, MERN stack back-end development, MERN stack UI/UX design, MERN stack API development, MERN stack LMS development, MERN stack plugin development, MERN stack integration services, MERN stack support and maintenance"
-        ></meta>
-        <meta property="og:title" content={data.name} />
+          content="Fullstack Developer, MERN Stack, React Developer, Node.js Developer, Portfolio, Shylesh S, Web Developer, Full Stack Development"
+        />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content={`${data.name} | Full Stack Developer`} />
         <meta property="og:description" content={data.description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://shylesh-s.vercel.app/" />
-        <meta property="og:image" content="public/shylesh.jpg" />
+        <meta property="og:image" content="/shylesh.jpg" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${data.name} | Full Stack Developer`} />
+        <meta name="twitter:description" content={data.description} />
       </Head>
 
-      <Navigation isDarkMode={isDarkMode} toggleMode={toggleMode} />
+      {/* Custom cursor */}
+      <CustomCursor />
 
-      {/* Header Section */}
-      <AnimationItem>
-        <div id="Header">
-          <Header data={data} />
-        </div>
-      </AnimationItem>
+      {/* 3D Background Scene */}
+      <Scene scrollProgress={progress} />
 
-      {/* Skills Section */}
-      <AnimationItem>
-        <div id="skills">
+      {/* Main content */}
+      <div className="main-container">
+        {/* Navigation */}
+        <Navigation isDarkMode={isDarkMode} toggleMode={toggleMode} />
+
+        {/* Content sections */}
+        <main className="content-layer">
+          {/* Hero Section */}
+          <HeroSection
+            name={data.name}
+            title={data.title}
+            description={data.description}
+            image={data.image}
+          />
+
+          {/* Skills Section */}
           <SkillsSection skills={data.skills} />
-        </div>
-      </AnimationItem>
-      {/* Experience Section */}
-      <AnimationItem>
-        <div id="experiences">
+
+          {/* Experience Section */}
           <ExperienceSection experiences={data.experiences} />
-        </div>
-      </AnimationItem>
 
-      {/* Projects Section */}
-      <AnimationItem>
-        <div id="projects">
+          {/* Projects Section */}
           <ProjectsSection projects={data.projects} />
-        </div>
-      </AnimationItem>
 
-      {/* Education Section */}
-      <AnimationItem>
-        <div id="studies">
+          {/* Education Section */}
           <EducationStudies studies={data.education} />
-        </div>
-      </AnimationItem>
 
-      {/* certificate section */}
+          {/* Certificates Section */}
+          <CertificatesSection certificates={data.certificates} />
 
-      <div id="certificates">
-        <CertificatesSection certificates={data.certificates} />
-      </div>
-
-      {/* Interests Section */}
-      <AnimationItem>
-        <div id="interests">
+          {/* Interests Section */}
           <InterestsSection interests={data.interests} />
-        </div>
-      </AnimationItem>
 
-      <AnimationItem>
-        <div id="contact">
+          {/* Contact Section */}
           <Contact contact={data.contact} />
-        </div>
-      </AnimationItem>
 
-      <AnimationItem>
-        <div id="message">
+          {/* Contact Form */}
           <ContactForm />
-        </div>
-      </AnimationItem>
+
+          {/* Footer */}
+          <Footer />
+        </main>
+      </div>
     </>
   );
 }
+
+// Simple Footer component
+const Footer = () => {
+  return (
+    <motion.footer
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      style={{
+        padding: '3rem 2rem',
+        textAlign: 'center',
+        borderTop: '1px solid var(--border)',
+        marginTop: '4rem',
+      }}
+    >
+      <p
+        style={{
+          fontSize: '0.85rem',
+          color: 'var(--text-muted)',
+          fontFamily: 'var(--font-mono)',
+        }}
+      >
+        © {new Date().getFullYear()} Shylesh S. Built with Next.js & Three.js
+      </p>
+      <motion.p
+        style={{
+          fontSize: '0.75rem',
+          color: 'var(--text-muted)',
+          marginTop: '0.5rem',
+        }}
+        whileHover={{ color: 'var(--text-secondary)' }}
+      >
+        Designed & Developed with ❤️
+      </motion.p>
+    </motion.footer>
+  );
+};
