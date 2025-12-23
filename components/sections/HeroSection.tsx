@@ -18,9 +18,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   description,
 }) => {
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: {},
     visible: {
-      opacity: 1,
       transition: {
         staggerChildren: 0.2,
         delayChildren: 0.3,
@@ -29,9 +28,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { y: 30 },
     visible: {
-      opacity: 1,
       y: 0,
       transition: {
         type: "spring" as const,
@@ -117,8 +115,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       {/* Scroll indicator */}
       <motion.div
         className="scroll-indicator"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ y: 20 }}
+        animate={{ y: 0 }}
         transition={{ delay: 1.5, duration: 0.6 }}
       >
         <span>Scroll</span>

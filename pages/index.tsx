@@ -96,7 +96,7 @@ export default function Home() {
         root.style.setProperty('--bg-card', '#ffffff');
         root.style.setProperty('--text-primary', '#111111');
         root.style.setProperty('--text-secondary', '#555555');
-        root.style.setProperty('--text-muted', '#888888');
+        root.style.setProperty('--text-muted', '#666666');
         root.style.setProperty('--border', 'rgba(0, 0, 0, 0.08)');
         root.style.setProperty('--border-hover', 'rgba(0, 0, 0, 0.15)');
         root.style.setProperty('--border-active', 'rgba(0, 0, 0, 0.25)');
@@ -207,8 +207,8 @@ export default function Home() {
 const Footer = () => {
   return (
     <motion.footer
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
+      initial={{ y: 20 }}
+      whileInView={{ y: 0 }}
       transition={{ duration: 0.5 }}
       style={{
         padding: '3rem 2rem',
@@ -220,7 +220,7 @@ const Footer = () => {
       <p
         style={{
           fontSize: '0.85rem',
-          color: 'var(--text-muted)',
+          color: 'var(--text-secondary)',
           fontFamily: 'var(--font-mono)',
         }}
       >
@@ -229,10 +229,10 @@ const Footer = () => {
       <motion.p
         style={{
           fontSize: '0.75rem',
-          color: 'var(--text-muted)',
+          color: 'var(--text-secondary)',
           marginTop: '0.5rem',
         }}
-        whileHover={{ color: 'var(--text-secondary)' }}
+        whileHover={{ color: 'var(--text-primary)' }}
       >
         Designed & Developed with ❤️
       </motion.p>

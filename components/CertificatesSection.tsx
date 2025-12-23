@@ -154,9 +154,8 @@ const CertificatesSection = ({ certificates }: CertificatesSectionProps) => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    hidden: { y: 20, scale: 0.95 },
     visible: {
-      opacity: 1,
       y: 0,
       scale: 1,
       transition: {
@@ -191,8 +190,8 @@ const CertificatesSection = ({ certificates }: CertificatesSectionProps) => {
           {displayedCerts.map((certificate, index) => (
             <motion.div
               key={certificate.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              animate={{ y: 0 }}
               transition={{
                 type: 'spring' as const,
                 stiffness: 100,

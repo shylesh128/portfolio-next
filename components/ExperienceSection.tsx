@@ -24,17 +24,11 @@ const ExperienceCard: React.FC<{
       ref={ref}
       className="experience-item"
       initial={{
-        opacity: 0,
         x: isLeft ? -50 : 50,
       }}
-      animate={
-        inView
-          ? {
-              opacity: 1,
-              x: 0,
-            }
-          : {}
-      }
+      animate={{
+        x: inView ? 0 : (isLeft ? -50 : 50),
+      }}
       transition={{
         type: 'spring',
         stiffness: 100,
@@ -44,6 +38,9 @@ const ExperienceCard: React.FC<{
       whileHover={{
         y: -5,
         transition: { duration: 0.2 },
+      }}
+      style={{
+        visibility: inView ? 'visible' : 'hidden',
       }}
     >
       {/* Timeline dot */}
@@ -67,16 +64,16 @@ const ExperienceCard: React.FC<{
       {/* Header */}
       <div className="experience-header">
         <motion.h3
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 10 }}
+          animate={{ y: inView ? 0 : 10 }}
           transition={{ delay: index * 0.1 + 0.1 }}
         >
           {experience.title}
         </motion.h3>
         <motion.div
           className="experience-dates"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={inView ? { opacity: 1, scale: 1 } : {}}
+          initial={{ scale: 0.9 }}
+          animate={{ scale: inView ? 1 : 0.9 }}
           transition={{ delay: index * 0.1 + 0.2 }}
         >
           <BiCalendar size={14} />
@@ -85,32 +82,22 @@ const ExperienceCard: React.FC<{
       </div>
 
       {/* Company */}
-      <motion.p
-        className="experience-company"
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ delay: index * 0.1 + 0.2 }}
-      >
+      <p className="experience-company">
         {experience.company}
-      </motion.p>
+      </p>
 
       {/* Description */}
-      <motion.p
-        className="experience-description"
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ delay: index * 0.1 + 0.3 }}
-      >
+      <p className="experience-description">
         {experience.description}
-      </motion.p>
+      </p>
 
       {/* Work items */}
       <ul className="experience-works">
         {experience.works.map((work, workIndex) => (
           <motion.li
             key={workIndex}
-            initial={{ opacity: 0, x: -20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ x: -20 }}
+            animate={{ x: inView ? 0 : -20 }}
             transition={{
               delay: index * 0.1 + 0.4 + workIndex * 0.1,
               type: 'spring',
@@ -145,12 +132,12 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
       <motion.div
         ref={ref}
         className="experience-content"
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
+        initial={{}}
+        animate={{}}
       >
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 20 }}
+          animate={{ y: inView ? 0 : 20 }}
           transition={{ duration: 0.5 }}
         >
           Work Experience

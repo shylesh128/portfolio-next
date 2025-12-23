@@ -39,11 +39,9 @@ const RevealText: React.FC<RevealTextProps> = ({
   const wordVariants = {
     hidden: {
       y: 50,
-      opacity: 0,
     },
     visible: {
       y: 0,
-      opacity: 1,
       transition: {
         type: 'spring' as const,
         stiffness: 100,
@@ -112,11 +110,9 @@ export const RevealTextChar: React.FC<RevealTextProps> = ({
   const charVariants = {
     hidden: {
       y: 20,
-      opacity: 0,
     },
     visible: {
       y: 0,
-      opacity: 1,
       transition: {
         type: 'spring' as const,
         stiffness: 150,

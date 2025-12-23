@@ -49,9 +49,8 @@ const ContactForm = () => {
   };
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { y: 30 },
     visible: {
-      opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
@@ -61,9 +60,8 @@ const ContactForm = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { y: 20 },
     visible: {
-      opacity: 1,
       y: 0,
       transition: { type: 'spring' as const, stiffness: 100, damping: 12 },
     },

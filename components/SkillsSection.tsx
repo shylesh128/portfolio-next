@@ -322,9 +322,8 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { y: 20 },
     visible: {
-      opacity: 1,
       y: 0,
       transition: {
         type: "spring" as const,
@@ -382,9 +381,9 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
             <motion.div
               key={activeCategory}
               className="skills-chart-container"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
+              initial={{ x: -20 }}
+              animate={{ x: 0 }}
+              exit={{ x: 20 }}
               transition={{ duration: 0.3 }}
             >
               {/* Radar Chart */}
@@ -413,8 +412,8 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
                         className={`legend-item ${isHovered ? "hovered" : ""}`}
                         onMouseEnter={() => setHoveredSkill(skill.skill)}
                         onMouseLeave={() => setHoveredSkill(null)}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
+                        initial={{ x: 20 }}
+                        animate={{ x: 0 }}
                         transition={{ delay: index * 0.05 }}
                         style={{
                           borderColor: isHovered

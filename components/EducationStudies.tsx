@@ -26,9 +26,8 @@ const EducationStudies = ({ studies }: EducationStudiesProps) => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { y: 30 },
     visible: {
-      opacity: 1,
       y: 0,
       transition: {
         type: "spring" as const,
