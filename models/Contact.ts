@@ -5,6 +5,11 @@ export interface IContact {
   email: string;
   subject?: string;
   message: string;
+  ip?: string;
+  userAgent?: string;
+  referrer?: string;
+  country?: string;
+  language?: string;
   createdAt: Date;
 }
 
@@ -35,6 +40,26 @@ const ContactSchema = new Schema<IContactDocument>(
       required: [true, "Message is required"],
       trim: true,
       maxlength: [5000, "Message cannot exceed 5000 characters"],
+    },
+    ip: {
+      type: String,
+      trim: true,
+    },
+    userAgent: {
+      type: String,
+      trim: true,
+    },
+    referrer: {
+      type: String,
+      trim: true,
+    },
+    country: {
+      type: String,
+      trim: true,
+    },
+    language: {
+      type: String,
+      trim: true,
     },
   },
   {
