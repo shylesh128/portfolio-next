@@ -20,7 +20,9 @@
     "axios": "^1.6.2",
     "eslint-config-next": "^16.0.7",
     "framer-motion": "^12.23.25",
+    "mongoose": "^9.0.2",
     "next": "^16.0.7",
+    "nodemailer": "^7.0.12",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-icons": "^4.10.1",
@@ -28,5 +30,8 @@
     "react-scroll": "^1.8.9",
     "three": "^0.182.0",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^7.0.4"
   }
 }

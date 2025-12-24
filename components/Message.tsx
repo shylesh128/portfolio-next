@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import axios from 'axios';
-import { BiSend, BiCheck, BiX } from 'react-icons/bi';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { BiSend, BiCheck, BiX } from "react-icons/bi";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
   const [loading, setLoading] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
+    null
+  );
+  const [statusMessage, setStatusMessage] = useState("");
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const [ref, inView] = useInView({
@@ -35,14 +38,27 @@ const ContactForm = () => {
     setSubmitStatus(null);
 
     try {
-      await axios.post(
-        'https://painpal.onrender.com/api/v1/other/feedback',
-        formData
-      );
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      setSubmitStatus('error');
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus("success");
+        setStatusMessage(data.message);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setSubmitStatus("error");
+        setStatusMessage(data.error);
+      }
+    } catch {
+      setSubmitStatus("error");
+      setStatusMessage("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -63,22 +79,25 @@ const ContactForm = () => {
     hidden: { y: 20 },
     visible: {
       y: 0,
-      transition: { type: 'spring' as const, stiffness: 100, damping: 12 },
+      transition: { type: "spring" as const, stiffness: 100, damping: 12 },
     },
   };
 
   const inputStyle = (fieldName: string): React.CSSProperties => ({
-    width: '100%',
-    padding: '1rem 1.25rem',
-    fontFamily: 'var(--font-body)',
-    fontSize: '0.95rem',
-    color: 'var(--text-primary)',
-    background: 'var(--bg-primary)',
-    border: `1px solid ${focusedField === fieldName ? 'var(--border-active)' : 'var(--border)'}`,
+    width: "100%",
+    padding: "1rem 1.25rem",
+    fontFamily: "var(--font-body)",
+    fontSize: "0.95rem",
+    color: "var(--text-primary)",
+    background: "var(--bg-primary)",
+    border: `1px solid ${
+      focusedField === fieldName ? "var(--border-active)" : "var(--border)"
+    }`,
     borderRadius: 12,
-    outline: 'none',
-    transition: 'all 0.2s ease',
-    boxShadow: focusedField === fieldName ? '0 0 0 3px var(--accent-glow)' : 'none',
+    outline: "none",
+    transition: "all 0.2s ease",
+    boxShadow:
+      focusedField === fieldName ? "0 0 0 3px var(--accent-glow)" : "none",
   });
 
   return (
@@ -87,12 +106,12 @@ const ContactForm = () => {
         ref={ref}
         className="message-content"
         initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
+        animate={inView ? "visible" : "hidden"}
         variants={containerVariants}
       >
         <motion.h2
           variants={itemVariants}
-          style={{ textAlign: 'center', marginBottom: '0.5rem' }}
+          style={{ textAlign: "center", marginBottom: "0.5rem" }}
         >
           Send a Message
         </motion.h2>
@@ -100,9 +119,9 @@ const ContactForm = () => {
         <motion.p
           variants={itemVariants}
           style={{
-            textAlign: 'center',
-            color: 'var(--text-secondary)',
-            marginBottom: '2rem',
+            textAlign: "center",
+            color: "var(--text-secondary)",
+            marginBottom: "2rem",
           }}
         >
           Have a question or want to work together?
@@ -112,72 +131,110 @@ const ContactForm = () => {
           className="message-container"
           variants={itemVariants}
           style={{
-            background: 'var(--bg-card)',
-            border: '1px solid var(--border)',
+            background: "var(--bg-card)",
+            border: "1px solid var(--border)",
             borderRadius: 24,
-            padding: '2.5rem',
+            padding: "2.5rem",
           }}
         >
           <form
             onSubmit={handleSubmit}
-            style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
+            style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
           >
-            {/* Name field */}
+            {/* Name and Email row */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                gap: "1.5rem",
+              }}
+            >
+              {/* Name field */}
+              <motion.div variants={itemVariants}>
+                <label
+                  htmlFor="name"
+                  style={{
+                    display: "block",
+                    fontSize: "0.85rem",
+                    fontWeight: 500,
+                    color: "var(--text-secondary)",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Name *
+                </label>
+                <motion.input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  onFocus={() => setFocusedField("name")}
+                  onBlur={() => setFocusedField(null)}
+                  required
+                  autoComplete="name"
+                  placeholder="Your name"
+                  style={inputStyle("name")}
+                  whileFocus={{ scale: 1.01 }}
+                />
+              </motion.div>
+
+              {/* Email field */}
+              <motion.div variants={itemVariants}>
+                <label
+                  htmlFor="email"
+                  style={{
+                    display: "block",
+                    fontSize: "0.85rem",
+                    fontWeight: 500,
+                    color: "var(--text-secondary)",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Email *
+                </label>
+                <motion.input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  onFocus={() => setFocusedField("email")}
+                  onBlur={() => setFocusedField(null)}
+                  required
+                  autoComplete="email"
+                  placeholder="your@email.com"
+                  style={inputStyle("email")}
+                  whileFocus={{ scale: 1.01 }}
+                />
+              </motion.div>
+            </div>
+
+            {/* Subject field */}
             <motion.div variants={itemVariants}>
               <label
-                htmlFor="name"
+                htmlFor="subject"
                 style={{
-                  display: 'block',
-                  fontSize: '0.85rem',
+                  display: "block",
+                  fontSize: "0.85rem",
                   fontWeight: 500,
-                  color: 'var(--text-secondary)',
-                  marginBottom: '0.5rem',
+                  color: "var(--text-secondary)",
+                  marginBottom: "0.5rem",
                 }}
               >
-                Name
+                Subject
               </label>
               <motion.input
                 type="text"
-                id="name"
-                name="name"
-                value={formData.name}
+                id="subject"
+                name="subject"
+                value={formData.subject}
                 onChange={handleChange}
-                onFocus={() => setFocusedField('name')}
+                onFocus={() => setFocusedField("subject")}
                 onBlur={() => setFocusedField(null)}
-                required
-                autoComplete="name"
-                placeholder="Your name"
-                style={inputStyle('name')}
-                whileFocus={{ scale: 1.01 }}
-              />
-            </motion.div>
-
-            {/* Email field */}
-            <motion.div variants={itemVariants}>
-              <label
-                htmlFor="email"
-                style={{
-                  display: 'block',
-                  fontSize: '0.85rem',
-                  fontWeight: 500,
-                  color: 'var(--text-secondary)',
-                  marginBottom: '0.5rem',
-                }}
-              >
-                Email
-              </label>
-              <motion.input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                onFocus={() => setFocusedField('email')}
-                onBlur={() => setFocusedField(null)}
-                required
-                autoComplete="email"
-                placeholder="your@email.com"
-                style={inputStyle('email')}
+                autoComplete="off"
+                placeholder="What is this about?"
+                style={inputStyle("subject")}
                 whileFocus={{ scale: 1.01 }}
               />
             </motion.div>
@@ -187,28 +244,28 @@ const ContactForm = () => {
               <label
                 htmlFor="message"
                 style={{
-                  display: 'block',
-                  fontSize: '0.85rem',
+                  display: "block",
+                  fontSize: "0.85rem",
                   fontWeight: 500,
-                  color: 'var(--text-secondary)',
-                  marginBottom: '0.5rem',
+                  color: "var(--text-secondary)",
+                  marginBottom: "0.5rem",
                 }}
               >
-                Message
+                Message *
               </label>
               <motion.textarea
                 id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                onFocus={() => setFocusedField('message')}
+                onFocus={() => setFocusedField("message")}
                 onBlur={() => setFocusedField(null)}
                 required
                 placeholder="Your message..."
                 rows={4}
                 style={{
-                  ...inputStyle('message'),
-                  resize: 'vertical',
+                  ...inputStyle("message"),
+                  resize: "vertical",
                   minHeight: 120,
                 }}
                 whileFocus={{ scale: 1.01 }}
@@ -224,19 +281,19 @@ const ContactForm = () => {
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.5rem',
-                padding: '1rem 2rem',
-                marginTop: '0.5rem',
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "0.5rem",
+                padding: "1rem 2rem",
+                marginTop: "0.5rem",
                 opacity: loading ? 0.7 : 1,
               }}
             >
               {loading ? (
                 <motion.span
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                 >
                   ⏳
                 </motion.span>
@@ -256,29 +313,29 @@ const ContactForm = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem',
-                  marginTop: '1.5rem',
-                  padding: '1rem',
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.5rem",
+                  marginTop: "1.5rem",
+                  padding: "1rem",
                   borderRadius: 12,
                   background:
-                    submitStatus === 'success'
-                      ? 'rgba(74, 222, 128, 0.1)'
-                      : 'rgba(248, 113, 113, 0.1)',
-                  color: submitStatus === 'success' ? '#4ade80' : '#f87171',
+                    submitStatus === "success"
+                      ? "rgba(74, 222, 128, 0.1)"
+                      : "rgba(248, 113, 113, 0.1)",
+                  color: submitStatus === "success" ? "#4ade80" : "#f87171",
                 }}
               >
-                {submitStatus === 'success' ? (
+                {submitStatus === "success" ? (
                   <>
                     <BiCheck size={20} />
-                    Message sent successfully!
+                    {statusMessage || "Message sent successfully!"}
                   </>
                 ) : (
                   <>
                     <BiX size={20} />
-                    Failed to send. Please try again.
+                    {statusMessage || "Failed to send. Please try again."}
                   </>
                 )}
               </motion.div>
