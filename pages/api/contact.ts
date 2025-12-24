@@ -148,13 +148,18 @@ export default async function handler(
       ...getMetadata(req),
     });
 
-    // Send email in background
-    sendContactNotification({
-      name: contact.name,
-      email: contact.email,
-      subject: contact.subject,
-      message: contact.message,
-    }).catch((err) => console.error("Email failed:", err));
+    // Send email (must await for Vercel serverless - function terminates after response)
+    try {
+      await sendContactNotification({
+        name: contact.name,
+        email: contact.email,
+        subject: contact.subject,
+        message: contact.message,
+      });
+    } catch (emailErr) {
+      // Log but don't fail - contact is already saved
+      console.error("Email failed:", emailErr);
+    }
 
     return respond.success(res, "Thank you! I will get back to you soon.");
   } catch (err) {
