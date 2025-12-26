@@ -78,13 +78,13 @@ export default function Home() {
       
       if (isDarkMode) {
         // Dark mode (default) - uses CSS variables from globals.css
-        root.style.setProperty('--bg-primary', '#0a0a0a');
-        root.style.setProperty('--bg-secondary', '#111111');
-        root.style.setProperty('--bg-elevated', '#1a1a1a');
-        root.style.setProperty('--bg-card', '#0f0f0f');
-        root.style.setProperty('--text-primary', '#ffffff');
-        root.style.setProperty('--text-secondary', '#a0a0a0');
-        root.style.setProperty('--text-muted', '#555555');
+        root.style.setProperty('--bg-primary', '#121212');
+        root.style.setProperty('--bg-secondary', '#18181b');
+        root.style.setProperty('--bg-elevated', '#27272a');
+        root.style.setProperty('--bg-card', '#1e1e20');
+        root.style.setProperty('--text-primary', '#f4f4f5');
+        root.style.setProperty('--text-secondary', '#d4d4d8');
+        root.style.setProperty('--text-muted', '#a1a1aa');
         root.style.setProperty('--border', 'rgba(255, 255, 255, 0.08)');
         root.style.setProperty('--border-hover', 'rgba(255, 255, 255, 0.15)');
         root.style.setProperty('--border-active', 'rgba(255, 255, 255, 0.25)');
@@ -152,9 +152,15 @@ export default function Home() {
 
       {/* Custom cursor */}
       <CustomCursor />
+      
+      {/* Accessibility Skip Link */}
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
 
-      {/* 3D Background Scene */}
+      {/* 3D Background Scene - Disabled for minimal design
       <Scene scrollProgress={progress} />
+      */}
 
       {/* Main content */}
       <div className="main-container">
@@ -162,7 +168,7 @@ export default function Home() {
         <Navigation isDarkMode={isDarkMode} toggleMode={toggleMode} />
 
         {/* Content sections */}
-        <main className="content-layer">
+        <main id="main-content" className="content-layer">
           {/* Hero Section */}
           <HeroSection
             name={data.name}

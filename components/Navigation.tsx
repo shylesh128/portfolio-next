@@ -101,12 +101,17 @@ const Navigation = ({ isDarkMode, toggleMode }: NavigationProps) => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMenuOpen}
+          aria-controls="nav-links-list"
         >
           {isMenuOpen ? <RiCloseLine size={24} /> : <RiMenuLine size={24} />}
         </motion.button>
 
         {/* Desktop Navigation Links */}
-        <ul className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
+        <ul 
+          id="nav-links-list"
+          className={`nav-links ${isMenuOpen ? 'open' : ''}`}
+        >
           {navigationLinks.map(({ id, label }, index) => (
             <motion.li
               key={id}
