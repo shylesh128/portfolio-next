@@ -126,6 +126,19 @@
   ],
   "experiences": [
     {
+      "title": "Software Engineer - Full Stack",
+      "company": "Societe Generale Global Solution Centre, Bengaluru",
+      "logo": "societe-generale-logo.png",
+      "dates": "Jan 2026 – Present",
+      "description": "Software Engineer working on enterprise applications using NestJS, React, and PostgreSQL. Contributing across backend and frontend development, building APIs, integrating databases, and collaborating with cross-functional teams within a global financial services environment.",
+      "works": [
+        "Full-time, hybrid role based in Bengaluru, Karnataka, India.",
+        "Developing enterprise applications across backend and frontend using NestJS, React, and PostgreSQL.",
+        "Building APIs, integrating databases, and collaborating with cross-functional teams in a global financial services environment.",
+        "Technologies: ReactJS, NestJS, PostgreSQL, TypeScript, Redux.js."
+      ]
+    },
+    {
       "title": "Full Stack Developer",
       "company": "ansrsource, Bengaluru",
       "logo": "ansr-logo.png",
