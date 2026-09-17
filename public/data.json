@@ -189,6 +189,12 @@
       "preview": "/projects/PainAI.png"
     },
     {
+      "title": "Instagram Followers Analytics",
+      "description": "Production-ready, full-stack web application for multi-account Instagram follower analytics. Features Google SSO with invite-only access, defensive ZIP parsing of Instagram data exports, O(N) set-based relationship analysis (mutuals, non-followers, unfollowers), historical snapshot diffs, cross-account portfolio overview, CSV/JSON exports, and an admin dashboard. Runs as a single unified server on port 3000. Technologies: NestJS, MongoDB Atlas, React 19, Vite, Tailwind CSS, Recharts, JWT, Google OAuth.",
+      "link": "https://github.com/shylesh128/tracker",
+      "preview": "/projects/insta-tracker.png"
+    },
+    {
       "title": "ansrAccess - Accessibility Solution",
       "description": "Enhanced data retrieval using optimized MongoDB aggregation pipelines, improving operational efficiency by 20%. Engineered AI-based alt-text generation to improve accessibility compliance, reducing manual effort by 40%. Implemented Redis caching strategies, reducing page load times by 25%. Technologies: NextJS, NodeJS, ExpressJS, MongoDB, Redis.",
       "link": "https://ansraccess.com/",
