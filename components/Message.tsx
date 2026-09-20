@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { BiSend, BiCheck, BiX } from "react-icons/bi";
+import { useAnalytics } from "./analytics/AnalyticsProvider";
 
 const ContactForm = () => {
+  const { track, getSessionId } = useAnalytics();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,6 +18,7 @@ const ContactForm = () => {
   );
   const [statusMessage, setStatusMessage] = useState("");
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const hasStartedRef = useRef(false);
 
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -32,16 +35,25 @@ const ContactForm = () => {
     }));
   };
 
+  const trackFormStart = () => {
+    if (!hasStartedRef.current) {
+      hasStartedRef.current = true;
+      track("contact_form_start", { target: "contact_form" });
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setSubmitStatus(null);
+    const analyticsSessionId = getSessionId();
 
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          ...(analyticsSessionId ? { "x-analytics-session-id": analyticsSessionId } : {}),
         },
         body: JSON.stringify(formData),
       });
@@ -170,6 +182,7 @@ const ContactForm = () => {
                   value={formData.name}
                   onChange={handleChange}
                   onFocus={() => setFocusedField("name")}
+                  onFocusCapture={trackFormStart}
                   onBlur={() => setFocusedField(null)}
                   required
                   autoComplete="name"
@@ -200,6 +213,7 @@ const ContactForm = () => {
                   value={formData.email}
                   onChange={handleChange}
                   onFocus={() => setFocusedField("email")}
+                  onFocusCapture={trackFormStart}
                   onBlur={() => setFocusedField(null)}
                   required
                   autoComplete="email"
@@ -231,6 +245,7 @@ const ContactForm = () => {
                 value={formData.subject}
                 onChange={handleChange}
                 onFocus={() => setFocusedField("subject")}
+                onFocusCapture={trackFormStart}
                 onBlur={() => setFocusedField(null)}
                 autoComplete="off"
                 placeholder="What is this about?"
@@ -259,6 +274,7 @@ const ContactForm = () => {
                 value={formData.message}
                 onChange={handleChange}
                 onFocus={() => setFocusedField("message")}
+                onFocusCapture={trackFormStart}
                 onBlur={() => setFocusedField(null)}
                 required
                 placeholder="Your message..."

@@ -5,9 +5,8 @@ export interface IContact {
   email: string;
   subject?: string;
   message: string;
-  ip?: string;
-  userAgent?: string;
-  referrer?: string;
+  visitorHash?: string;
+  referrerDomain?: string;
   country?: string;
   language?: string;
   createdAt: Date;
@@ -41,15 +40,12 @@ const ContactSchema = new Schema<IContactDocument>(
       trim: true,
       maxlength: [5000, "Message cannot exceed 5000 characters"],
     },
-    ip: {
+    // The raw IP is intentionally not retained. This is a keyed, non-reversible hash.
+    visitorHash: {
       type: String,
       trim: true,
     },
-    userAgent: {
-      type: String,
-      trim: true,
-    },
-    referrer: {
+    referrerDomain: {
       type: String,
       trim: true,
     },

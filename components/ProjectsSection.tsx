@@ -5,6 +5,7 @@ import { BiLinkExternal } from 'react-icons/bi';
 import TiltCard from './ui/TiltCard';
 
 import { Project } from '../types';
+import { useAnalytics } from './analytics/AnalyticsProvider';
 
 interface ProjectsProps {
   projects: Project[];
@@ -15,6 +16,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({
   index,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { track } = useAnalytics();
 
   return (
     <TiltCard
@@ -77,6 +79,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => track('project_click', { target: project.title })}
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: 20, opacity: 0 }}
