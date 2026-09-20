@@ -4,6 +4,7 @@ import { RevealTextChar } from "@/components/ui/RevealText";
 import GlitchText from "@/components/ui/GlitchText";
 import { BiChevronDown } from "react-icons/bi";
 import { Link } from "react-scroll";
+import { useAnalytics } from "@/components/analytics/AnalyticsProvider";
 
 interface HeroSectionProps {
   name: string;
@@ -17,6 +18,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   title,
   description,
 }) => {
+  const { track } = useAnalytics();
   const containerVariants = {
     hidden: {},
     visible: {
@@ -91,7 +93,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             justifyContent: "center",
           }}
         >
-          <Link to="projects" spy smooth duration={500} offset={-80}>
+          <Link to="projects" spy smooth duration={500} offset={-80} onClick={() => track("navigation", { target: "projects" })}>
             <motion.button
               className="btn"
               whileHover={{ scale: 1.05, y: -2 }}
@@ -100,7 +102,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               View Projects
             </motion.button>
           </Link>
-          <Link to="contact" spy smooth duration={500} offset={-80}>
+          <Link to="contact" spy smooth duration={500} offset={-80} onClick={() => track("navigation", { target: "contact" })}>
             <motion.button
               className="btn btn-outline"
               whileHover={{ scale: 1.05, y: -2 }}
@@ -109,6 +111,16 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               Contact Me
             </motion.button>
           </Link>
+          <motion.a
+            href="/Shylesh-S-Resume.pdf"
+            download
+            className="btn btn-outline"
+            onClick={() => track("resume_download", { target: "Shylesh-S-Resume.pdf" })}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Download Resume
+          </motion.a>
         </motion.div>
       </motion.div>
 

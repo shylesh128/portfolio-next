@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { RiMenuLine, RiCloseLine } from 'react-icons/ri';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
+import { useAnalytics } from '@/components/analytics/AnalyticsProvider';
 
 interface NavigationProps {
   isDarkMode: boolean;
@@ -31,11 +32,13 @@ const Navigation = ({ isDarkMode, toggleMode }: NavigationProps) => {
   const [activeLink, setActiveLink] = useState('Header');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollY, progress } = useScrollProgress();
+  const { track } = useAnalytics();
   const isScrolled = scrollY > 50;
 
   const handleNavLinkClick = (targetId: string) => {
     setActiveLink(targetId);
     setIsMenuOpen(false);
+    track('navigation', { target: targetId });
   };
 
   const toggleMenu = () => {

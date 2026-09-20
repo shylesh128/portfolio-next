@@ -19,6 +19,8 @@ import CustomCursor from '@/components/ui/CustomCursor';
 
 // Hooks
 import { useScrollProgress } from '@/hooks/useScrollProgress';
+import { useAnalytics } from '@/components/analytics/AnalyticsProvider';
+import { useSectionAnalytics } from '@/components/analytics/useSectionAnalytics';
 
 // Data
 import publicJson from '../public/data.json';
@@ -35,9 +37,17 @@ export default function Home() {
   const [data, setData] = useState<PortfolioData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { progress } = useScrollProgress();
+  const { track } = useAnalytics();
+
+  useSectionAnalytics(
+    ['Header', 'skills', 'experiences', 'projects', 'studies', 'certificates', 'contact', 'message'],
+    !isLoading && Boolean(data)
+  );
 
   const toggleMode = () => {
-    setIsDarkMode(!isDarkMode);
+    const nextMode = !isDarkMode;
+    setIsDarkMode(nextMode);
+    track('theme_change', { target: nextMode ? 'dark' : 'light' });
   };
 
   // Wake up backend server

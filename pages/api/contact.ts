@@ -1,7 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { createHash } from "crypto";
 import connectDB from "../../lib/mongodb";
 import Contact from "../../models/Contact";
 import { sendContactNotification } from "../../lib/email";
+import {
+  getAnalyticsSessionId,
+  getClientIp,
+  hashVisitorIdentifier,
+  recordAnalyticsEvents,
+} from "../../lib/analytics";
 
 // ===================
 // Configuration
@@ -37,15 +44,15 @@ function getValidTimestamps(timestamps: number[]): number[] {
   return timestamps.filter((t) => t > cutoff);
 }
 
-function isRateLimited(ip: string): number | null {
-  const timestamps = getValidTimestamps(rateLimitStore.get(ip) || []);
+function isRateLimited(rateLimitKey: string): number | null {
+  const timestamps = getValidTimestamps(rateLimitStore.get(rateLimitKey) || []);
 
   if (timestamps.length >= RATE_LIMIT.maxRequests) {
     const oldestExpiry = Math.min(...timestamps) + RATE_LIMIT.windowMs;
     return Math.ceil((oldestExpiry - Date.now()) / 60000);
   }
 
-  rateLimitStore.set(ip, [...timestamps, Date.now()]);
+  rateLimitStore.set(rateLimitKey, [...timestamps, Date.now()]);
   return null;
 }
 
@@ -59,18 +66,26 @@ function cleanupStore(): void {
 // ===================
 // Request Helpers
 // ===================
-function getClientIp(req: NextApiRequest): string {
-  const forwarded = req.headers["x-forwarded-for"];
-  if (typeof forwarded === "string") return forwarded.split(",")[0].trim();
-  if (Array.isArray(forwarded)) return forwarded[0]?.split(",")[0].trim();
-  return req.socket.remoteAddress || "unknown";
+function rateLimitKey(ip: string | null): string {
+  // This temporary in-memory limiter does not retain raw IP addresses either.
+  return createHash("sha256")
+    .update(`${process.env.ANALYTICS_HASH_SECRET || "contact-rate-limit"}:${ip || "unknown"}`)
+    .digest("base64url");
 }
 
 function getMetadata(req: NextApiRequest) {
   const lang = req.headers["accept-language"];
+  const referrer = req.headers.referer;
+  let referrerDomain: string | undefined;
+  if (typeof referrer === "string") {
+    try {
+      referrerDomain = new URL(referrer).hostname.toLowerCase();
+    } catch {
+      referrerDomain = undefined;
+    }
+  }
   return {
-    userAgent: req.headers["user-agent"],
-    referrer: req.headers["referer"],
+    referrerDomain,
     country: req.headers["x-vercel-ip-country"] as string | undefined,
     language: typeof lang === "string" ? lang.split(",")[0].trim() : undefined,
   };
@@ -115,7 +130,7 @@ export default async function handler(
 
   // Rate limiting
   const ip = getClientIp(req);
-  const retryMinutes = isRateLimited(ip);
+  const retryMinutes = isRateLimited(rateLimitKey(ip));
 
   if (retryMinutes) {
     res.setHeader("Retry-After", retryMinutes * 60);
@@ -139,14 +154,35 @@ export default async function handler(
     await connectDB();
 
     // Save contact
+    let visitorHash: string | undefined;
+    const sessionId = getAnalyticsSessionId(req);
+    try {
+      visitorHash = hashVisitorIdentifier(ip, sessionId || "contact");
+    } catch {
+      // Analytics configuration must not make the contact form unavailable.
+      visitorHash = undefined;
+    }
     const contact = await Contact.create({
       name: formData.name.trim(),
       email: formData.email.trim().toLowerCase(),
       subject: formData.subject?.trim(),
       message: formData.message.trim(),
-      ip,
+      visitorHash,
       ...getMetadata(req),
     });
+
+    if (sessionId) {
+      try {
+        await recordAnalyticsEvents(
+          req,
+          sessionId,
+          [{ type: "contact_submit", path: "/", target: "contact_form" }],
+          { rateLimit: false }
+        );
+      } catch (analyticsError) {
+        console.error("Contact analytics error:", analyticsError);
+      }
+    }
 
     // Send email (must await for Vercel serverless - function terminates after response)
     try {

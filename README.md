@@ -50,3 +50,34 @@ Provide your contact information, such as your email address, LinkedIn profile, 
 - LinkedIn: [Your LinkedIn Profile](https://www.linkedin.com/in/yourname)
 
 Feel free to reach out to me. I'm always open to new opportunities and collaborations!
+
+## First-party analytics
+
+The portfolio records a focused set of first-party events: page and section views, navigation, theme changes, project visits, GitHub and LinkedIn clicks, resume downloads, and contact-form starts/submissions. Events are sent in small batches to `POST /api/analytics/events`.
+
+The private dashboard is available at `/admin/analytics` and presents overview metrics, sources, devices, countries, pages, sections, meaningful actions, recent sessions, and recent event activity. It also has a protected JSON equivalent at `/api/analytics/summary`.
+
+### Privacy model
+
+- Raw IP addresses are not stored for analytics or new contact submissions. The server creates a keyed HMAC visitor hash from the request address; the secret never reaches the browser.
+- Full user-agent strings and full referrer URLs are not retained. Analytics stores broad browser/OS/device categories and a referrer domain only.
+- Contact-form values are never added to analytics events.
+- The client respects Do Not Track and Global Privacy Control signals.
+- MongoDB TTL indexes expire sessions and events. The default retention period is 180 days.
+
+Existing historical contact records that already contain an `ip` field are intentionally left untouched; remove them through a separate, reviewed data-retention migration if needed.
+
+### Environment variables
+
+Copy `.env.example` to `.env.local` for local development. In Vercel, add the same values through the project environment settings; do not use a `NEXT_PUBLIC_` prefix for any of them.
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `MONGODB_URI` | Yes | Existing MongoDB connection string. |
+| `ANALYTICS_HASH_SECRET` | Yes | A random value of at least 32 characters used for non-reversible visitor hashing. Rotating it resets visitor grouping. |
+| `ANALYTICS_DASHBOARD_USER` | Yes | Basic-auth username for the dashboard and summary endpoint. |
+| `ANALYTICS_DASHBOARD_PASSWORD` | Yes | Strong Basic-auth password for the dashboard and summary endpoint. |
+| `ANALYTICS_RETENTION_DAYS` | No | Retention in days, from 1 through 730; defaults to `180`. |
+| `GMAIL_USER`, `GMAIL_APP_PASSWORD`, `CONTACT_EMAIL` | For email | Existing contact-notification settings. |
+
+The analytics write endpoint is protected by a MongoDB-backed fixed-window limiter of 120 accepted events per pseudonymous visitor per minute. Client batches are capped at 20 events and request bodies at 32 KB.

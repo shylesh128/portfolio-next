@@ -5,12 +5,14 @@ import { FaEnvelope, FaPhone, FaLinkedin, FaGithub } from "react-icons/fa";
 import { BiMap } from "react-icons/bi";
 
 import { Contact as ContactType } from "../types";
+import { useAnalytics } from "./analytics/AnalyticsProvider";
 
 interface ContactProps {
   contact: ContactType;
 }
 
 const Contact = ({ contact }: ContactProps) => {
+  const { track } = useAnalytics();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -128,6 +130,10 @@ const Contact = ({ contact }: ContactProps) => {
               href={link.href}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noopener noreferrer" : undefined}
+              onClick={() => {
+                if (link.label === "GitHub") track("github_click", { target: "profile" });
+                if (link.label === "LinkedIn") track("linkedin_click", { target: "profile" });
+              }}
               variants={itemVariants}
               whileHover={{
                 y: -8,
