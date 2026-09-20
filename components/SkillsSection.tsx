@@ -24,6 +24,8 @@ import {
   SiRedis,
   SiGraphql,
   SiJsonwebtokens,
+  SiNestjs,
+  SiPostgresql,
 } from "react-icons/si";
 import { RiJavascriptFill } from "react-icons/ri";
 import { PiBird } from "react-icons/pi";
@@ -76,9 +78,11 @@ const categories: Category[] = [
     color: categoryColors.backend.color,
     skills: [
       "NODE JS",
+      "NestJS",
       "EXPRESS JS",
       "PYTHON",
       "Flask",
+      "PostgreSQL",
       "SQL",
       "MONGO DB",
       "GraphQL",
@@ -111,7 +115,9 @@ const skillIcons: { [key: string]: IconType } = {
   CSS: FaCss3,
   JavaScript: RiJavascriptFill,
   "NEXT JS": SiNextdotjs,
+  NestJS: SiNestjs,
   "NODE JS": FaNodeJs,
+  PostgreSQL: SiPostgresql,
   SQL: FiDatabase,
   "REACT JS": FaReact,
   "EXPRESS JS": SiExpress,
@@ -295,10 +301,13 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
   });
 
   const skillsMap = useMemo(() => {
-    return skills.reduce((acc, skill) => {
-      acc[skill.skill] = skill.rating;
-      return acc;
-    }, {} as Record<string, number>);
+    return skills.reduce(
+      (acc, skill) => {
+        acc[skill.skill] = skill.rating;
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
   }, [skills]);
 
   const currentCategory = categories.find((c) => c.id === activeCategory)!;

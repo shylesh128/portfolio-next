@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="glassBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16" />
+      <stop offset="100%" stop-color="#120c18" />
+    </linearGradient>
+    <linearGradient id="amberGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0.75" />
+    </linearGradient>
+    <linearGradient id="emeraldGlow" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0.7" />
+    </linearGradient>
+    <linearGradient id="purpleGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0.75" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#glassBg)" />
+
+  <!-- Translucent Glass Panes & Geometric Stained Glass Art -->
+  <g opacity="0.85">
+    <polygon points="120,80 300,160 220,320 80,240" fill="url(#purpleGlow)" />
+    <polygon points="300,160 480,110 440,290 220,320" fill="url(#amberGlow)" />
+    <polygon points="220,320 440,290 400,480 180,450" fill="url(#emeraldGlow)" />
+    <polygon points="80,240 220,320 180,450 90,390" fill="url(#purpleGlow)" opacity="0.6" />
+    <polygon points="440,290 520,340 480,460 400,480" fill="url(#amberGlow)" opacity="0.6" />
+  </g>
+
+  <!-- Black Lead Linework (Glass Outlines) -->
+  <g stroke="#030712" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <polygon points="120,80 300,160 220,320 80,240" />
+    <polygon points="300,160 480,110 440,290 220,320" />
+    <polygon points="220,320 440,290 400,480 180,450" />
+    <polygon points="80,240 220,320 180,450 90,390" />
+    <polygon points="440,290 520,340 480,460 400,480" />
+    <!-- Delicate inner facets -->
+    <line x1="300" y1="160" x2="330" y2="240" stroke-width="3" stroke="#0f172a" />
+    <line x1="220" y1="320" x2="310" y2="385" stroke-width="3" stroke="#0f172a" />
+  </g>
+
+  <!-- Glass Light Sheen / Reflection lines -->
+  <path d="M 160,110 L 260,150" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+  <path d="M 330,190 L 410,160" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.5" />
+  <path d="M 250,350 L 350,330" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.4" />
+
+  <text x="480" y="550" fill="#a1a1aa" font-family="'Courier New', monospace" font-size="14" font-weight="bold" letter-spacing="2" opacity="0.6">@SHYYLINES</text>
+</svg>
+

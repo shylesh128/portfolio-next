@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { BiCalendar, BiLinkExternal } from 'react-icons/bi';
-import { useInView } from 'react-intersection-observer';
-import TiltCard from './ui/TiltCard';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { BiCalendar, BiLinkExternal } from "react-icons/bi";
+import { useInView } from "react-intersection-observer";
+import TiltCard from "./ui/TiltCard";
 
-import { Certificate } from '../types';
+import { Certificate } from "../types";
 
 interface CertificatesSectionProps {
   certificates: Certificate[];
 }
 
-const CertificateCard: React.FC<{ certificate: Certificate; index: number }> = ({
-  certificate,
-  index,
-}) => {
+const CertificateCard: React.FC<{
+  certificate: Certificate;
+  index: number;
+}> = ({ certificate, index }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -27,20 +27,20 @@ const CertificateCard: React.FC<{ certificate: Certificate; index: number }> = (
       <motion.div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        style={{ height: '100%' }}
+        style={{ height: "100%" }}
       >
         {/* Platform badge */}
         <motion.div
           style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            padding: '0.25rem 0.75rem',
-            background: 'var(--color-certificates-dim)',
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            padding: "0.25rem 0.75rem",
+            background: "var(--color-certificates-dim)",
             borderRadius: 50,
-            fontSize: '0.75rem',
-            color: 'var(--color-certificates)',
-            marginBottom: '0.75rem',
+            fontSize: "0.75rem",
+            color: "var(--color-certificates)",
+            marginBottom: "0.75rem",
           }}
         >
           {certificate.platform}
@@ -50,8 +50,8 @@ const CertificateCard: React.FC<{ certificate: Certificate; index: number }> = (
         <h3
           className="certificate-header"
           style={{
-            fontSize: '1rem',
-            marginBottom: '0.75rem',
+            fontSize: "1rem",
+            marginBottom: "0.75rem",
             lineHeight: 1.4,
           }}
         >
@@ -61,13 +61,13 @@ const CertificateCard: React.FC<{ certificate: Certificate; index: number }> = (
         {/* Date */}
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            fontSize: '0.8rem',
-            color: 'var(--text-muted)',
-            fontFamily: 'var(--font-mono)',
-            marginBottom: '1rem',
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            fontSize: "0.8rem",
+            color: "var(--text-muted)",
+            fontFamily: "var(--font-mono)",
+            marginBottom: "1rem",
           }}
         >
           <BiCalendar size={14} />
@@ -78,36 +78,38 @@ const CertificateCard: React.FC<{ certificate: Certificate; index: number }> = (
         {certificate.skills && certificate.skills.length > 0 && (
           <div
             style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '0.5rem',
-              marginBottom: '1rem',
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "0.45rem",
+              marginBottom: "1rem",
             }}
           >
-            {certificate.skills.slice(0, 3).map((skill, skillIndex) => (
+            {certificate.skills.slice(0, 4).map((skill, skillIndex) => (
               <span
                 key={skillIndex}
                 style={{
-                  padding: '0.2rem 0.5rem',
-                  background: 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid var(--border)',
-                  borderRadius: 4,
-                  fontSize: '0.7rem',
-                  color: 'var(--text-secondary)',
+                  padding: "0.2rem 0.55rem",
+                  background: "rgba(255, 255, 255, 0.04)",
+                  border: "1px solid var(--border)",
+                  borderRadius: 6,
+                  fontSize: "0.72rem",
+                  color: "var(--text-secondary)",
+                  fontFamily: "var(--font-mono)",
                 }}
               >
                 {skill}
               </span>
             ))}
-            {certificate.skills.length > 3 && (
+            {certificate.skills.length > 4 && (
               <span
                 style={{
-                  padding: '0.2rem 0.5rem',
-                  fontSize: '0.7rem',
-                  color: 'var(--text-muted)',
+                  padding: "0.2rem 0.5rem",
+                  fontSize: "0.72rem",
+                  color: "var(--text-muted)",
+                  fontFamily: "var(--font-mono)",
                 }}
               >
-                +{certificate.skills.length - 3}
+                +{certificate.skills.length - 4}
               </span>
             )}
           </div>
@@ -119,12 +121,14 @@ const CertificateCard: React.FC<{ certificate: Certificate; index: number }> = (
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            fontSize: '0.85rem',
-            color: isHovered ? 'var(--color-certificates)' : 'var(--text-secondary)',
-            transition: 'color 0.2s',
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            fontSize: "0.85rem",
+            color: isHovered
+              ? "var(--color-certificates)"
+              : "var(--text-secondary)",
+            transition: "color 0.2s",
           }}
           whileHover={{ x: 3 }}
         >
@@ -159,7 +163,7 @@ const CertificatesSection = ({ certificates }: CertificatesSectionProps) => {
       y: 0,
       scale: 1,
       transition: {
-        type: 'spring' as const,
+        type: "spring" as const,
         stiffness: 100,
         damping: 15,
       },
@@ -167,12 +171,16 @@ const CertificatesSection = ({ certificates }: CertificatesSectionProps) => {
   };
 
   return (
-    <section id="certificates" style={{ padding: 'var(--section-padding) 0' }}>
+    <section id="certificates" style={{ padding: "var(--section-padding) 0" }}>
       <motion.div
         ref={ref}
-        style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto', padding: '0 2rem' }}
+        style={{
+          maxWidth: "var(--content-max-width)",
+          margin: "0 auto",
+          padding: "0 2rem",
+        }}
         initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
+        animate={inView ? "visible" : "hidden"}
         variants={containerVariants}
       >
         <motion.h2 variants={itemVariants}>Certificates</motion.h2>
@@ -180,10 +188,10 @@ const CertificatesSection = ({ certificates }: CertificatesSectionProps) => {
         <div
           className="certificate-content"
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1.5rem',
-            marginTop: '1.5rem',
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "1.5rem",
+            marginTop: "1.5rem",
             padding: 0,
           }}
         >
@@ -193,7 +201,7 @@ const CertificatesSection = ({ certificates }: CertificatesSectionProps) => {
               initial={{ y: 20 }}
               animate={{ y: 0 }}
               transition={{
-                type: 'spring' as const,
+                type: "spring" as const,
                 stiffness: 100,
                 damping: 15,
                 delay: index * 0.08,
@@ -209,9 +217,9 @@ const CertificatesSection = ({ certificates }: CertificatesSectionProps) => {
           <motion.div
             variants={itemVariants}
             style={{
-              display: 'flex',
-              justifyContent: 'center',
-              marginTop: '2rem',
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "2rem",
             }}
           >
             <motion.button
@@ -220,7 +228,7 @@ const CertificatesSection = ({ certificates }: CertificatesSectionProps) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {showAll ? 'Show Less' : `View All (${certificates.length})`}
+              {showAll ? "Show Less" : `View All (${certificates.length})`}
             </motion.button>
           </motion.div>
         )}

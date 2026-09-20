@@ -2,23 +2,36 @@ import React from "react";
 import { motion } from "framer-motion";
 import { RevealTextChar } from "@/components/ui/RevealText";
 import GlitchText from "@/components/ui/GlitchText";
-import { BiChevronDown } from "react-icons/bi";
+import { BiChevronDown, BiChevronRight } from "react-icons/bi";
 import { Link } from "react-scroll";
 import { useAnalytics } from "@/components/analytics/AnalyticsProvider";
+import { Experience } from "@/types";
+import { calculateExperienceStats } from "@/lib/experience";
 
 interface HeroSectionProps {
   name: string;
   title: string;
   description: string;
   image?: string; // Now optional since we're not using it
+  experiences?: Experience[];
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({
   name,
   title,
   description,
+  experiences,
 }) => {
   const { track } = useAnalytics();
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const stats = React.useMemo(() => {
+    return experiences ? calculateExperienceStats(experiences) : null;
+  }, [experiences]);
   const containerVariants = {
     hidden: {},
     visible: {
@@ -82,6 +95,39 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           {description}
         </motion.p>
 
+        {/* Dynamic Experience Pill */}
+        {stats && isMounted && (
+          <motion.div
+            variants={itemVariants}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
+            <Link
+              to="experiences"
+              spy
+              smooth
+              duration={500}
+              offset={-80}
+              style={{ textDecoration: "none" }}
+              onClick={() =>
+                track("navigation", { target: "experiences_pill" })
+              }
+            >
+              <div
+                className="hero-experience-pill"
+                title="Click to view full work experience breakdown"
+              >
+                <span className="experience-pulse-dot" />
+                <span>
+                  <strong>{stats.fullTime.formatted}</strong> Full-Time ·{" "}
+                  <strong>{stats.totalWithInternship.formatted}</strong> Total
+                  (incl. Internship)
+                </span>
+                <BiChevronRight size={16} />
+              </div>
+            </Link>
+          </motion.div>
+        )}
+
         {/* CTA Buttons */}
         <motion.div
           variants={itemVariants}
@@ -93,7 +139,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             justifyContent: "center",
           }}
         >
-          <Link to="projects" spy smooth duration={500} offset={-80} onClick={() => track("navigation", { target: "projects" })}>
+          <Link
+            to="projects"
+            spy
+            smooth
+            duration={500}
+            offset={-80}
+            onClick={() => track("navigation", { target: "projects" })}
+          >
             <motion.button
               className="btn"
               whileHover={{ scale: 1.05, y: -2 }}
@@ -102,7 +155,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               View Projects
             </motion.button>
           </Link>
-          <Link to="contact" spy smooth duration={500} offset={-80} onClick={() => track("navigation", { target: "contact" })}>
+          <Link
+            to="contact"
+            spy
+            smooth
+            duration={500}
+            offset={-80}
+            onClick={() => track("navigation", { target: "contact" })}
+          >
             <motion.button
               className="btn btn-outline"
               whileHover={{ scale: 1.05, y: -2 }}
@@ -115,7 +175,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             href="/Shylesh-S-Resume.pdf"
             download
             className="btn btn-outline"
-            onClick={() => track("resume_download", { target: "Shylesh-S-Resume.pdf" })}
+            onClick={() =>
+              track("resume_download", { target: "Shylesh-S-Resume.pdf" })
+            }
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >

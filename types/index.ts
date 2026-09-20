@@ -17,6 +17,11 @@ export interface Experience {
   dates: string;
   description: string;
   works: string[];
+  startDate?: string;
+  endDate?: string | null;
+  isCurrent?: boolean;
+  isInternship?: boolean;
+  type?: string;
 }
 
 export interface Project {
@@ -46,6 +51,23 @@ export interface Certificate {
   "image-link"?: string;
 }
 
+export interface InstagramPost {
+  id: string;
+  title: string;
+  category: string;
+  tag: string;
+  caption: string;
+  image: string;
+}
+
+export interface InstagramConfig {
+  handle: string;
+  name: string;
+  url: string;
+  bio: string;
+  posts: InstagramPost[];
+}
+
 export interface PortfolioData {
   version: string;
   name: string;
@@ -58,5 +80,6 @@ export interface PortfolioData {
   projects: Project[];
   education: Education[];
   interests: string[];
+  instagram?: InstagramConfig;
   certificates: Certificate[];
 }

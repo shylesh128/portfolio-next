@@ -28,6 +28,14 @@
       "rating": 9
     },
     {
+      "skill": "NestJS",
+      "rating": 8
+    },
+    {
+      "skill": "PostgreSQL",
+      "rating": 8
+    },
+    {
       "skill": "MONGO DB",
       "rating": 8
     },
@@ -128,8 +136,13 @@
     {
       "title": "Software Engineer - Full Stack",
       "company": "Societe Generale Global Solution Centre, Bengaluru",
-      "logo": "societe-generale-logo.png",
+      "logo": "/logos/Societe-Generale-Logo.svg",
       "dates": "Jan 2026 – Present",
+      "startDate": "2026-01-01",
+      "endDate": null,
+      "isCurrent": true,
+      "isInternship": false,
+      "type": "Full-time",
       "description": "Software Engineer working on enterprise applications using NestJS, React, and PostgreSQL. Contributing across backend and frontend development, building APIs, integrating databases, and collaborating with cross-functional teams within a global financial services environment.",
       "works": [
         "Full-time, hybrid role based in Bengaluru, Karnataka, India.",
@@ -141,8 +154,13 @@
     {
       "title": "Full Stack Developer",
       "company": "ansrsource, Bengaluru",
-      "logo": "ansr-logo.png",
-      "dates": "Apr 2025 – Present",
+      "logo": "/logos/ansrsource-logo.svg",
+      "dates": "Apr 2025 – Dec 2025",
+      "startDate": "2025-04-01",
+      "endDate": "2025-12-31",
+      "isCurrent": false,
+      "isInternship": false,
+      "type": "Full-time",
       "description": "Leading web and mobile app development with focus on deployment strategies and scalable microservices.",
       "works": [
         "Orchestrated web and mobile app development using ReactJS, NextJS, NodeJS, React Native (Expo), and TypeScript, reducing prototype-to-MVP time by 20% and enhancing cross-platform functionality.",
@@ -153,8 +171,13 @@
     {
       "title": "Junior Full Stack Developer",
       "company": "ansrsource, Bengaluru",
-      "logo": "ansr-logo.png",
+      "logo": "/logos/ansrsource-logo.svg",
       "dates": "Apr 2023 – Mar 2025",
+      "startDate": "2023-04-01",
+      "endDate": "2025-03-31",
+      "isCurrent": false,
+      "isInternship": false,
+      "type": "Full-time",
       "description": "Led development of training management systems and AI-powered solutions, recognized with Star of the Quarter award.",
       "works": [
         "Led the development of ansrTMS, reducing on-boarding time by 35% and boosting training completion rates; received Spot Award for project success.",
@@ -165,8 +188,13 @@
     {
       "title": "Full Stack Developer Intern",
       "company": "ansrsource, Bengaluru",
-      "logo": "ansr-logo.png",
+      "logo": "/logos/ansrsource-logo.svg",
       "dates": "Oct 2022 – Mar 2023",
+      "startDate": "2022-10-01",
+      "endDate": "2023-03-31",
+      "isCurrent": false,
+      "isInternship": true,
+      "type": "Internship",
       "description": "Executed platform migrations and developed plagiarism detection tools while implementing comprehensive testing suites.",
       "works": [
         "Executed migration of GranuLearn Admin and Player platforms to NextJS, enhancing code-base maintainability.",
@@ -319,13 +347,53 @@
     }
   ],
   "interests": ["Graphic Designing", "Charcoal Sketching", "Glass Painting"],
+  "instagram": {
+    "handle": "shyylines",
+    "name": "Shyy Lines",
+    "url": "https://www.instagram.com/shyylines/",
+    "bio": "Where code meets canvas — sketches, glass paintings, and creative lines.",
+    "posts": [
+      {
+        "id": "charcoal-1",
+        "title": "Charcoal Sketching",
+        "category": "Charcoal & Graphite",
+        "tag": "#charcoalsketch",
+        "caption": "Deep contrast, shadows, and expressive pencil shading explorations.",
+        "image": "/hobbies/charcoal-sketch.svg"
+      },
+      {
+        "id": "glass-1",
+        "title": "Glass Painting",
+        "category": "Glass & Acrylics",
+        "tag": "#glasspainting",
+        "caption": "Luminous colors and transparent light refractions on glass surfaces.",
+        "image": "/hobbies/glass-painting.svg"
+      },
+      {
+        "id": "line-art-1",
+        "title": "Continuous Line Art",
+        "category": "Ink & Contours",
+        "tag": "#shyylines",
+        "caption": "Minimalist continuous single-line silhouettes and freehand flows.",
+        "image": "/hobbies/line-art.svg"
+      },
+      {
+        "id": "graphic-1",
+        "title": "Graphic Designing",
+        "category": "Digital Art",
+        "tag": "#graphicdesign",
+        "caption": "Modern vector aesthetics, layouts, and bold visual storytelling.",
+        "image": "/hobbies/graphic-design.svg"
+      }
+    ]
+  },
   "certificates": [
     {
       "platform": "freeCodeCamp",
       "logo": "freeCodeCamp logo",
       "title": "Front End Development Libraries",
       "issuedDate": "Jun 2023",
-      "skills": ["Bootstrap", "jQuery", "React.js", "redux", "SASS"],
+      "skills": ["React.js", "Redux", "Bootstrap", "SASS", "jQuery"],
       "link": "https://www.freecodecamp.org/certification/shyleshstylo/front-end-development-libraries",
       "image": "/cert/front-end-libraries.png"
     },
@@ -335,8 +403,9 @@
       "title": "Node.js, Express, MongoDB & More: The Complete Bootcamp 2023",
       "issuedDate": "Jun 2023",
       "credentialId": "UC-15f95138-f169-4715-aa92-2b79d6518292",
-      "skills": ["MongoDB", "Node js", "Express.js"],
-      "link": "https://ude.my/UC-15f95138-f169-4715-aa92-2b79d6518292"
+      "skills": ["Node.js", "Express.js", "MongoDB", "REST APIs"],
+      "link": "https://ude.my/UC-15f95138-f169-4715-aa92-2b79d6518292",
+      "image": "/cert/Back-end-udemy.jpg"
     },
     {
       "platform": "Cisco thingQbator RGIPT",
@@ -344,7 +413,18 @@
       "title": "FULL STACK DEVELOPMENT WITH MERN",
       "issuedDate": "Nov 2022",
       "credentialId": "1668707081301",
-      "link": "https://thingqbator.s3.ap-south-1.amazonaws.com/1668707081301_Shylesh_Course-Excellence.jpg"
+      "skills": ["MERN Stack", "MongoDB", "Express.js", "React.js", "Node.js"],
+      "link": "https://thingqbator.s3.ap-south-1.amazonaws.com/1668707081301_Shylesh_Course-Excellence.jpg",
+      "image": "/cert/Mern-stack-cisco.jpg"
+    },
+    {
+      "platform": "LinkedIn",
+      "logo": "LinkedIn logo",
+      "title": "Become a Software Developer",
+      "issuedDate": "Jun 2022",
+      "skills": ["Software Development", "Programming", "System Design"],
+      "link": "https://www.linkedin.com/learning/certificates/a1c00fd686a2f53af816d7d982eb734c9e25b601551050106055106f0dd7c5a1?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bin3tDrCEQX2fCN3Zl9Tq1g%3D%3D",
+      "image": "/cert/software-developer-linkedn.jpg"
     },
     {
       "platform": "Great Learning",
@@ -352,45 +432,41 @@
       "title": "Front end web development",
       "issuedDate": "Feb 2022",
       "credentialId": "6HXFGR2BIM",
-      "link": "https://dtmvamahs40ux.cloudfront.net/ComplementaryCourseCertificate/794046/original/Shylesh._S20220215-23539-ojcdo8.jpg"
+      "skills": ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+      "link": "https://dtmvamahs40ux.cloudfront.net/ComplementaryCourseCertificate/794046/original/Shylesh._S20220215-23539-ojcdo8.jpg",
+      "image": "/cert/front-end-dev-great-learning.jpg"
     },
     {
       "platform": "freeCodeCamp",
       "logo": "freeCodeCamp logo",
       "title": "JavaScript Algorithms and Data Structures",
       "issuedDate": "Jan 2022",
-      "link": "https://www.freecodecamp.org/certification/shyleshstylo/javascript-algorithms-and-data-structures"
-    },
-    {
-      "platform": "LinkedIn",
-      "logo": "LinkedIn logo",
-      "title": "Become a Software Developer",
-      "issuedDate": "Jun 2022",
-      "skills": ["Software Development", "Programming"],
-      "link": "https://www.linkedin.com/learning/certificates/a1c00fd686a2f53af816d7d982eb734c9e25b601551050106055106f0dd7c5a1?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bin3tDrCEQX2fCN3Zl9Tq1g%3D%3D"
+      "skills": ["JavaScript", "Algorithms", "Data Structures", "ES6+"],
+      "link": "https://www.freecodecamp.org/certification/shyleshstylo/javascript-algorithms-and-data-structures",
+      "image": "/cert/JS-DSA-freecodecamp.png"
     },
     {
       "platform": "freeCodeCamp",
       "logo": "freeCodeCamp logo",
       "title": "Responsive Web Design",
       "issuedDate": "Dec 2021",
-      "link": "https://www.freecodecamp.org/certification/shyleshstylo/responsive-web-design"
+      "skills": ["Responsive Web Design", "HTML5", "CSS3", "Flexbox"],
+      "link": "https://www.freecodecamp.org/certification/shyleshstylo/responsive-web-design",
+      "image": "/cert/responsive-design.png"
     },
     {
       "platform": "LinkedIn",
       "logo": "LinkedIn logo",
       "title": "Master In-Demand Professional Soft Skills",
       "issuedDate": "Sep 2021",
-      "link": "https://www.linkedin.com/learning/certificates/12c2101c2913d27645bde638a5b5f02de1c1dfb9c55ee408d5eda142589efce8?trk=backfilled_certificate&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bin3tDrCEQX2fCN3Zl9Tq1g%3D%3D"
-    },
-    {
-      "platform": "Coursera",
-      "logo": "Coursera logo",
-      "title": "Mathematics for Machine Learning: Linear Algebra",
-      "issuedDate": "Oct 2020",
-      "credentialId": "3899db6f8da16901a1034affc2c4cbd1",
-      "image-link": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~6FJJ6JUK6EMM/CERTIFICATE_LANDING_PAGE~6FJJ6JUK6EMM.jpeg",
-      "link": "https://www.coursera.org/account/accomplishments/verify/6FJJ6JUK6EMM?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course"
+      "skills": [
+        "Communication",
+        "Problem Solving",
+        "Team Collaboration",
+        "Agile"
+      ],
+      "link": "https://www.linkedin.com/learning/certificates/12c2101c2913d27645bde638a5b5f02de1c1dfb9c55ee408d5eda142589efce8?trk=backfilled_certificate&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bin3tDrCEQX2fCN3Zl9Tq1g%3D%3D",
+      "image": "/cert/Master-soft-skills.png"
     },
     {
       "platform": "Coursera",
@@ -398,7 +474,32 @@
       "title": "Using Python to Access Web Data",
       "issuedDate": "Oct 2020",
       "credentialId": "05986ce925849c650d3dfde95e4fb98a",
+      "skills": ["Python", "Web Scraping", "REST APIs", "Sockets"],
       "link": "https://coursera.org/share/05986ce925849c650d3dfde95e4fb98a"
+    },
+    {
+      "platform": "Coursera",
+      "logo": "Coursera logo",
+      "title": "Python Data Structures",
+      "issuedDate": "Oct 2020",
+      "credentialId": "4b80c44ece5a072f1b09f52d533041bb",
+      "skills": ["Python", "Data Structures", "Algorithms", "Tuples & Dicts"],
+      "link": "https://coursera.org/share/4b80c44ece5a072f1b09f52d533041bb"
+    },
+    {
+      "platform": "Coursera",
+      "logo": "Coursera logo",
+      "title": "Mathematics for Machine Learning: Linear Algebra",
+      "issuedDate": "Oct 2020",
+      "credentialId": "3899db6f8da16901a1034affc2c4cbd1",
+      "skills": [
+        "Linear Algebra",
+        "Mathematics",
+        "Machine Learning",
+        "Vectors & Matrices"
+      ],
+      "image-link": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~6FJJ6JUK6EMM/CERTIFICATE_LANDING_PAGE~6FJJ6JUK6EMM.jpeg",
+      "link": "https://www.coursera.org/account/accomplishments/verify/6FJJ6JUK6EMM?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course"
     },
     {
       "platform": "edX",
@@ -406,15 +507,8 @@
       "title": "IBM Python Basics for Data Science",
       "issuedDate": "Aug 2020",
       "credentialId": "ed0af9c433954a7baa154febbcbc938f",
+      "skills": ["Python", "Data Science", "Data Analysis", "NumPy & Pandas"],
       "link": "https://courses.edx.org/certificates/ed0af9c433954a7baa154febbcbc938f"
-    },
-    {
-      "platform": "Coursera",
-      "logo": "Coursera logo",
-      "title": "Python Data Structures",
-      "issuedDate": "Oct 2008",
-      "credentialId": "4b80c44ece5a072f1b09f52d533041bb",
-      "link": "https://coursera.org/share/4b80c44ece5a072f1b09f52d533041bb"
     }
   ]
 }

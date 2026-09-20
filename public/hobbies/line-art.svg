@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <radialGradient id="lineArtBg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#18181b" />
+      <stop offset="100%" stop-color="#09090b" />
+    </radialGradient>
+    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="50%" stop-color="#fb7185" />
+      <stop offset="100%" stop-color="#fda4af" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#lineArtBg)" />
+
+  <!-- Single Continuous Flowing Line Art (Shyy Lines signature aesthetic) -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Abstract continuous portrait / organic floral silhouette -->
+    <path d="M 180,480 
+             C 170,420 180,340 220,290 
+             C 240,260 250,230 245,190 
+             C 240,140 280,100 330,110 
+             C 380,120 400,160 390,210 
+             C 385,240 395,270 420,300 
+             C 450,340 450,420 420,480
+             C 390,520 330,510 300,450
+             C 280,410 320,370 340,330
+             C 355,295 335,270 310,275
+             C 285,280 270,305 285,340
+             C 295,365 290,400 270,430
+             C 250,460 200,500 180,480 Z" 
+          stroke="url(#neonGradient)" 
+          stroke-width="3.5" 
+          opacity="0.9" />
+
+    <!-- Secondary minimalist contour line -->
+    <path d="M 210,310 C 230,220 340,190 370,260 C 390,320 320,360 270,410" 
+          stroke="#ffffff" 
+          stroke-width="1.8" 
+          opacity="0.4" />
+
+    <!-- Minimalist floating abstract dots -->
+    <circle cx="340" cy="180" r="3.5" fill="#f43f5e" opacity="0.8" />
+    <circle cx="270" cy="230" r="2.5" fill="#fda4af" opacity="0.6" />
+    <circle cx="380" cy="380" r="3" fill="#f43f5e" opacity="0.7" />
+  </g>
+
+  <text x="480" y="550" fill="#71717a" font-family="'Courier New', monospace" font-size="14" font-weight="bold" letter-spacing="2" opacity="0.6">@SHYYLINES</text>
+</svg>
+

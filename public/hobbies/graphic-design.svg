@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="designBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e1726" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="cyberCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+    <linearGradient id="neonViolet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#designBg)" />
+
+  <!-- Modern Graphic Design / Swiss Geometric Grid -->
+  <g opacity="0.12" stroke="#ffffff" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="600" />
+    <line x1="200" y1="0" x2="200" y2="600" />
+    <line x1="300" y1="0" x2="300" y2="600" />
+    <line x1="400" y1="0" x2="400" y2="600" />
+    <line x1="500" y1="0" x2="500" y2="600" />
+    <line x1="0" y1="150" x2="600" y2="150" />
+    <line x1="0" y1="300" x2="600" y2="300" />
+    <line x1="0" y1="450" x2="600" y2="450" />
+  </g>
+
+  <!-- Dynamic Geometric Layers -->
+  <circle cx="280" cy="270" r="130" fill="url(#cyberCyan)" opacity="0.85" />
+  <rect x="250" y="220" width="180" height="180" rx="24" fill="url(#neonViolet)" opacity="0.75" transform="rotate(18 340 310)" />
+  
+  <!-- Minimalist Vector Typography & Symbols -->
+  <circle cx="340" cy="310" r="40" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.9" />
+  <line x1="220" y1="420" x2="440" y2="420" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.8" />
+  <line x1="220" y1="440" x2="360" y2="440" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" opacity="0.7" />
+
+  <text x="480" y="550" fill="#94a3b8" font-family="'Courier New', monospace" font-size="14" font-weight="bold" letter-spacing="2" opacity="0.6">@SHYYLINES</text>
+</svg>
+
