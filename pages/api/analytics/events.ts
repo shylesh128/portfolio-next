@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import {
+  extractClientInfo,
   getAnalyticsSessionId,
   isAnalyticsSessionId,
   recordAnalyticsEvents,
@@ -27,8 +28,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     return res.status(400).json({ accepted: false, error: "Invalid analytics payload" });
   }
 
+  // Extract client-provided info (device ID, screen size, timezone)
+  const clientInfo = extractClientInfo(req.body || {});
+
   try {
-    const result = await recordAnalyticsEvents(req, sessionId, events);
+    const result = await recordAnalyticsEvents(req, sessionId, events, clientInfo);
     if (result.rateLimited) {
       res.setHeader("Retry-After", "60");
       return res.status(429).json({ accepted: false, error: "Rate limit exceeded" });
