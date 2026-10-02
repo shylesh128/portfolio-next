@@ -72,10 +72,9 @@ const labelValue = (value: unknown, fallback = "unknown"): string =>
   typeof value === "string" && value ? value : fallback;
 
 function toBreakdown(
-  rows: Array<{ _id?: unknown; value?: unknown }> | undefined,
+  rows: Array<{ _id?: unknown; value?: unknown }>,
   fallback?: string
 ): Breakdown[] {
-  if (!Array.isArray(rows)) return [];
   return rows.map((row) => ({
     label: labelValue(row._id, fallback),
     value: numberValue(row.value),

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import {
@@ -120,6 +121,15 @@ export default function AnalyticsDashboard({
   snapshot,
   authorized,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  useEffect(() => {
+    document.body.classList.add("admin-page");
+    document.body.style.cursor = "auto";
+    return () => {
+      document.body.classList.remove("admin-page");
+      document.body.style.cursor = "";
+    };
+  }, []);
+
   if (!authorized) return <p>Authentication required.</p>;
   if (!snapshot)
     return (
@@ -209,12 +219,12 @@ export default function AnalyticsDashboard({
                 Identified via anonymous 1-year first-party cookie. No personal identity or fingerprinting.
               </p>
             </div>
-            <span className="countBadge">{topVisitors.length} active</span>
+            <span className="countBadge">{snapshot.topVisitors.length} active</span>
           </div>
 
-          {topVisitors.length ? (
+          {snapshot.topVisitors.length ? (
             <div className="visitorCardsGrid">
-              {topVisitors.map((visitor, idx) => (
+              {snapshot.topVisitors.map((visitor, idx) => (
                 <article className="visitorCard" key={visitor.id || idx}>
                   <div className="visitorCardHeader">
                     <span className="visitorId">Visitor #{visitor.id}</span>
@@ -260,20 +270,20 @@ export default function AnalyticsDashboard({
 
         {/* ── Main Breakdowns ── */}
         <section className="grid three">
-          <Breakdown title="Traffic sources" rows={sources} />
-          <Breakdown title="Locations (Country → Region → City)" rows={locations} />
-          <Breakdown title="Devices & Form Factor" rows={devices} />
+          <Breakdown title="Traffic sources" rows={snapshot.sources} />
+          <Breakdown title="Locations (Country → Region → City)" rows={snapshot.locations} />
+          <Breakdown title="Devices & Form Factor" rows={snapshot.devices} />
         </section>
 
         <section className="grid three">
-          <Breakdown title="Browsers & Versions" rows={browsers} />
-          <Breakdown title="Top pages viewed" rows={pages} />
-          <Breakdown title="Most-viewed sections" rows={sections} />
+          <Breakdown title="Browsers & Versions" rows={snapshot.browsers} />
+          <Breakdown title="Top pages viewed" rows={snapshot.pages} />
+          <Breakdown title="Most-viewed sections" rows={snapshot.sections} />
         </section>
 
         {/* ── Meaningful Actions & Bot Traffic ── */}
         <section className="grid two">
-          <Breakdown title="Meaningful Actions (Clicks & Downloads)" rows={actions} />
+          <Breakdown title="Meaningful Actions (Clicks & Downloads)" rows={snapshot.actions} />
 
           <section className="panel">
             <div className="panelHeader">
@@ -282,7 +292,7 @@ export default function AnalyticsDashboard({
                 <p className="muted subtext">Automated traffic categorized by User-Agent signature</p>
               </div>
             </div>
-            {botTraffic.length ? (
+            {snapshot.botTraffic.length ? (
               <div className="tableWrap">
                 <table>
                   <thead>
@@ -295,13 +305,13 @@ export default function AnalyticsDashboard({
                     </tr>
                   </thead>
                   <tbody>
-                    {botTraffic.map((bot, i) => (
+                    {snapshot.botTraffic.map((bot, i) => (
                       <tr key={`${bot.botName}-${i}`}>
                         <td><strong>{bot.botName}</strong></td>
                         <td><BotCategoryBadge category={bot.botCategory} /></td>
                         <td>{count(bot.count)}</td>
                         <td className="pathsCell">
-                          {bot.topPaths && bot.topPaths.length > 0 ? (
+                          {bot.topPaths.length > 0 ? (
                             bot.topPaths.map((p) => (
                               <code key={p} className="pathTag">{p}</code>
                             ))
@@ -325,7 +335,7 @@ export default function AnalyticsDashboard({
         <section className="grid two">
           <section className="panel">
             <h2>Recent sessions</h2>
-            {recentSessions.length ? (
+            {snapshot.recentSessions.length ? (
               <div className="tableWrap">
                 <table>
                   <thead>
@@ -340,7 +350,7 @@ export default function AnalyticsDashboard({
                     </tr>
                   </thead>
                   <tbody>
-                    {recentSessions.map((session) => (
+                    {snapshot.recentSessions.map((session) => (
                       <tr key={session.id}>
                         <td><VisitorTypeBadge type={session.visitorType} /></td>
                         <td><code>{session.id}</code></td>
@@ -372,9 +382,9 @@ export default function AnalyticsDashboard({
 
           <section className="panel">
             <h2>Live Event Activity</h2>
-            {recentEvents.length ? (
+            {snapshot.recentEvents.length ? (
               <ol className="activity">
-                {recentEvents.map((event, index) => (
+                {snapshot.recentEvents.map((event, index) => (
                   <li key={`${event.occurredAt}-${index}`}>
                     <div>
                       <strong>{displayLabel(event.type)}</strong>
@@ -418,7 +428,19 @@ export default function AnalyticsDashboard({
 
       <style>{`
         * { box-sizing: border-box; }
-        body { background: #09090b; color: #f4f4f5; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
+        html, body {
+          background: #09090b;
+          color: #f4f4f5;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          margin: 0;
+          cursor: auto !important;
+        }
+        .dashboard, .dashboard * {
+          cursor: auto !important;
+        }
+        .dashboard a, .dashboard button, .dashboard [role="button"], .dashboard nav a {
+          cursor: pointer !important;
+        }
         .dashboard { max-width: 1320px; margin: 0 auto; padding: 40px 24px 72px; }
         .dashboardHeader { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; margin-bottom: 26px; }
         h1, h2, h3, p { margin-top: 0; }

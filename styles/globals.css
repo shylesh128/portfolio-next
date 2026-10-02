@@ -107,7 +107,7 @@ section {
   border-radius: 4px;
 }
 
-/* Hide default cursor on interactive elements */
+/* Hide default cursor on interactive elements (landing page) */
 a,
 button,
 [role="button"],
@@ -115,6 +115,23 @@ input,
 textarea,
 select {
   cursor: none;
+}
+
+/* Restore visible cursor on admin and non-landing pages */
+body.admin-page,
+body.admin-page *,
+body:has(.dashboard),
+body:has(.dashboard) * {
+  cursor: auto !important;
+}
+
+body.admin-page a,
+body.admin-page button,
+body.admin-page [role="button"],
+body:has(.dashboard) a,
+body:has(.dashboard) button,
+body:has(.dashboard) [role="button"] {
+  cursor: pointer !important;
 }
 
 /* Selection styles */
