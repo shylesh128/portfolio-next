@@ -22,6 +22,7 @@ export type AnalyticsSnapshot = {
   sources: Breakdown[];
   devices: Breakdown[];
   locations: Breakdown[];
+  countries: Breakdown[];
   browsers: Breakdown[];
   pages: Breakdown[];
   sections: Breakdown[];
@@ -71,9 +72,10 @@ const labelValue = (value: unknown, fallback = "unknown"): string =>
   typeof value === "string" && value ? value : fallback;
 
 function toBreakdown(
-  rows: Array<{ _id?: unknown; value?: unknown }>,
+  rows: Array<{ _id?: unknown; value?: unknown }> | undefined,
   fallback?: string
 ): Breakdown[] {
+  if (!Array.isArray(rows)) return [];
   return rows.map((row) => ({
     label: labelValue(row._id, fallback),
     value: numberValue(row.value),
@@ -313,6 +315,7 @@ export async function getAnalyticsSnapshot(requestedDays = 30): Promise<Analytic
     sources: toBreakdown(sources, "Direct"),
     devices: toBreakdown(devices),
     locations: toBreakdown(locations, "Unknown"),
+    countries: toBreakdown(locations, "Unknown"),
     browsers: toBreakdown(browsers),
     pages: toBreakdown(pages),
     sections: toBreakdown(sections),

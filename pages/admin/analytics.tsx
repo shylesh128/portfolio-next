@@ -68,13 +68,14 @@ function formatHierarchyLocation(raw: string): string {
   return parts.reverse().join(" → ");
 }
 
-function Breakdown({ title, rows }: { title: string; rows: AnalyticsSnapshot["sources"] }) {
+function Breakdown({ title, rows }: { title: string; rows?: AnalyticsSnapshot["sources"] }) {
+  const safeRows = Array.isArray(rows) ? rows : [];
   return (
     <section className="panel">
       <h2>{title}</h2>
-      {rows.length ? (
+      {safeRows.length ? (
         <ol className="breakdown">
-          {rows.map((row) => (
+          {safeRows.map((row) => (
             <li key={row.label}>
               <span title={row.label}>{formatHierarchyLocation(displayLabel(row.label))}</span>
               <strong>{count(row.value)}</strong>
@@ -128,14 +129,35 @@ export default function AnalyticsDashboard({
       </main>
     );
 
+  const overview = snapshot.overview || {
+    visitors: 0,
+    returningVisitors: 0,
+    sessions: 0,
+    pageViews: 0,
+    averageSessionMinutes: 0,
+    botSessions: 0,
+  };
+
   const cards = [
-    { label: "Unique visitors", value: snapshot.overview.visitors, note: "Human traffic" },
-    { label: "Returning visitors", value: snapshot.overview.returningVisitors, note: "Anonymous cookie" },
-    { label: "Sessions", value: snapshot.overview.sessions, note: "Total human sessions" },
-    { label: "Page views", value: snapshot.overview.pageViews, note: "Total pages viewed" },
-    { label: "Avg. session", value: `${snapshot.overview.averageSessionMinutes} min`, note: "Human duration" },
-    { label: "Bot / script hits", value: snapshot.overview.botSessions, note: "Filtered out of metrics" },
+    { label: "Unique visitors", value: overview.visitors, note: "Human traffic" },
+    { label: "Returning visitors", value: overview.returningVisitors, note: "Anonymous cookie" },
+    { label: "Sessions", value: overview.sessions, note: "Total human sessions" },
+    { label: "Page views", value: overview.pageViews, note: "Total pages viewed" },
+    { label: "Avg. session", value: `${overview.averageSessionMinutes} min`, note: "Human duration" },
+    { label: "Bot / script hits", value: overview.botSessions, note: "Filtered out of metrics" },
   ];
+
+  const topVisitors = Array.isArray(snapshot.topVisitors) ? snapshot.topVisitors : [];
+  const botTraffic = Array.isArray(snapshot.botTraffic) ? snapshot.botTraffic : [];
+  const recentSessions = Array.isArray(snapshot.recentSessions) ? snapshot.recentSessions : [];
+  const recentEvents = Array.isArray(snapshot.recentEvents) ? snapshot.recentEvents : [];
+  const sources = Array.isArray(snapshot.sources) ? snapshot.sources : [];
+  const locations = Array.isArray(snapshot.locations) ? snapshot.locations : (Array.isArray(snapshot.countries) ? snapshot.countries : []);
+  const devices = Array.isArray(snapshot.devices) ? snapshot.devices : [];
+  const browsers = Array.isArray(snapshot.browsers) ? snapshot.browsers : [];
+  const pages = Array.isArray(snapshot.pages) ? snapshot.pages : [];
+  const sections = Array.isArray(snapshot.sections) ? snapshot.sections : [];
+  const actions = Array.isArray(snapshot.actions) ? snapshot.actions : [];
 
   return (
     <>
@@ -187,12 +209,12 @@ export default function AnalyticsDashboard({
                 Identified via anonymous 1-year first-party cookie. No personal identity or fingerprinting.
               </p>
             </div>
-            <span className="countBadge">{snapshot.topVisitors.length} active</span>
+            <span className="countBadge">{topVisitors.length} active</span>
           </div>
 
-          {snapshot.topVisitors.length ? (
+          {topVisitors.length ? (
             <div className="visitorCardsGrid">
-              {snapshot.topVisitors.map((visitor, idx) => (
+              {topVisitors.map((visitor, idx) => (
                 <article className="visitorCard" key={visitor.id || idx}>
                   <div className="visitorCardHeader">
                     <span className="visitorId">Visitor #{visitor.id}</span>
@@ -238,20 +260,20 @@ export default function AnalyticsDashboard({
 
         {/* ── Main Breakdowns ── */}
         <section className="grid three">
-          <Breakdown title="Traffic sources" rows={snapshot.sources} />
-          <Breakdown title="Locations (Country → Region → City)" rows={snapshot.locations} />
-          <Breakdown title="Devices & Form Factor" rows={snapshot.devices} />
+          <Breakdown title="Traffic sources" rows={sources} />
+          <Breakdown title="Locations (Country → Region → City)" rows={locations} />
+          <Breakdown title="Devices & Form Factor" rows={devices} />
         </section>
 
         <section className="grid three">
-          <Breakdown title="Browsers & Versions" rows={snapshot.browsers} />
-          <Breakdown title="Top pages viewed" rows={snapshot.pages} />
-          <Breakdown title="Most-viewed sections" rows={snapshot.sections} />
+          <Breakdown title="Browsers & Versions" rows={browsers} />
+          <Breakdown title="Top pages viewed" rows={pages} />
+          <Breakdown title="Most-viewed sections" rows={sections} />
         </section>
 
         {/* ── Meaningful Actions & Bot Traffic ── */}
         <section className="grid two">
-          <Breakdown title="Meaningful Actions (Clicks & Downloads)" rows={snapshot.actions} />
+          <Breakdown title="Meaningful Actions (Clicks & Downloads)" rows={actions} />
 
           <section className="panel">
             <div className="panelHeader">
@@ -260,7 +282,7 @@ export default function AnalyticsDashboard({
                 <p className="muted subtext">Automated traffic categorized by User-Agent signature</p>
               </div>
             </div>
-            {snapshot.botTraffic.length ? (
+            {botTraffic.length ? (
               <div className="tableWrap">
                 <table>
                   <thead>
@@ -273,13 +295,13 @@ export default function AnalyticsDashboard({
                     </tr>
                   </thead>
                   <tbody>
-                    {snapshot.botTraffic.map((bot, i) => (
+                    {botTraffic.map((bot, i) => (
                       <tr key={`${bot.botName}-${i}`}>
                         <td><strong>{bot.botName}</strong></td>
                         <td><BotCategoryBadge category={bot.botCategory} /></td>
                         <td>{count(bot.count)}</td>
                         <td className="pathsCell">
-                          {bot.topPaths.length > 0 ? (
+                          {bot.topPaths && bot.topPaths.length > 0 ? (
                             bot.topPaths.map((p) => (
                               <code key={p} className="pathTag">{p}</code>
                             ))
@@ -303,7 +325,7 @@ export default function AnalyticsDashboard({
         <section className="grid two">
           <section className="panel">
             <h2>Recent sessions</h2>
-            {snapshot.recentSessions.length ? (
+            {recentSessions.length ? (
               <div className="tableWrap">
                 <table>
                   <thead>
@@ -318,7 +340,7 @@ export default function AnalyticsDashboard({
                     </tr>
                   </thead>
                   <tbody>
-                    {snapshot.recentSessions.map((session) => (
+                    {recentSessions.map((session) => (
                       <tr key={session.id}>
                         <td><VisitorTypeBadge type={session.visitorType} /></td>
                         <td><code>{session.id}</code></td>
@@ -350,9 +372,9 @@ export default function AnalyticsDashboard({
 
           <section className="panel">
             <h2>Live Event Activity</h2>
-            {snapshot.recentEvents.length ? (
+            {recentEvents.length ? (
               <ol className="activity">
-                {snapshot.recentEvents.map((event, index) => (
+                {recentEvents.map((event, index) => (
                   <li key={`${event.occurredAt}-${index}`}>
                     <div>
                       <strong>{displayLabel(event.type)}</strong>
