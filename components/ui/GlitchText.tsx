@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface GlitchTextProps {
   children: string;
@@ -11,15 +11,15 @@ interface GlitchTextProps {
 
 const GlitchText: React.FC<GlitchTextProps> = ({
   children,
-  className = '',
+  className = "",
   glitchOnHover = true,
   continuous = false,
   speed = 100,
 }) => {
   const [isGlitching, setIsGlitching] = useState(continuous);
   const [displayText, setDisplayText] = useState(children);
-  
-  const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?/~`';
+
+  const glitchChars = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`";
 
   useEffect(() => {
     if (!isGlitching) {
@@ -29,19 +29,19 @@ const GlitchText: React.FC<GlitchTextProps> = ({
 
     let iteration = 0;
     const originalText = children;
-    
+
     const interval = setInterval(() => {
       setDisplayText(
         originalText
-          .split('')
+          .split("")
           .map((char, index) => {
             if (index < iteration) {
               return originalText[index];
             }
-            if (char === ' ') return ' ';
+            if (char === " ") return " ";
             return glitchChars[Math.floor(Math.random() * glitchChars.length)];
           })
-          .join('')
+          .join("")
       );
 
       if (iteration >= originalText.length) {
@@ -65,26 +65,24 @@ const GlitchText: React.FC<GlitchTextProps> = ({
       onMouseEnter={() => glitchOnHover && setIsGlitching(true)}
       onMouseLeave={() => glitchOnHover && !continuous && setIsGlitching(false)}
       style={{
-        display: 'inline-block',
-        fontFamily: 'var(--font-mono)',
-        position: 'relative',
+        display: "inline-block",
+        fontFamily: "var(--font-mono)",
+        position: "relative",
       }}
     >
       {/* Main text */}
-      <span style={{ position: 'relative', zIndex: 1 }}>
-        {displayText}
-      </span>
-      
+      <span style={{ position: "relative", zIndex: 1 }}>{displayText}</span>
+
       {/* Glitch layers */}
       {isGlitching && (
         <>
           <motion.span
             style={{
-              position: 'absolute',
+              position: "absolute",
               left: 0,
               top: 0,
-              color: 'rgba(255, 255, 255, 0.8)',
-              clipPath: 'inset(0 0 50% 0)',
+              color: "rgba(255, 255, 255, 0.8)",
+              clipPath: "inset(0 0 50% 0)",
               zIndex: 0,
             }}
             animate={{
@@ -93,18 +91,18 @@ const GlitchText: React.FC<GlitchTextProps> = ({
             transition={{
               duration: 0.1,
               repeat: Infinity,
-              repeatType: 'reverse',
+              repeatType: "reverse",
             }}
           >
             {displayText}
           </motion.span>
           <motion.span
             style={{
-              position: 'absolute',
+              position: "absolute",
               left: 0,
               top: 0,
-              color: 'rgba(255, 255, 255, 0.5)',
-              clipPath: 'inset(50% 0 0 0)',
+              color: "rgba(255, 255, 255, 0.5)",
+              clipPath: "inset(50% 0 0 0)",
               zIndex: 0,
             }}
             animate={{
@@ -113,7 +111,7 @@ const GlitchText: React.FC<GlitchTextProps> = ({
             transition={{
               duration: 0.1,
               repeat: Infinity,
-              repeatType: 'reverse',
+              repeatType: "reverse",
             }}
           >
             {displayText}
@@ -125,5 +123,3 @@ const GlitchText: React.FC<GlitchTextProps> = ({
 };
 
 export default GlitchText;
-
-

@@ -23,9 +23,7 @@ const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 // ===================
 // Types
 // ===================
-type ApiResponse =
-  | { success: true; message: string }
-  | { success: false; error: string };
+type ApiResponse = { success: true; message: string } | { success: false; error: string };
 
 interface FormData {
   name: string;
@@ -115,10 +113,7 @@ const respond = {
 // ===================
 // API Handler
 // ===================
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<ApiResponse>
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<ApiResponse>) {
   // Method check
   if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
@@ -135,11 +130,7 @@ export default async function handler(
   if (retryMinutes) {
     res.setHeader("Retry-After", retryMinutes * 60);
     const s = retryMinutes === 1 ? "" : "s";
-    return respond.error(
-      res,
-      429,
-      `Too many messages. Try again in ${retryMinutes} minute${s}.`
-    );
+    return respond.error(res, 429, `Too many messages. Try again in ${retryMinutes} minute${s}.`);
   }
 
   // Validate form

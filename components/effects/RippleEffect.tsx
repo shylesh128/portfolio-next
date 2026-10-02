@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Ripple {
   id: number;
@@ -16,32 +16,35 @@ interface RippleEffectProps {
 
 const RippleEffect: React.FC<RippleEffectProps> = ({
   children,
-  className = '',
-  color = 'rgba(255, 255, 255, 0.3)',
+  className = "",
+  color = "rgba(255, 255, 255, 0.3)",
   duration = 0.6,
 }) => {
   const [ripples, setRipples] = useState<Ripple[]>([]);
 
-  const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const id = Date.now();
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const id = Date.now();
 
-    setRipples((prev) => [...prev, { id, x, y }]);
+      setRipples((prev) => [...prev, { id, x, y }]);
 
-    setTimeout(() => {
-      setRipples((prev) => prev.filter((ripple) => ripple.id !== id));
-    }, duration * 1000);
-  }, [duration]);
+      setTimeout(() => {
+        setRipples((prev) => prev.filter((ripple) => ripple.id !== id));
+      }, duration * 1000);
+    },
+    [duration]
+  );
 
   return (
     <div
       className={className}
       onClick={handleClick}
       style={{
-        position: 'relative',
-        overflow: 'hidden',
+        position: "relative",
+        overflow: "hidden",
       }}
     >
       {children}
@@ -66,10 +69,10 @@ const RippleEffect: React.FC<RippleEffectProps> = ({
             exit={{ opacity: 0 }}
             transition={{ duration }}
             style={{
-              position: 'absolute',
-              borderRadius: '50%',
+              position: "absolute",
+              borderRadius: "50%",
               background: color,
-              pointerEvents: 'none',
+              pointerEvents: "none",
             }}
           />
         ))}
@@ -79,5 +82,3 @@ const RippleEffect: React.FC<RippleEffectProps> = ({
 };
 
 export default RippleEffect;
-
-

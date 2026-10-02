@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useSpring, useMotionValue } from 'framer-motion';
-import useMousePosition from '@/hooks/useMousePosition';
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useSpring, useMotionValue } from "framer-motion";
+import useMousePosition from "@/hooks/useMousePosition";
 
 const CustomCursor: React.FC = () => {
   const { x, y } = useMousePosition();
@@ -12,7 +12,7 @@ const CustomCursor: React.FC = () => {
   // Spring physics for smooth cursor movement
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
-  
+
   const springConfig = { damping: 25, stiffness: 400 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
@@ -27,12 +27,11 @@ const CustomCursor: React.FC = () => {
   useEffect(() => {
     // Check if mobile device
     const checkMobile = () => {
-      setIsMobile(window.matchMedia('(max-width: 768px)').matches || 
-                   navigator.maxTouchPoints > 0);
+      setIsMobile(window.matchMedia("(max-width: 768px)").matches || navigator.maxTouchPoints > 0);
     };
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   useEffect(() => {
@@ -56,18 +55,18 @@ const CustomCursor: React.FC = () => {
       setIsHovering(isInteractive);
     };
 
-    document.addEventListener('mouseenter', handleMouseEnter);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mouseover', handleElementHover);
+    document.addEventListener("mouseenter", handleMouseEnter);
+    document.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mouseover", handleElementHover);
 
     return () => {
-      document.removeEventListener('mouseenter', handleMouseEnter);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mouseover', handleElementHover);
+      document.removeEventListener("mouseenter", handleMouseEnter);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("mouseover", handleElementHover);
     };
   }, []);
 
@@ -79,12 +78,12 @@ const CustomCursor: React.FC = () => {
       {/* Outer ring */}
       <motion.div
         style={{
-          position: 'fixed',
+          position: "fixed",
           left: ringXSpring,
           top: ringYSpring,
-          pointerEvents: 'none',
+          pointerEvents: "none",
           zIndex: 9999,
-          mixBlendMode: 'difference',
+          mixBlendMode: "difference",
         }}
         animate={{
           width: isHovering ? 60 : 40,
@@ -102,12 +101,12 @@ const CustomCursor: React.FC = () => {
       >
         <div
           style={{
-            width: '100%',
-            height: '100%',
-            borderRadius: '50%',
-            border: '1px solid rgba(255, 255, 255, 0.5)',
-            backgroundColor: isHovering ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
-            transition: 'background-color 0.2s ease',
+            width: "100%",
+            height: "100%",
+            borderRadius: "50%",
+            border: "1px solid rgba(255, 255, 255, 0.5)",
+            backgroundColor: isHovering ? "rgba(255, 255, 255, 0.1)" : "transparent",
+            transition: "background-color 0.2s ease",
           }}
         />
       </motion.div>
@@ -115,12 +114,12 @@ const CustomCursor: React.FC = () => {
       {/* Inner dot */}
       <motion.div
         style={{
-          position: 'fixed',
+          position: "fixed",
           left: cursorXSpring,
           top: cursorYSpring,
-          pointerEvents: 'none',
+          pointerEvents: "none",
           zIndex: 9999,
-          mixBlendMode: 'difference',
+          mixBlendMode: "difference",
         }}
         animate={{
           width: isClicking ? 12 : 8,
@@ -135,11 +134,11 @@ const CustomCursor: React.FC = () => {
       >
         <div
           style={{
-            width: '100%',
-            height: '100%',
-            borderRadius: '50%',
-            backgroundColor: 'rgba(255, 255, 255, 1)',
-            boxShadow: '0 0 10px rgba(255, 255, 255, 0.5)',
+            width: "100%",
+            height: "100%",
+            borderRadius: "50%",
+            backgroundColor: "rgba(255, 255, 255, 1)",
+            boxShadow: "0 0 10px rgba(255, 255, 255, 0.5)",
           }}
         />
       </motion.div>
@@ -147,10 +146,10 @@ const CustomCursor: React.FC = () => {
       {/* Glow trail effect */}
       <motion.div
         style={{
-          position: 'fixed',
+          position: "fixed",
           left: ringXSpring,
           top: ringYSpring,
-          pointerEvents: 'none',
+          pointerEvents: "none",
           zIndex: 9998,
         }}
         animate={{
@@ -163,11 +162,11 @@ const CustomCursor: React.FC = () => {
       >
         <div
           style={{
-            width: '100%',
-            height: '100%',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%)',
-            filter: 'blur(10px)',
+            width: "100%",
+            height: "100%",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%)",
+            filter: "blur(10px)",
           }}
         />
       </motion.div>
@@ -176,5 +175,3 @@ const CustomCursor: React.FC = () => {
 };
 
 export default CustomCursor;
-
-

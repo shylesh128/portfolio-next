@@ -1,11 +1,21 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
-import { analyticsDashboardIsConfigured, isAnalyticsDashboardAuthorized } from "@/lib/analytics-auth";
+import {
+  analyticsDashboardIsConfigured,
+  isAnalyticsDashboardAuthorized,
+} from "@/lib/analytics-auth";
 import { getAnalyticsSnapshot, type AnalyticsSnapshot } from "@/lib/analytics-dashboard";
 
-type DashboardProps = { snapshot: AnalyticsSnapshot | null; authorized: boolean };
+type DashboardProps = {
+  snapshot: AnalyticsSnapshot | null;
+  authorized: boolean;
+};
 
-export const getServerSideProps: GetServerSideProps<DashboardProps> = async ({ req, res, query }) => {
+export const getServerSideProps: GetServerSideProps<DashboardProps> = async ({
+  req,
+  res,
+  query,
+}) => {
   if (!analyticsDashboardIsConfigured()) return { notFound: true };
   res.setHeader("Cache-Control", "private, no-store, max-age=0");
   res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
@@ -17,7 +27,9 @@ export const getServerSideProps: GetServerSideProps<DashboardProps> = async ({ r
 
   const days = typeof query.days === "string" ? Number(query.days) : 30;
   try {
-    return { props: { snapshot: await getAnalyticsSnapshot(days), authorized: true } };
+    return {
+      props: { snapshot: await getAnalyticsSnapshot(days), authorized: true },
+    };
   } catch (error) {
     console.error("Analytics dashboard error:", error);
     return { props: { snapshot: null, authorized: true } };
@@ -33,7 +45,10 @@ function displayLabel(value: string): string {
 }
 
 function date(value: string): string {
-  return new Intl.DateTimeFormat("en", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value));
+  return new Intl.DateTimeFormat("en", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(new Date(value));
 }
 
 function Breakdown({ title, rows }: { title: string; rows: AnalyticsSnapshot["sources"] }) {
@@ -42,16 +57,32 @@ function Breakdown({ title, rows }: { title: string; rows: AnalyticsSnapshot["so
       <h2>{title}</h2>
       {rows.length ? (
         <ol className="breakdown">
-          {rows.map((row) => <li key={row.label}><span>{displayLabel(row.label)}</span><strong>{count(row.value)}</strong></li>)}
+          {rows.map((row) => (
+            <li key={row.label}>
+              <span>{displayLabel(row.label)}</span>
+              <strong>{count(row.value)}</strong>
+            </li>
+          ))}
         </ol>
-      ) : <p className="empty">No data yet.</p>}
+      ) : (
+        <p className="empty">No data yet.</p>
+      )}
     </section>
   );
 }
 
-export default function AnalyticsDashboard({ snapshot, authorized }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function AnalyticsDashboard({
+  snapshot,
+  authorized,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   if (!authorized) return <p>Authentication required.</p>;
-  if (!snapshot) return <main className="dashboard"><h1>Analytics is temporarily unavailable</h1><p>Check MongoDB and the analytics environment variables, then refresh.</p></main>;
+  if (!snapshot)
+    return (
+      <main className="dashboard">
+        <h1>Analytics is temporarily unavailable</h1>
+        <p>Check MongoDB and the analytics environment variables, then refresh.</p>
+      </main>
+    );
 
   const cards = [
     ["Sessions", snapshot.overview.sessions],
@@ -63,21 +94,104 @@ export default function AnalyticsDashboard({ snapshot, authorized }: InferGetSer
 
   return (
     <>
-      <Head><title>Private Analytics</title><meta name="robots" content="noindex, nofollow" /></Head>
+      <Head>
+        <title>Private Analytics</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
       <main className="dashboard">
         <header className="dashboardHeader">
-          <div><p className="eyebrow">Private dashboard</p><h1>Portfolio analytics</h1><p className="muted">First-party, privacy-conscious activity. Updated {date(snapshot.generatedAt)}.</p></div>
-          <nav aria-label="Date range">{[7, 30, 90].map((days) => <a className={snapshot.days === days ? "active" : ""} href={`/admin/analytics?days=${days}`} key={days}>{days} days</a>)}</nav>
+          <div>
+            <p className="eyebrow">Private dashboard</p>
+            <h1>Portfolio analytics</h1>
+            <p className="muted">
+              First-party, privacy-conscious activity. Updated {date(snapshot.generatedAt)}.
+            </p>
+          </div>
+          <nav aria-label="Date range">
+            {[7, 30, 90].map((days) => (
+              <a
+                className={snapshot.days === days ? "active" : ""}
+                href={`/admin/analytics?days=${days}`}
+                key={days}
+              >
+                {days} days
+              </a>
+            ))}
+          </nav>
         </header>
 
-        <section className="metrics">{cards.map(([label, value]) => <article className="metric" key={String(label)}><span>{label}</span><strong>{typeof value === "number" ? count(value) : value}</strong></article>)}</section>
+        <section className="metrics">
+          {cards.map(([label, value]) => (
+            <article className="metric" key={String(label)}>
+              <span>{label}</span>
+              <strong>{typeof value === "number" ? count(value) : value}</strong>
+            </article>
+          ))}
+        </section>
 
-        <section className="grid three"><Breakdown title="Traffic sources" rows={snapshot.sources} /><Breakdown title="Devices" rows={snapshot.devices} /><Breakdown title="Countries" rows={snapshot.countries} /></section>
-        <section className="grid three"><Breakdown title="Top pages" rows={snapshot.pages} /><Breakdown title="Most-viewed sections" rows={snapshot.sections} /><Breakdown title="Meaningful actions" rows={snapshot.actions} /></section>
+        <section className="grid three">
+          <Breakdown title="Traffic sources" rows={snapshot.sources} />
+          <Breakdown title="Devices" rows={snapshot.devices} />
+          <Breakdown title="Countries" rows={snapshot.countries} />
+        </section>
+        <section className="grid three">
+          <Breakdown title="Top pages" rows={snapshot.pages} />
+          <Breakdown title="Most-viewed sections" rows={snapshot.sections} />
+          <Breakdown title="Meaningful actions" rows={snapshot.actions} />
+        </section>
 
         <section className="grid two">
-          <section className="panel"><h2>Recent sessions</h2>{snapshot.recentSessions.length ? <div className="tableWrap"><table><thead><tr><th>Session</th><th>Country</th><th>Device</th><th>Source</th><th>Events</th><th>Last active</th></tr></thead><tbody>{snapshot.recentSessions.map((session) => <tr key={session.id}><td>{session.id}</td><td>{session.country}</td><td>{session.device}</td><td>{session.source}</td><td>{session.events}</td><td>{date(session.lastSeenAt)}</td></tr>)}</tbody></table></div> : <p className="empty">No sessions yet.</p>}</section>
-          <section className="panel"><h2>Event activity</h2>{snapshot.recentEvents.length ? <ol className="activity">{snapshot.recentEvents.map((event, index) => <li key={`${event.occurredAt}-${index}`}><div><strong>{displayLabel(event.type)}</strong><span>{event.target || event.path}</span></div><time>{date(event.occurredAt)}</time></li>)}</ol> : <p className="empty">No events yet.</p>}</section>
+          <section className="panel">
+            <h2>Recent sessions</h2>
+            {snapshot.recentSessions.length ? (
+              <div className="tableWrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Session</th>
+                      <th>Country</th>
+                      <th>Device</th>
+                      <th>Source</th>
+                      <th>Events</th>
+                      <th>Last active</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {snapshot.recentSessions.map((session) => (
+                      <tr key={session.id}>
+                        <td>{session.id}</td>
+                        <td>{session.country}</td>
+                        <td>{session.device}</td>
+                        <td>{session.source}</td>
+                        <td>{session.events}</td>
+                        <td>{date(session.lastSeenAt)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <p className="empty">No sessions yet.</p>
+            )}
+          </section>
+          <section className="panel">
+            <h2>Event activity</h2>
+            {snapshot.recentEvents.length ? (
+              <ol className="activity">
+                {snapshot.recentEvents.map((event, index) => (
+                  <li key={`${event.occurredAt}-${index}`}>
+                    <div>
+                      <strong>{displayLabel(event.type)}</strong>
+                      <span>{event.target || event.path}</span>
+                    </div>
+                    <time>{date(event.occurredAt)}</time>
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p className="empty">No events yet.</p>
+            )}
+          </section>
         </section>
       </main>
       <style>{`

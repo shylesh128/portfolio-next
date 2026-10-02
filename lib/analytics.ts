@@ -111,7 +111,10 @@ export function validateAnalyticsEvents(value: unknown): AnalyticsEventInput[] |
   for (const item of value) {
     if (!item || typeof item !== "object") return null;
     const event = item as Record<string, unknown>;
-    if (typeof event.type !== "string" || !ANALYTICS_EVENT_NAMES.includes(event.type as AnalyticsEventName)) {
+    if (
+      typeof event.type !== "string" ||
+      !ANALYTICS_EVENT_NAMES.includes(event.type as AnalyticsEventName)
+    ) {
       return null;
     }
     const path = safePath(event.path);
@@ -128,7 +131,9 @@ export function validateAnalyticsEvents(value: unknown): AnalyticsEventInput[] |
   return events;
 }
 
-function parseUserAgent(userAgent: string | undefined): Pick<RequestMetadata, "browser" | "os" | "device"> {
+function parseUserAgent(
+  userAgent: string | undefined
+): Pick<RequestMetadata, "browser" | "os" | "device"> {
   const ua = userAgent || "";
   const device: AnalyticsDevice = /bot|crawler|spider|slurp/i.test(ua)
     ? "bot"
@@ -178,17 +183,21 @@ function referrerDomain(req: NextApiRequest): string {
 
 function requestMetadata(req: NextApiRequest, sessionId: string): RequestMetadata {
   const languageHeader = req.headers["accept-language"];
-  const language = typeof languageHeader === "string" ? compact(languageHeader.split(",")[0], 35) : undefined;
+  const language =
+    typeof languageHeader === "string" ? compact(languageHeader.split(",")[0], 35) : undefined;
   const countryHeader = req.headers["x-vercel-ip-country"];
-  const country = typeof countryHeader === "string" && /^[A-Za-z]{2,3}$/.test(countryHeader)
-    ? countryHeader.toUpperCase()
-    : "unknown";
+  const country =
+    typeof countryHeader === "string" && /^[A-Za-z]{2,3}$/.test(countryHeader)
+      ? countryHeader.toUpperCase()
+      : "unknown";
   return {
     visitorHash: hashVisitorIdentifier(getClientIp(req), sessionId),
     referrerDomain: referrerDomain(req),
     country,
     ...(language ? { language } : {}),
-    ...parseUserAgent(typeof req.headers["user-agent"] === "string" ? req.headers["user-agent"] : undefined),
+    ...parseUserAgent(
+      typeof req.headers["user-agent"] === "string" ? req.headers["user-agent"] : undefined
+    ),
   };
 }
 
@@ -200,14 +209,14 @@ async function consumeRateLimit(key: string, cost: number): Promise<boolean> {
   const withinWindow = await AnalyticsRateLimit.findOneAndUpdate(
     { key, windowStartedAt: { $gt: cutoff }, count: { $lte: RATE_LIMIT_MAX_EVENTS - cost } },
     { $inc: { count: cost }, $set: { expiresAt } },
-    { new: true }
+    { returnDocument: "after" }
   ).lean();
   if (withinWindow) return true;
 
   const resetWindow = await AnalyticsRateLimit.findOneAndUpdate(
     { key, windowStartedAt: { $lte: cutoff } },
     { $set: { windowStartedAt: now, count: cost, expiresAt } },
-    { new: true }
+    { returnDocument: "after" }
   ).lean();
   if (resetWindow) return true;
 
@@ -222,7 +231,7 @@ async function consumeRateLimit(key: string, cost: number): Promise<boolean> {
     await AnalyticsRateLimit.findOneAndUpdate(
       { key, windowStartedAt: { $gt: cutoff }, count: { $lte: RATE_LIMIT_MAX_EVENTS - cost } },
       { $inc: { count: cost }, $set: { expiresAt } },
-      { new: true }
+      { returnDocument: "after" }
     ).lean()
   );
 }
@@ -237,7 +246,10 @@ export async function recordAnalyticsEvents(
   const metadata = requestMetadata(req, sessionId);
   await connectDB();
 
-  if (options.rateLimit !== false && !(await consumeRateLimit(`analytics:${metadata.visitorHash}`, events.length))) {
+  if (
+    options.rateLimit !== false &&
+    !(await consumeRateLimit(`analytics:${metadata.visitorHash}`, events.length))
+  ) {
     return { accepted: false, rateLimited: true };
   }
 
@@ -261,7 +273,7 @@ export async function recordAnalyticsEvents(
       },
       $inc: { eventCount: events.length },
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 
   await AnalyticsEvent.insertMany(

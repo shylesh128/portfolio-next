@@ -89,8 +89,7 @@ const Contact = ({ contact }: ContactProps) => {
             margin: "0 auto 2rem",
           }}
         >
-          Feel free to reach out for collaborations, opportunities, or just to
-          say hello!
+          Feel free to reach out for collaborations, opportunities, or just to say hello!
         </motion.p>
 
         {/* Location */}
@@ -157,8 +156,7 @@ const Contact = ({ contact }: ContactProps) => {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "var(--color-interests)";
-                e.currentTarget.style.boxShadow =
-                  "0 0 20px var(--color-interests-dim)";
+                e.currentTarget.style.boxShadow = "0 0 20px var(--color-interests-dim)";
                 e.currentTarget.style.color = "var(--color-interests)";
               }}
               onMouseLeave={(e) => {
@@ -168,9 +166,7 @@ const Contact = ({ contact }: ContactProps) => {
               }}
             >
               {link.icon}
-              <span style={{ fontSize: "0.75rem", fontWeight: 500 }}>
-                {link.label}
-              </span>
+              <span style={{ fontSize: "0.75rem", fontWeight: 500 }}>{link.label}</span>
             </motion.a>
           ))}
         </motion.div>

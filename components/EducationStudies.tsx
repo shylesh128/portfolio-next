@@ -60,13 +60,7 @@ const EducationStudies = ({ studies }: EducationStudiesProps) => {
         >
           {studies.map((study, index) => (
             <motion.div key={index} variants={itemVariants}>
-              <TiltCard
-                className="study-item"
-                maxTilt={6}
-                scale={1.02}
-                glare
-                glareOpacity={0.1}
-              >
+              <TiltCard className="study-item" maxTilt={6} scale={1.02} glare glareOpacity={0.1}>
                 <div
                   style={{
                     display: "flex",

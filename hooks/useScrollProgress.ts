@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from "react";
 
 interface ScrollProgress {
   progress: number;
   scrollY: number;
-  direction: 'up' | 'down' | null;
+  direction: "up" | "down" | null;
   velocity: number;
   isScrolling: boolean;
 }
@@ -36,7 +36,7 @@ export function useScrollProgress(): ScrollProgress {
       rafId.current = requestAnimationFrame(() => {
         const currentScrollY = window.scrollY;
         const velocity = currentScrollY - previousScrollY.current;
-        const direction = velocity > 0 ? 'down' : velocity < 0 ? 'up' : null;
+        const direction = velocity > 0 ? "down" : velocity < 0 ? "up" : null;
         const progress = calculateProgress();
 
         setScrollData({
@@ -59,13 +59,13 @@ export function useScrollProgress(): ScrollProgress {
       });
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     // Initial calculation
     handleScroll();
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
       if (rafId.current) {
         cancelAnimationFrame(rafId.current);
       }
@@ -98,7 +98,7 @@ export function useSectionInView(threshold: number = 0.3) {
       },
       {
         threshold: Array.from({ length: 10 }, (_, i) => i * 0.1),
-        rootMargin: '0px',
+        rootMargin: "0px",
       }
     );
 
@@ -113,5 +113,3 @@ export function useSectionInView(threshold: number = 0.3) {
 }
 
 export default useScrollProgress;
-
-

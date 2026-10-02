@@ -13,9 +13,7 @@ const ContactForm = () => {
     message: "",
   });
   const [loading, setLoading] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
-    null
-  );
+  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(null);
   const [statusMessage, setStatusMessage] = useState("");
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const hasStartedRef = useRef(false);
@@ -25,9 +23,7 @@ const ContactForm = () => {
     threshold: 0.2,
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
@@ -102,14 +98,11 @@ const ContactForm = () => {
     fontSize: "0.95rem",
     color: "var(--text-primary)",
     background: "var(--bg-primary)",
-    border: `1px solid ${
-      focusedField === fieldName ? "var(--border-active)" : "var(--border)"
-    }`,
+    border: `1px solid ${focusedField === fieldName ? "var(--border-active)" : "var(--border)"}`,
     borderRadius: 12,
     outline: "none",
     transition: "all 0.2s ease",
-    boxShadow:
-      focusedField === fieldName ? "0 0 0 3px var(--accent-glow)" : "none",
+    boxShadow: focusedField === fieldName ? "0 0 0 3px var(--accent-glow)" : "none",
   });
 
   return (
@@ -121,10 +114,7 @@ const ContactForm = () => {
         animate={inView ? "visible" : "hidden"}
         variants={containerVariants}
       >
-        <motion.h2
-          variants={itemVariants}
-          style={{ textAlign: "center", marginBottom: "0.5rem" }}
-        >
+        <motion.h2 variants={itemVariants} style={{ textAlign: "center", marginBottom: "0.5rem" }}>
           Send a Message
         </motion.h2>
 

@@ -62,15 +62,7 @@ const categories: Category[] = [
     id: "frontend",
     label: "Frontend",
     color: categoryColors.frontend.color,
-    skills: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "TypeScript",
-      "REACT JS",
-      "NEXT JS",
-      "React Native",
-    ],
+    skills: ["HTML", "CSS", "JavaScript", "TypeScript", "REACT JS", "NEXT JS", "React Native"],
   },
   {
     id: "backend",
@@ -150,12 +142,7 @@ interface RadarChartProps {
   inView: boolean;
 }
 
-const RadarChart: React.FC<RadarChartProps> = ({
-  skills,
-  color,
-  hoveredSkill,
-  inView,
-}) => {
+const RadarChart: React.FC<RadarChartProps> = ({ skills, color, hoveredSkill, inView }) => {
   const size = 300;
   const center = size / 2;
   const maxRadius = size / 2 - 40;
@@ -306,7 +293,7 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
         acc[skill.skill] = skill.rating;
         return acc;
       },
-      {} as Record<string, number>,
+      {} as Record<string, number>
     );
   }, [skills]);
 
@@ -358,27 +345,16 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
           {categories.map((category) => (
             <motion.button
               key={category.id}
-              className={`category-pill ${
-                activeCategory === category.id ? "active" : ""
-              }`}
+              className={`category-pill ${activeCategory === category.id ? "active" : ""}`}
               onClick={() => setActiveCategory(category.id)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               style={{
-                borderColor:
-                  activeCategory === category.id
-                    ? category.color
-                    : "var(--border)",
-                background:
-                  activeCategory === category.id
-                    ? `${category.color}15`
-                    : "transparent",
+                borderColor: activeCategory === category.id ? category.color : "var(--border)",
+                background: activeCategory === category.id ? `${category.color}15` : "transparent",
               }}
             >
-              <span
-                className="pill-dot"
-                style={{ background: category.color }}
-              />
+              <span className="pill-dot" style={{ background: category.color }} />
               {category.label}
             </motion.button>
           ))}
@@ -407,9 +383,7 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
 
               {/* Skill Legend */}
               <div className="skills-legend">
-                <h3 style={{ color: currentCategory.color }}>
-                  {currentCategory.label}
-                </h3>
+                <h3 style={{ color: currentCategory.color }}>{currentCategory.label}</h3>
                 <ul className="legend-list">
                   {categorySkills.map((skill, index) => {
                     const IconComponent = skillIcons[skill.skill] || TbApi;
@@ -425,15 +399,10 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
                         animate={{ x: 0 }}
                         transition={{ delay: index * 0.05 }}
                         style={{
-                          borderColor: isHovered
-                            ? currentCategory.color
-                            : "transparent",
+                          borderColor: isHovered ? currentCategory.color : "transparent",
                         }}
                       >
-                        <div
-                          className="legend-icon"
-                          style={{ color: currentCategory.color }}
-                        >
+                        <div className="legend-icon" style={{ color: currentCategory.color }}>
                           <IconComponent size={20} />
                         </div>
                         <div className="legend-info">

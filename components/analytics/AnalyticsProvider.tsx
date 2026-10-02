@@ -58,7 +58,14 @@ export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const enabledRef = useRef(false);
   const sessionIdRef = useRef<string | null>(null);
-  const queueRef = useRef<Array<{ type: AnalyticsEventName; path: string; target?: string; metadata?: Record<string, string> }>>([]);
+  const queueRef = useRef<
+    Array<{
+      type: AnalyticsEventName;
+      path: string;
+      target?: string;
+      metadata?: Record<string, string>;
+    }>
+  >([]);
   const flushTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const flush = useCallback((preferBeacon = false) => {
@@ -88,31 +95,36 @@ export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
       headers,
       body: payload,
       keepalive: preferBeacon,
-    }).then((response) => {
-      // Avoid retry storms on a deliberate rate limit, but retry transient failures once later.
-      if (!response.ok && response.status !== 429) {
+    })
+      .then((response) => {
+        // Avoid retry storms on a deliberate rate limit, but retry transient failures once later.
+        if (!response.ok && response.status !== 429) {
+          queueRef.current = [...events, ...queueRef.current].slice(0, MAX_QUEUE_SIZE);
+        }
+      })
+      .catch(() => {
         queueRef.current = [...events, ...queueRef.current].slice(0, MAX_QUEUE_SIZE);
-      }
-    }).catch(() => {
-      queueRef.current = [...events, ...queueRef.current].slice(0, MAX_QUEUE_SIZE);
-    });
+      });
   }, []);
 
-  const track = useCallback((type: AnalyticsEventName, options: TrackOptions = {}) => {
-    if (!enabledRef.current || !sessionIdRef.current) return;
-    queueRef.current.push({
-      type,
-      path: cleanPath(options.path || window.location.pathname),
-      ...(options.target ? { target: options.target.slice(0, 160) } : {}),
-      ...(options.metadata ? { metadata: options.metadata } : {}),
-    });
+  const track = useCallback(
+    (type: AnalyticsEventName, options: TrackOptions = {}) => {
+      if (!enabledRef.current || !sessionIdRef.current) return;
+      queueRef.current.push({
+        type,
+        path: cleanPath(options.path || window.location.pathname),
+        ...(options.target ? { target: options.target.slice(0, 160) } : {}),
+        ...(options.metadata ? { metadata: options.metadata } : {}),
+      });
 
-    if (queueRef.current.length >= 10) {
-      flush();
-    } else if (!flushTimerRef.current) {
-      flushTimerRef.current = setTimeout(() => flush(), 2_000);
-    }
-  }, [flush]);
+      if (queueRef.current.length >= 10) {
+        flush();
+      } else if (!flushTimerRef.current) {
+        flushTimerRef.current = setTimeout(() => flush(), 2_000);
+      }
+    },
+    [flush]
+  );
 
   useEffect(() => {
     if (router.pathname.startsWith("/admin") || !trackingIsAllowed()) return;
@@ -141,10 +153,13 @@ export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
     };
   }, [flush, router.events, router.pathname, track]);
 
-  const value = useMemo<AnalyticsContextValue>(() => ({
-    track,
-    getSessionId: () => sessionIdRef.current,
-  }), [track]);
+  const value = useMemo<AnalyticsContextValue>(
+    () => ({
+      track,
+      getSessionId: () => sessionIdRef.current,
+    }),
+    [track]
+  );
 
   return <AnalyticsContext.Provider value={value}>{children}</AnalyticsContext.Provider>;
 }

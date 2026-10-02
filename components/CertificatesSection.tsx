@@ -17,13 +17,7 @@ const CertificateCard: React.FC<{
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <TiltCard
-      className="certificate-item"
-      maxTilt={6}
-      scale={1.02}
-      glare
-      glareOpacity={0.1}
-    >
+    <TiltCard className="certificate-item" maxTilt={6} scale={1.02} glare glareOpacity={0.1}>
       <motion.div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -125,9 +119,7 @@ const CertificateCard: React.FC<{
             alignItems: "center",
             gap: "0.5rem",
             fontSize: "0.85rem",
-            color: isHovered
-              ? "var(--color-certificates)"
-              : "var(--text-secondary)",
+            color: isHovered ? "var(--color-certificates)" : "var(--text-secondary)",
             transition: "color 0.2s",
           }}
           whileHover={{ x: 3 }}

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { MeshDistortMaterial, Float } from '@react-three/drei';
-import * as THREE from 'three';
-import { motion } from 'framer-motion';
+import React, { useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { MeshDistortMaterial, Float } from "@react-three/drei";
+import * as THREE from "three";
+import { motion } from "framer-motion";
 
 const MorphingShape: React.FC = () => {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -45,13 +45,10 @@ const Loading3D: React.FC = () => {
         style={{
           width: 200,
           height: 200,
-          position: 'relative',
+          position: "relative",
         }}
       >
-        <Canvas
-          camera={{ position: [0, 0, 4], fov: 50 }}
-          style={{ background: 'transparent' }}
-        >
+        <Canvas camera={{ position: [0, 0, 4], fov: 50 }} style={{ background: "transparent" }}>
           <ambientLight intensity={0.3} />
           <pointLight position={[10, 10, 10]} intensity={0.5} />
           <MorphingShape />
@@ -77,5 +74,3 @@ const Loading3D: React.FC = () => {
 };
 
 export default Loading3D;
-
-

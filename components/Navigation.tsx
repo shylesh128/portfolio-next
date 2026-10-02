@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-scroll';
-import { motion, AnimatePresence } from 'framer-motion';
-import { RiMenuLine, RiCloseLine } from 'react-icons/ri';
-import { MdDarkMode, MdLightMode } from 'react-icons/md';
-import { useScrollProgress } from '@/hooks/useScrollProgress';
-import { useAnalytics } from '@/components/analytics/AnalyticsProvider';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-scroll";
+import { motion, AnimatePresence } from "framer-motion";
+import { RiMenuLine, RiCloseLine } from "react-icons/ri";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { useScrollProgress } from "@/hooks/useScrollProgress";
+import { useAnalytics } from "@/components/analytics/AnalyticsProvider";
 
 interface NavigationProps {
   isDarkMode: boolean;
@@ -20,16 +20,16 @@ const calculateScrollDuration = (distance: number): number => {
 
 const Navigation = ({ isDarkMode, toggleMode }: NavigationProps) => {
   const navigationLinks = [
-    { id: 'Header', label: 'Home' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'experiences', label: 'Experience' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'studies', label: 'Education' },
-    { id: 'certificates', label: 'Certificates' },
-    { id: 'contact', label: 'Contact' },
+    { id: "Header", label: "Home" },
+    { id: "skills", label: "Skills" },
+    { id: "experiences", label: "Experience" },
+    { id: "projects", label: "Projects" },
+    { id: "studies", label: "Education" },
+    { id: "certificates", label: "Certificates" },
+    { id: "contact", label: "Contact" },
   ];
 
-  const [activeLink, setActiveLink] = useState('Header');
+  const [activeLink, setActiveLink] = useState("Header");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollY, progress } = useScrollProgress();
   const { track } = useAnalytics();
@@ -38,7 +38,7 @@ const Navigation = ({ isDarkMode, toggleMode }: NavigationProps) => {
   const handleNavLinkClick = (targetId: string) => {
     setActiveLink(targetId);
     setIsMenuOpen(false);
-    track('navigation', { target: targetId });
+    track("navigation", { target: targetId });
   };
 
   const toggleMenu = () => {
@@ -48,27 +48,27 @@ const Navigation = ({ isDarkMode, toggleMode }: NavigationProps) => {
   // Close menu on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsMenuOpen(false);
+      if (e.key === "Escape") setIsMenuOpen(false);
     };
-    window.addEventListener('keydown', handleEscape);
-    return () => window.removeEventListener('keydown', handleEscape);
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
   }, []);
 
   return (
     <motion.nav
-      className={`navigation ${isScrolled ? 'scrolled' : ''}`}
+      className={`navigation ${isScrolled ? "scrolled" : ""}`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       {/* Progress bar */}
       <motion.div
         style={{
-          position: 'absolute',
+          position: "absolute",
           bottom: 0,
           left: 0,
-          height: '1px',
-          background: 'rgba(255, 255, 255, 0.3)',
+          height: "1px",
+          background: "rgba(255, 255, 255, 0.3)",
           width: `${progress * 100}%`,
         }}
       />
@@ -77,11 +77,11 @@ const Navigation = ({ isDarkMode, toggleMode }: NavigationProps) => {
         {/* Logo / Name */}
         <motion.div
           style={{
-            fontFamily: 'var(--font-heading)',
+            fontFamily: "var(--font-heading)",
             fontWeight: 700,
-            fontSize: '1.1rem',
-            letterSpacing: '-0.02em',
-            display: 'none',
+            fontSize: "1.1rem",
+            letterSpacing: "-0.02em",
+            display: "none",
           }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -91,7 +91,7 @@ const Navigation = ({ isDarkMode, toggleMode }: NavigationProps) => {
             spy={true}
             smooth={true}
             duration={calculateScrollDuration}
-            style={{ cursor: 'none' }}
+            style={{ cursor: "none" }}
           >
             SS
           </Link>
@@ -103,7 +103,7 @@ const Navigation = ({ isDarkMode, toggleMode }: NavigationProps) => {
           onClick={toggleMenu}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMenuOpen}
           aria-controls="nav-links-list"
         >
@@ -111,14 +111,11 @@ const Navigation = ({ isDarkMode, toggleMode }: NavigationProps) => {
         </motion.button>
 
         {/* Desktop Navigation Links */}
-        <ul 
-          id="nav-links-list"
-          className={`nav-links ${isMenuOpen ? 'open' : ''}`}
-        >
+        <ul id="nav-links-list" className={`nav-links ${isMenuOpen ? "open" : ""}`}>
           {navigationLinks.map(({ id, label }, index) => (
             <motion.li
               key={id}
-              className={`nav-link ${activeLink === id ? 'active' : ''}`}
+              className={`nav-link ${activeLink === id ? "active" : ""}`}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 + 0.2 }}
@@ -136,7 +133,7 @@ const Navigation = ({ isDarkMode, toggleMode }: NavigationProps) => {
                 <motion.span
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  style={{ display: 'inline-block' }}
+                  style={{ display: "inline-block" }}
                 >
                   {label}
                 </motion.span>
@@ -151,22 +148,22 @@ const Navigation = ({ isDarkMode, toggleMode }: NavigationProps) => {
           whileHover={{ scale: 1.1, rotate: 15 }}
           whileTap={{ scale: 0.9 }}
           style={{
-            background: 'transparent',
-            border: '1px solid var(--border)',
-            borderRadius: '50%',
+            background: "transparent",
+            border: "1px solid var(--border)",
+            borderRadius: "50%",
             width: 40,
             height: 40,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--text-primary)',
-            marginLeft: '1rem',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "var(--text-primary)",
+            marginLeft: "1rem",
           }}
-          aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+          aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
         >
           <AnimatePresence mode="wait">
             <motion.div
-              key={isDarkMode ? 'dark' : 'light'}
+              key={isDarkMode ? "dark" : "light"}
               initial={{ rotate: -90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
@@ -187,11 +184,11 @@ const Navigation = ({ isDarkMode, toggleMode }: NavigationProps) => {
             exit={{ opacity: 0 }}
             onClick={() => setIsMenuOpen(false)}
             style={{
-              position: 'fixed',
+              position: "fixed",
               inset: 0,
               top: 60,
-              background: 'rgba(0, 0, 0, 0.5)',
-              backdropFilter: 'blur(4px)',
+              background: "rgba(0, 0, 0, 0.5)",
+              backdropFilter: "blur(4px)",
               zIndex: -1,
             }}
           />

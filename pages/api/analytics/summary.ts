@@ -1,8 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { analyticsDashboardIsConfigured, isAnalyticsDashboardAuthorized } from "@/lib/analytics-auth";
+import {
+  analyticsDashboardIsConfigured,
+  isAnalyticsDashboardAuthorized,
+} from "@/lib/analytics-auth";
 import { getAnalyticsSnapshot, type AnalyticsSnapshot } from "@/lib/analytics-dashboard";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<AnalyticsSnapshot | { error: string }>) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<AnalyticsSnapshot | { error: string }>
+) {
   res.setHeader("Cache-Control", "no-store");
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");

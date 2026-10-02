@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import React from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 interface RevealTextProps {
   children: string;
@@ -8,23 +8,23 @@ interface RevealTextProps {
   delay?: number;
   staggerDelay?: number;
   once?: boolean;
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span';
+  as?: "h1" | "h2" | "h3" | "h4" | "p" | "span";
 }
 
 const RevealText: React.FC<RevealTextProps> = ({
   children,
-  className = '',
+  className = "",
   delay = 0,
   staggerDelay = 0.03,
   once = true,
-  as: Component = 'span',
+  as: Component = "span",
 }) => {
   const [ref, inView] = useInView({
     triggerOnce: once,
     threshold: 0.1,
   });
 
-  const words = children.split(' ');
+  const words = children.split(" ");
 
   const containerVariants = {
     hidden: {},
@@ -43,7 +43,7 @@ const RevealText: React.FC<RevealTextProps> = ({
     visible: {
       y: 0,
       transition: {
-        type: 'spring' as const,
+        type: "spring" as const,
         stiffness: 100,
         damping: 12,
       },
@@ -51,26 +51,26 @@ const RevealText: React.FC<RevealTextProps> = ({
   };
 
   return (
-    <Component className={className} style={{ display: 'block' }}>
+    <Component className={className} style={{ display: "block" }}>
       <motion.span
         ref={ref}
-        style={{ 
-          display: 'inline-flex', 
-          flexWrap: 'wrap',
-          overflow: 'hidden',
+        style={{
+          display: "inline-flex",
+          flexWrap: "wrap",
+          overflow: "hidden",
         }}
         variants={containerVariants}
         initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
+        animate={inView ? "visible" : "hidden"}
       >
         {words.map((word, index) => (
           <motion.span
             key={index}
             variants={wordVariants}
-            style={{ 
-              display: 'inline-block',
-              marginRight: '0.25em',
-              overflow: 'hidden',
+            style={{
+              display: "inline-block",
+              marginRight: "0.25em",
+              overflow: "hidden",
             }}
           >
             {word}
@@ -84,18 +84,18 @@ const RevealText: React.FC<RevealTextProps> = ({
 // Character-by-character reveal variant
 export const RevealTextChar: React.FC<RevealTextProps> = ({
   children,
-  className = '',
+  className = "",
   delay = 0,
   staggerDelay = 0.02,
   once = true,
-  as: Component = 'span',
+  as: Component = "span",
 }) => {
   const [ref, inView] = useInView({
     triggerOnce: once,
     threshold: 0.1,
   });
 
-  const characters = children.split('');
+  const characters = children.split("");
 
   const containerVariants = {
     hidden: {},
@@ -114,7 +114,7 @@ export const RevealTextChar: React.FC<RevealTextProps> = ({
     visible: {
       y: 0,
       transition: {
-        type: 'spring' as const,
+        type: "spring" as const,
         stiffness: 150,
         damping: 15,
       },
@@ -125,18 +125,18 @@ export const RevealTextChar: React.FC<RevealTextProps> = ({
     <Component className={className}>
       <motion.span
         ref={ref}
-        style={{ display: 'inline-block' }}
+        style={{ display: "inline-block" }}
         variants={containerVariants}
         initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
+        animate={inView ? "visible" : "hidden"}
       >
         {characters.map((char, index) => (
           <motion.span
             key={index}
             variants={charVariants}
-            style={{ 
-              display: 'inline-block',
-              whiteSpace: char === ' ' ? 'pre' : 'normal',
+            style={{
+              display: "inline-block",
+              whiteSpace: char === " " ? "pre" : "normal",
             }}
           >
             {char}

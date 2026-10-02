@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 interface ContactEmailData {
   name: string;
@@ -8,7 +8,7 @@ interface ContactEmailData {
 }
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
     user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_APP_PASSWORD,
@@ -22,7 +22,7 @@ export async function sendContactNotification(data: ContactEmailData): Promise<v
     from: process.env.GMAIL_USER,
     to: process.env.CONTACT_EMAIL,
     replyTo: email,
-    subject: `Portfolio Contact: ${subject || 'New Message'} - from ${name}`,
+    subject: `Portfolio Contact: ${subject || "New Message"} - from ${name}`,
     html: `
       <!DOCTYPE html>
       <html>
@@ -58,7 +58,9 @@ export async function sendContactNotification(data: ContactEmailData): Promise<v
                         </tr>
                       </table>
                       
-                      ${subject ? `
+                      ${
+                        subject
+                          ? `
                       <!-- Subject -->
                       <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 24px;">
                         <tr>
@@ -68,7 +70,9 @@ export async function sendContactNotification(data: ContactEmailData): Promise<v
                           </td>
                         </tr>
                       </table>
-                      ` : ''}
+                      `
+                          : ""
+                      }
                       
                       <!-- Message -->
                       <table width="100%" cellpadding="0" cellspacing="0">
@@ -107,7 +111,7 @@ New Contact Message from Portfolio
 
 From: ${name}
 Email: ${email}
-${subject ? `Subject: ${subject}` : ''}
+${subject ? `Subject: ${subject}` : ""}
 
 Message:
 ${message}
@@ -119,4 +123,3 @@ Reply directly to this email to respond to ${name}.
 
   await transporter.sendMail(mailOptions);
 }
-

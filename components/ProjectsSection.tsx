@@ -1,58 +1,49 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
-import { BiLinkExternal } from 'react-icons/bi';
-import TiltCard from './ui/TiltCard';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { BiLinkExternal } from "react-icons/bi";
+import TiltCard from "./ui/TiltCard";
 
-import { Project } from '../types';
-import { useAnalytics } from './analytics/AnalyticsProvider';
+import { Project } from "../types";
+import { useAnalytics } from "./analytics/AnalyticsProvider";
 
 interface ProjectsProps {
   projects: Project[];
 }
 
-const ProjectCard: React.FC<{ project: Project; index: number }> = ({
-  project,
-  index,
-}) => {
+const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { track } = useAnalytics();
 
   return (
-    <TiltCard
-      className="project-item"
-      maxTilt={8}
-      scale={1.02}
-      glare
-      glareOpacity={0.15}
-    >
+    <TiltCard className="project-item" maxTilt={8} scale={1.02} glare glareOpacity={0.15}>
       <motion.div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+        style={{ height: "100%", display: "flex", flexDirection: "column" }}
       >
         {/* Image container */}
         <div
           style={{
-            position: 'relative',
-            width: '100%',
+            position: "relative",
+            width: "100%",
             height: 200,
-            overflow: 'hidden',
-            borderRadius: '12px 12px 0 0',
+            overflow: "hidden",
+            borderRadius: "12px 12px 0 0",
           }}
         >
           <motion.div
             animate={{
               scale: isHovered ? 1.1 : 1,
             }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-            style={{ width: '100%', height: '100%' }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            style={{ width: "100%", height: "100%" }}
           >
             <Image
               src={project.preview}
               alt={project.title}
               fill
-              style={{ objectFit: 'cover' }}
+              style={{ objectFit: "cover" }}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </motion.div>
@@ -65,36 +56,35 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 style={{
-                  position: 'absolute',
+                  position: "absolute",
                   inset: 0,
-                  background:
-                    'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)',
-                  display: 'flex',
-                  alignItems: 'flex-end',
-                  justifyContent: 'center',
-                  padding: '1rem',
+                  background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)",
+                  display: "flex",
+                  alignItems: "flex-end",
+                  justifyContent: "center",
+                  padding: "1rem",
                 }}
               >
                 <motion.a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => track('project_click', { target: project.title })}
+                  onClick={() => track("project_click", { target: project.title })}
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: 20, opacity: 0 }}
                   transition={{ delay: 0.1 }}
                   style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    padding: '0.75rem 1.5rem',
-                    background: 'var(--color-projects)',
-                    color: 'black',
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    padding: "0.75rem 1.5rem",
+                    background: "var(--color-projects)",
+                    color: "black",
                     borderRadius: 8,
                     fontWeight: 500,
-                    fontSize: '0.9rem',
-                    textDecoration: 'none',
+                    fontSize: "0.9rem",
+                    textDecoration: "none",
                   }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -107,19 +97,17 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({
         </div>
 
         {/* Project info */}
-        <div className="project-info" style={{ flex: 1, padding: '1.25rem' }}>
-          <h3 style={{ marginBottom: '0.75rem', fontSize: '1.1rem' }}>
-            {project.title}
-          </h3>
+        <div className="project-info" style={{ flex: 1, padding: "1.25rem" }}>
+          <h3 style={{ marginBottom: "0.75rem", fontSize: "1.1rem" }}>{project.title}</h3>
           <p
             style={{
-              fontSize: '0.9rem',
-              color: 'var(--text-secondary)',
+              fontSize: "0.9rem",
+              color: "var(--text-secondary)",
               lineHeight: 1.6,
-              display: '-webkit-box',
+              display: "-webkit-box",
               WebkitLineClamp: 3,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
             }}
           >
             {project.description}
@@ -148,9 +136,9 @@ const ProjectsSection = ({ projects }: ProjectsProps) => {
         <div
           className="projects-grid"
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-            gap: '1.5rem',
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+            gap: "1.5rem",
           }}
         >
           {displayedProjects.map((project, index) => (
@@ -159,7 +147,7 @@ const ProjectsSection = ({ projects }: ProjectsProps) => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                type: 'spring' as const,
+                type: "spring" as const,
                 stiffness: 100,
                 damping: 15,
                 delay: index * 0.1,
@@ -177,9 +165,9 @@ const ProjectsSection = ({ projects }: ProjectsProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             style={{
-              display: 'flex',
-              justifyContent: 'center',
-              marginTop: '2rem',
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "2rem",
             }}
           >
             <motion.button
@@ -188,7 +176,7 @@ const ProjectsSection = ({ projects }: ProjectsProps) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {showAll ? 'Show Less' : `Show All (${projects.length})`}
+              {showAll ? "Show Less" : `Show All (${projects.length})`}
             </motion.button>
           </motion.div>
         )}

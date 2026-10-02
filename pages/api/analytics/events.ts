@@ -19,7 +19,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     return res.status(405).json({ accepted: false, error: "Method not allowed" });
   }
 
-  const sessionId = getAnalyticsSessionId(req) || (isAnalyticsSessionId(req.body?.sessionId) ? req.body.sessionId : null);
+  const sessionId =
+    getAnalyticsSessionId(req) ||
+    (isAnalyticsSessionId(req.body?.sessionId) ? req.body.sessionId : null);
   const events = validateAnalyticsEvents(req.body?.events);
   if (!sessionId || !events) {
     return res.status(400).json({ accepted: false, error: "Invalid analytics payload" });

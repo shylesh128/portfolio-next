@@ -1,25 +1,22 @@
-'use client';
+"use client";
 
-import React, { useRef, useMemo, useEffect } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
-import * as THREE from 'three';
+import React, { useRef, useMemo, useEffect } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import * as THREE from "three";
 
 interface ParticleFieldProps {
   count?: number;
   scrollProgress?: number;
 }
 
-const ParticleField: React.FC<ParticleFieldProps> = ({ 
-  count = 500, 
-  scrollProgress = 0 
-}) => {
+const ParticleField: React.FC<ParticleFieldProps> = ({ count = 500, scrollProgress = 0 }) => {
   const pointsRef = useRef<THREE.Points>(null);
   const mousePosition = useRef({ x: 0, y: 0 });
   const { viewport } = useThree();
 
   // Reduce particle count on mobile
   const particleCount = useMemo(() => {
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
       return Math.floor(count * 0.4);
     }
     return count;
@@ -34,21 +31,21 @@ const ParticleField: React.FC<ParticleFieldProps> = ({
 
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3;
-      
+
       // Position
       positions[i3] = (Math.random() - 0.5) * 20;
       positions[i3 + 1] = (Math.random() - 0.5) * 20;
       positions[i3 + 2] = (Math.random() - 0.5) * 10;
-      
+
       // Color (white with slight variation)
       const brightness = 0.5 + Math.random() * 0.5;
       colors[i3] = brightness;
       colors[i3 + 1] = brightness;
       colors[i3 + 2] = brightness;
-      
+
       // Size
       sizes[i] = Math.random() * 2 + 0.5;
-      
+
       // Velocity for animation
       velocities[i3] = (Math.random() - 0.5) * 0.002;
       velocities[i3 + 1] = (Math.random() - 0.5) * 0.002;
@@ -67,8 +64,8 @@ const ParticleField: React.FC<ParticleFieldProps> = ({
       };
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   // Animation
@@ -80,7 +77,7 @@ const ParticleField: React.FC<ParticleFieldProps> = ({
 
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3;
-      
+
       // Add subtle movement
       positions[i3] += particles.velocities[i3] + Math.sin(time * 0.1 + i) * 0.0005;
       positions[i3 + 1] += particles.velocities[i3 + 1] + Math.cos(time * 0.1 + i) * 0.0005;
@@ -90,7 +87,7 @@ const ParticleField: React.FC<ParticleFieldProps> = ({
       const dx = positions[i3] - mousePosition.current.x * viewport.width * 0.5;
       const dy = positions[i3 + 1] - mousePosition.current.y * viewport.height * 0.5;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      
+
       if (dist < 2) {
         const force = (2 - dist) * 0.001;
         positions[i3] += (dx / dist) * force;
@@ -179,5 +176,3 @@ const ParticleField: React.FC<ParticleFieldProps> = ({
 };
 
 export default ParticleField;
-
-

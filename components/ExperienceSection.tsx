@@ -1,13 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import {
-  BiCalendar,
-  BiCheck,
-  BiBriefcase,
-  BiTimeFive,
-  BiTrendingUp,
-} from "react-icons/bi";
+import { BiCalendar, BiCheck, BiBriefcase, BiTimeFive, BiTrendingUp } from "react-icons/bi";
 
 import { Experience } from "../types";
 import { calculateExperienceStats, getRoleDuration } from "@/lib/experience";
@@ -31,11 +25,11 @@ const ExperienceCard: React.FC<{
   const isIntern = Boolean(
     experience.isInternship ||
     experience.type?.toLowerCase() === "internship" ||
-    experience.title.toLowerCase().includes("intern"),
+    experience.title.toLowerCase().includes("intern")
   );
 
   const isCurrent = Boolean(
-    experience.isCurrent || experience.dates.toLowerCase().includes("present"),
+    experience.isCurrent || experience.dates.toLowerCase().includes("present")
   );
 
   return (
@@ -72,9 +66,7 @@ const ExperienceCard: React.FC<{
           height: 12,
           borderRadius: "50%",
           background: isCurrent ? "#22c55e" : "var(--color-experience)",
-          boxShadow: isCurrent
-            ? "0 0 16px #22c55e"
-            : "0 0 14px var(--color-experience-dim)",
+          boxShadow: isCurrent ? "0 0 16px #22c55e" : "0 0 14px var(--color-experience-dim)",
           display: "none", // Hidden on mobile
         }}
         initial={{ scale: 0 }}
@@ -89,9 +81,7 @@ const ExperienceCard: React.FC<{
             <div className="experience-logo-box" title={experience.company}>
               <img
                 src={
-                  experience.logo.startsWith("/")
-                    ? experience.logo
-                    : `/logos/${experience.logo}`
+                  experience.logo.startsWith("/") ? experience.logo : `/logos/${experience.logo}`
                 }
                 alt={`${experience.company} logo`}
                 className="experience-logo-img"
@@ -139,20 +129,12 @@ const ExperienceCard: React.FC<{
             <span>{experience.dates}</span>
           </motion.div>
 
-          <span
-            className="experience-duration-badge"
-            title="Dynamic calculated duration"
-          >
-            <BiTimeFive
-              size={12}
-              style={{ color: "var(--color-experience)" }}
-            />
+          <span className="experience-duration-badge" title="Dynamic calculated duration">
+            <BiTimeFive size={12} style={{ color: "var(--color-experience)" }} />
             <span>{duration.formatted}</span>
           </span>
 
-          <span
-            className={`experience-type-badge ${isIntern ? "internship" : "fulltime"}`}
-          >
+          <span className={`experience-type-badge ${isIntern ? "internship" : "fulltime"}`}>
             {isIntern ? "Internship" : "Full-time"}
           </span>
         </div>
@@ -205,10 +187,7 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
   }, []);
 
   // Dynamically compute experience stats (safe for SSR + hydrated with exact date)
-  const stats = useMemo(
-    () => calculateExperienceStats(experiences),
-    [experiences],
-  );
+  const stats = useMemo(() => calculateExperienceStats(experiences), [experiences]);
 
   const filteredExperiences = useMemo(() => {
     if (filter === "fulltime") {
@@ -216,7 +195,7 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
         (exp) =>
           !exp.isInternship &&
           exp.type?.toLowerCase() !== "internship" &&
-          !exp.title.toLowerCase().includes("intern"),
+          !exp.title.toLowerCase().includes("intern")
       );
     }
     return experiences;
@@ -253,13 +232,9 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                 <div className="experience-stat-header">
                   <div className="experience-stat-title-wrap">
                     <BiBriefcase size={18} style={{ color: "#86efac" }} />
-                    <h3 className="experience-stat-title">
-                      Full-Time Experience
-                    </h3>
+                    <h3 className="experience-stat-title">Full-Time Experience</h3>
                   </div>
-                  <span className="experience-stat-pill fulltime">
-                    Without Internship
-                  </span>
+                  <span className="experience-stat-pill fulltime">Without Internship</span>
                 </div>
 
                 <div className="experience-counter-group">
@@ -274,9 +249,8 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                 </div>
 
                 <p className="experience-stat-desc">
-                  Professional software engineering at Societe Generale &
-                  ansrsource building enterprise-scale applications and
-                  microservices.
+                  Professional software engineering at Societe Generale & ansrsource building
+                  enterprise-scale applications and microservices.
                 </p>
               </div>
 
@@ -285,9 +259,7 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                   <span className="experience-pulse-dot" />
                   Software Engineer @ Societe Generale
                 </span>
-                <span style={{ fontFamily: "var(--font-mono)" }}>
-                  3 Full-Time Roles
-                </span>
+                <span style={{ fontFamily: "var(--font-mono)" }}>3 Full-Time Roles</span>
               </div>
             </motion.div>
 
@@ -302,20 +274,14 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                 <div className="experience-stat-header">
                   <div className="experience-stat-title-wrap">
                     <BiTrendingUp size={19} style={{ color: "#93c5fd" }} />
-                    <h3 className="experience-stat-title">
-                      Total Career Experience
-                    </h3>
+                    <h3 className="experience-stat-title">Total Career Experience</h3>
                   </div>
-                  <span className="experience-stat-pill total">
-                    Including Internship
-                  </span>
+                  <span className="experience-stat-pill total">Including Internship</span>
                 </div>
 
                 <div className="experience-counter-group">
                   <span className="experience-number">
-                    {isMounted
-                      ? stats.totalWithInternship.years
-                      : stats.totalWithInternship.years}
+                    {isMounted ? stats.totalWithInternship.years : stats.totalWithInternship.years}
                   </span>
                   <span className="experience-unit">YRS</span>
                   <span className="experience-number">
@@ -327,17 +293,14 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps) => {
                 </div>
 
                 <p className="experience-stat-desc">
-                  Total hands-on industry journey including the 6-month
-                  foundational full-stack developer internship at ansrsource
-                  (Oct 2022 – Mar 2023).
+                  Total hands-on industry journey including the 6-month foundational full-stack
+                  developer internship at ansrsource (Oct 2022 – Mar 2023).
                 </p>
               </div>
 
               <div className="experience-stat-footer">
                 <span>Oct 2022 – Present</span>
-                <span style={{ fontFamily: "var(--font-mono)" }}>
-                  All 4 Roles
-                </span>
+                <span style={{ fontFamily: "var(--font-mono)" }}>All 4 Roles</span>
               </div>
             </motion.div>
           </div>

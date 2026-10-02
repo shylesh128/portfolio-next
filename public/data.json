@@ -459,12 +459,7 @@
       "logo": "LinkedIn logo",
       "title": "Master In-Demand Professional Soft Skills",
       "issuedDate": "Sep 2021",
-      "skills": [
-        "Communication",
-        "Problem Solving",
-        "Team Collaboration",
-        "Agile"
-      ],
+      "skills": ["Communication", "Problem Solving", "Team Collaboration", "Agile"],
       "link": "https://www.linkedin.com/learning/certificates/12c2101c2913d27645bde638a5b5f02de1c1dfb9c55ee408d5eda142589efce8?trk=backfilled_certificate&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bin3tDrCEQX2fCN3Zl9Tq1g%3D%3D",
       "image": "/cert/Master-soft-skills.png"
     },
@@ -492,12 +487,7 @@
       "title": "Mathematics for Machine Learning: Linear Algebra",
       "issuedDate": "Oct 2020",
       "credentialId": "3899db6f8da16901a1034affc2c4cbd1",
-      "skills": [
-        "Linear Algebra",
-        "Mathematics",
-        "Machine Learning",
-        "Vectors & Matrices"
-      ],
+      "skills": ["Linear Algebra", "Mathematics", "Machine Learning", "Vectors & Matrices"],
       "image-link": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~6FJJ6JUK6EMM/CERTIFICATE_LANDING_PAGE~6FJJ6JUK6EMM.jpeg",
       "link": "https://www.coursera.org/account/accomplishments/verify/6FJJ6JUK6EMM?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course"
     },

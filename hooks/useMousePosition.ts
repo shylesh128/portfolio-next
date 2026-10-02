@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from "react";
 
 interface MousePosition {
   x: number;
@@ -18,7 +18,7 @@ export function useMousePosition(): MousePosition {
     velocityX: 0,
     velocityY: 0,
   });
-  
+
   const previousPosition = useRef({ x: 0, y: 0 });
   const rafId = useRef<number | null>(null);
 
@@ -30,7 +30,7 @@ export function useMousePosition(): MousePosition {
     rafId.current = requestAnimationFrame(() => {
       const velocityX = clientX - previousPosition.current.x;
       const velocityY = clientY - previousPosition.current.y;
-      
+
       setPosition({
         x: clientX,
         y: clientY,
@@ -39,7 +39,7 @@ export function useMousePosition(): MousePosition {
         velocityX,
         velocityY,
       });
-      
+
       previousPosition.current = { x: clientX, y: clientY };
     });
   }, []);
@@ -55,12 +55,12 @@ export function useMousePosition(): MousePosition {
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
       if (rafId.current) {
         cancelAnimationFrame(rafId.current);
       }
@@ -71,5 +71,3 @@ export function useMousePosition(): MousePosition {
 }
 
 export default useMousePosition;
-
-

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { Suspense, useRef } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { Preload, PerformanceMonitor } from '@react-three/drei';
-import ParticleField from './ParticleField';
-import FloatingShapes from './FloatingShapes';
+import React, { Suspense, useRef } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Preload, PerformanceMonitor } from "@react-three/drei";
+import ParticleField from "./ParticleField";
+import FloatingShapes from "./FloatingShapes";
 
 interface SceneProps {
   scrollProgress?: number;
@@ -16,13 +16,13 @@ const Scene: React.FC<SceneProps> = ({ scrollProgress = 0 }) => {
   return (
     <div
       style={{
-        position: 'fixed',
+        position: "fixed",
         top: 0,
         left: 0,
-        width: '100%',
-        height: '100%',
+        width: "100%",
+        height: "100%",
         zIndex: 0,
-        pointerEvents: 'none',
+        pointerEvents: "none",
       }}
     >
       <Canvas
@@ -30,7 +30,7 @@ const Scene: React.FC<SceneProps> = ({ scrollProgress = 0 }) => {
         gl={{
           antialias: true,
           alpha: true,
-          powerPreference: 'high-performance',
+          powerPreference: "high-performance",
         }}
         camera={{
           position: [0, 0, 5],
@@ -47,10 +47,10 @@ const Scene: React.FC<SceneProps> = ({ scrollProgress = 0 }) => {
             <ambientLight intensity={0.2} />
             <pointLight position={[10, 10, 10]} intensity={0.5} />
             <pointLight position={[-10, -10, -10]} intensity={0.3} color="#ffffff" />
-            
+
             <ParticleField scrollProgress={scrollProgress} />
             <FloatingShapes scrollProgress={scrollProgress} />
-            
+
             <Preload all />
           </Suspense>
         </PerformanceMonitor>
@@ -60,5 +60,3 @@ const Scene: React.FC<SceneProps> = ({ scrollProgress = 0 }) => {
 };
 
 export default Scene;
-
-

@@ -50,7 +50,7 @@ export default function Home() {
       "contact",
       "message",
     ],
-    !isLoading && Boolean(data),
+    !isLoading && Boolean(data)
   );
 
   const toggleMode = () => {
@@ -144,10 +144,7 @@ export default function Home() {
             name: "Shylesh S",
             jobTitle: "Full Stack Developer",
             url: "https://shylesh-s.vercel.app/",
-            sameAs: [
-              "https://www.linkedin.com/in/s-shylesh/",
-              "https://github.com/shylesh128",
-            ],
+            sameAs: ["https://www.linkedin.com/in/s-shylesh/", "https://github.com/shylesh128"],
           })}
         </script>
 
@@ -157,10 +154,7 @@ export default function Home() {
         />
 
         {/* Open Graph */}
-        <meta
-          property="og:title"
-          content={`${data.name} | Full Stack Developer`}
-        />
+        <meta property="og:title" content={`${data.name} | Full Stack Developer`} />
         <meta property="og:description" content={data.description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://shylesh-s.vercel.app/" />
@@ -168,10 +162,7 @@ export default function Home() {
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={`${data.name} | Full Stack Developer`}
-        />
+        <meta name="twitter:title" content={`${data.name} | Full Stack Developer`} />
         <meta name="twitter:description" content={data.description} />
       </Head>
 
@@ -219,10 +210,7 @@ export default function Home() {
           <CertificatesSection certificates={data.certificates} />
 
           {/* Interests Section */}
-          <InterestsSection
-            interests={data.interests}
-            instagram={data.instagram}
-          />
+          <InterestsSection interests={data.interests} instagram={data.instagram} />
 
           {/* Contact Section */}
           <Contact contact={data.contact} />

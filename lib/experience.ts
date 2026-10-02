@@ -49,11 +49,7 @@ const MONTH_MAP: Record<string, number> = {
 function parseDate(dateStr?: string | null, isEnd = false): Date {
   if (!dateStr) return new Date();
   const normalized = dateStr.trim().toLowerCase();
-  if (
-    normalized === "present" ||
-    normalized === "current" ||
-    normalized === "now"
-  ) {
+  if (normalized === "present" || normalized === "current" || normalized === "now") {
     return new Date();
   }
 
@@ -70,11 +66,7 @@ function parseDate(dateStr?: string | null, isEnd = false): Date {
   const parts = dateStr.replace(/[–—]/g, "-").split(/[\s-]+/);
   for (let i = 0; i < parts.length; i++) {
     const word = parts[i].toLowerCase().slice(0, 3);
-    if (
-      MONTH_MAP[word] !== undefined &&
-      parts[i + 1] &&
-      /^\d{4}$/.test(parts[i + 1])
-    ) {
+    if (MONTH_MAP[word] !== undefined && parts[i + 1] && /^\d{4}$/.test(parts[i + 1])) {
       const year = parseInt(parts[i + 1], 10);
       return new Date(year, MONTH_MAP[word], isEnd ? 28 : 1);
     }
@@ -122,17 +114,14 @@ export function formatDuration(totalMonths: number): DurationBreakdown {
  */
 export function getRoleDuration(
   exp: Experience,
-  referenceDate: Date = new Date(),
+  referenceDate: Date = new Date()
 ): DurationBreakdown {
   let start: Date;
   let end: Date;
 
   if (exp.startDate) {
     start = parseDate(exp.startDate, false);
-    end =
-      exp.isCurrent || !exp.endDate
-        ? referenceDate
-        : parseDate(exp.endDate, true);
+    end = exp.isCurrent || !exp.endDate ? referenceDate : parseDate(exp.endDate, true);
   } else {
     const dateParts = exp.dates.split(/[–—\-]\s*/);
     start = parseDate(dateParts[0], false);
@@ -142,9 +131,7 @@ export function getRoleDuration(
   if (end < start) end = start;
 
   const months =
-    (end.getFullYear() - start.getFullYear()) * 12 +
-    (end.getMonth() - start.getMonth()) +
-    1;
+    (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()) + 1;
   return formatDuration(Math.max(1, months));
 }
 
@@ -156,7 +143,7 @@ export function getRoleDuration(
  */
 export function calculateExperienceStats(
   experiences: Experience[],
-  referenceDate: Date = new Date(),
+  referenceDate: Date = new Date()
 ): ExperienceStats {
   const fullTimeMonthSet = new Set<string>();
   const totalMonthSet = new Set<string>();
@@ -172,10 +159,7 @@ export function calculateExperienceStats(
 
     if (exp.startDate) {
       start = parseDate(exp.startDate, false);
-      end =
-        exp.isCurrent || !exp.endDate
-          ? referenceDate
-          : parseDate(exp.endDate, true);
+      end = exp.isCurrent || !exp.endDate ? referenceDate : parseDate(exp.endDate, true);
     } else {
       const dateParts = exp.dates.split(/[–—\-]\s*/);
       start = parseDate(dateParts[0], false);
@@ -187,12 +171,10 @@ export function calculateExperienceStats(
     const isIntern = Boolean(
       exp.isInternship ||
       exp.type?.toLowerCase() === "internship" ||
-      exp.title.toLowerCase().includes("intern"),
+      exp.title.toLowerCase().includes("intern")
     );
 
-    const isCurrent = Boolean(
-      exp.isCurrent || exp.dates.toLowerCase().includes("present"),
-    );
+    const isCurrent = Boolean(exp.isCurrent || exp.dates.toLowerCase().includes("present"));
 
     if (isCurrent && !currentRoleDuration) {
       currentRoleDuration = getRoleDuration(exp, referenceDate);

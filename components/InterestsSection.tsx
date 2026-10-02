@@ -28,8 +28,7 @@ const defaultInstagram: InstagramConfig = {
       title: "Charcoal Sketching",
       category: "Charcoal & Graphite",
       tag: "#charcoalsketch",
-      caption:
-        "Deep contrast, shadows, and expressive pencil shading explorations.",
+      caption: "Deep contrast, shadows, and expressive pencil shading explorations.",
       image: "/hobbies/charcoal-sketch.svg",
     },
     {
@@ -37,8 +36,7 @@ const defaultInstagram: InstagramConfig = {
       title: "Glass Painting",
       category: "Glass & Acrylics",
       tag: "#glasspainting",
-      caption:
-        "Luminous colors and transparent light refractions on glass surfaces.",
+      caption: "Luminous colors and transparent light refractions on glass surfaces.",
       image: "/hobbies/glass-painting.svg",
     },
     {
@@ -46,8 +44,7 @@ const defaultInstagram: InstagramConfig = {
       title: "Continuous Line Art",
       category: "Ink & Contours",
       tag: "#shyylines",
-      caption:
-        "Minimalist continuous single-line silhouettes and freehand flows.",
+      caption: "Minimalist continuous single-line silhouettes and freehand flows.",
       image: "/hobbies/line-art.svg",
     },
     {
@@ -55,17 +52,13 @@ const defaultInstagram: InstagramConfig = {
       title: "Graphic Designing",
       category: "Digital Art",
       tag: "#graphicdesign",
-      caption:
-        "Modern vector aesthetics, layouts, and bold visual storytelling.",
+      caption: "Modern vector aesthetics, layouts, and bold visual storytelling.",
       image: "/hobbies/graphic-design.svg",
     },
   ],
 };
 
-const InterestsSection = ({
-  interests,
-  instagram = defaultInstagram,
-}: InterestsSectionProps) => {
+const InterestsSection = ({ interests, instagram = defaultInstagram }: InterestsSectionProps) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.15,
@@ -106,9 +99,7 @@ const InterestsSection = ({
         animate={inView ? "visible" : "hidden"}
         variants={containerVariants}
       >
-        <motion.h2 variants={itemVariants}>
-          Interests & Creative Hobbies
-        </motion.h2>
+        <motion.h2 variants={itemVariants}>Interests & Creative Hobbies</motion.h2>
 
         {/* Category Pills */}
         <motion.ul
@@ -175,9 +166,7 @@ const InterestsSection = ({
               <div className="instagram-meta">
                 <h3>
                   <span>{igData.name}</span>
-                  <span className="instagram-handle-badge">
-                    @{igData.handle}
-                  </span>
+                  <span className="instagram-handle-badge">@{igData.handle}</span>
                 </h3>
                 <p>{igData.bio}</p>
               </div>
@@ -199,10 +188,7 @@ const InterestsSection = ({
           </motion.div>
 
           {/* Artwork Preview Grid */}
-          <motion.div
-            variants={containerVariants}
-            className="instagram-gallery-grid"
-          >
+          <motion.div variants={containerVariants} className="instagram-gallery-grid">
             {igData.posts.map((post, idx) => (
               <motion.a
                 key={post.id || idx}
@@ -212,9 +198,7 @@ const InterestsSection = ({
                 rel="noopener noreferrer"
                 className="instagram-post-card"
                 whileHover={{ y: -6 }}
-                onClick={() =>
-                  track("navigation", { target: `${igData.url}#${post.id}` })
-                }
+                onClick={() => track("navigation", { target: `${igData.url}#${post.id}` })}
                 title={`View ${post.title} on Instagram (@${igData.handle})`}
               >
                 {/* Visual artwork preview */}

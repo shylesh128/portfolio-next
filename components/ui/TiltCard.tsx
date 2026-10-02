@@ -1,5 +1,5 @@
-import React, { useRef, useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useState, useCallback } from "react";
+import { motion } from "framer-motion";
 
 interface TiltCardProps {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ interface TiltCardProps {
 
 const TiltCard: React.FC<TiltCardProps> = ({
   children,
-  className = '',
+  className = "",
   maxTilt = 10,
   scale = 1.02,
   perspective = 1000,
@@ -25,26 +25,29 @@ const TiltCard: React.FC<TiltCardProps> = ({
   const [glarePosition, setGlarePosition] = useState({ x: 50, y: 50 });
   const [isHovering, setIsHovering] = useState(false);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!cardRef.current) return;
 
-    const rect = cardRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    const mouseX = e.clientX - centerX;
-    const mouseY = e.clientY - centerY;
-    
-    const tiltX = (mouseY / (rect.height / 2)) * -maxTilt;
-    const tiltY = (mouseX / (rect.width / 2)) * maxTilt;
-    
-    setTilt({ x: tiltX, y: tiltY });
+      const rect = cardRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
 
-    // Calculate glare position
-    const glareX = ((e.clientX - rect.left) / rect.width) * 100;
-    const glareY = ((e.clientY - rect.top) / rect.height) * 100;
-    setGlarePosition({ x: glareX, y: glareY });
-  }, [maxTilt]);
+      const mouseX = e.clientX - centerX;
+      const mouseY = e.clientY - centerY;
+
+      const tiltX = (mouseY / (rect.height / 2)) * -maxTilt;
+      const tiltY = (mouseX / (rect.width / 2)) * maxTilt;
+
+      setTilt({ x: tiltX, y: tiltY });
+
+      // Calculate glare position
+      const glareX = ((e.clientX - rect.left) / rect.width) * 100;
+      const glareY = ((e.clientY - rect.top) / rect.height) * 100;
+      setGlarePosition({ x: glareX, y: glareY });
+    },
+    [maxTilt]
+  );
 
   const handleMouseEnter = useCallback(() => {
     setIsHovering(true);
@@ -69,32 +72,32 @@ const TiltCard: React.FC<TiltCardProps> = ({
         scale: isHovering ? scale : 1,
       }}
       transition={{
-        type: 'spring',
+        type: "spring",
         stiffness: 300,
         damping: 20,
       }}
       style={{
         perspective: `${perspective}px`,
-        transformStyle: 'preserve-3d',
-        position: 'relative',
-        overflow: 'hidden',
+        transformStyle: "preserve-3d",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
       {children}
-      
+
       {/* Glare effect */}
       {glare && (
         <motion.div
           style={{
-            position: 'absolute',
+            position: "absolute",
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            pointerEvents: 'none',
+            pointerEvents: "none",
             background: `radial-gradient(circle at ${glarePosition.x}% ${glarePosition.y}%, rgba(255,255,255,${glareOpacity}) 0%, transparent 50%)`,
             opacity: isHovering ? 1 : 0,
-            transition: 'opacity 0.3s ease',
+            transition: "opacity 0.3s ease",
           }}
         />
       )}
@@ -103,5 +106,3 @@ const TiltCard: React.FC<TiltCardProps> = ({
 };
 
 export default TiltCard;
-
-

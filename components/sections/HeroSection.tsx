@@ -16,12 +16,7 @@ interface HeroSectionProps {
   experiences?: Experience[];
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({
-  name,
-  title,
-  description,
-  experiences,
-}) => {
+const HeroSection: React.FC<HeroSectionProps> = ({ name, title, description, experiences }) => {
   const { track } = useAnalytics();
   const [isMounted, setIsMounted] = React.useState(false);
 
@@ -97,10 +92,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
         {/* Dynamic Experience Pill */}
         {stats && isMounted && (
-          <motion.div
-            variants={itemVariants}
-            style={{ display: "flex", justifyContent: "center" }}
-          >
+          <motion.div variants={itemVariants} style={{ display: "flex", justifyContent: "center" }}>
             <Link
               to="experiences"
               spy
@@ -108,9 +100,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               duration={500}
               offset={-80}
               style={{ textDecoration: "none" }}
-              onClick={() =>
-                track("navigation", { target: "experiences_pill" })
-              }
+              onClick={() => track("navigation", { target: "experiences_pill" })}
             >
               <div
                 className="hero-experience-pill"
@@ -119,8 +109,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 <span className="experience-pulse-dot" />
                 <span>
                   <strong>{stats.fullTime.formatted}</strong> Full-Time ·{" "}
-                  <strong>{stats.totalWithInternship.formatted}</strong> Total
-                  (incl. Internship)
+                  <strong>{stats.totalWithInternship.formatted}</strong> Total (incl. Internship)
                 </span>
                 <BiChevronRight size={16} />
               </div>
@@ -175,9 +164,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             href="/Shylesh-S-Resume.pdf"
             download
             className="btn btn-outline"
-            onClick={() =>
-              track("resume_download", { target: "Shylesh-S-Resume.pdf" })
-            }
+            onClick={() => track("resume_download", { target: "Shylesh-S-Resume.pdf" })}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -194,10 +181,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         transition={{ delay: 1.5, duration: 0.6 }}
       >
         <span>Scroll</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
+        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
           <BiChevronDown size={20} />
         </motion.div>
         <div className="scroll-indicator-line" />

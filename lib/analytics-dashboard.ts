@@ -37,12 +37,18 @@ export type AnalyticsSnapshot = {
   }>;
 };
 
-const numberValue = (value: unknown): number => typeof value === "number" ? value : 0;
+const numberValue = (value: unknown): number => (typeof value === "number" ? value : 0);
 const labelValue = (value: unknown, fallback = "unknown"): string =>
   typeof value === "string" && value ? value : fallback;
 
-function toBreakdown(rows: Array<{ _id?: unknown; value?: unknown }>, fallback?: string): Breakdown[] {
-  return rows.map((row) => ({ label: labelValue(row._id, fallback), value: numberValue(row.value) }));
+function toBreakdown(
+  rows: Array<{ _id?: unknown; value?: unknown }>,
+  fallback?: string
+): Breakdown[] {
+  return rows.map((row) => ({
+    label: labelValue(row._id, fallback),
+    value: numberValue(row.value),
+  }));
 }
 
 export async function getAnalyticsSnapshot(requestedDays = 30): Promise<AnalyticsSnapshot> {
@@ -50,81 +56,91 @@ export async function getAnalyticsSnapshot(requestedDays = 30): Promise<Analytic
   const start = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
   await connectDB();
 
-  const [sessionOverview, eventOverview, sources, devices, countries, pages, sections, actions, recentSessions, recentEvents] =
-    await Promise.all([
-      AnalyticsSession.aggregate([
-        { $match: { lastSeenAt: { $gte: start } } },
-        {
-          $facet: {
-            sessions: [{ $count: "value" }],
-            visitors: [{ $group: { _id: "$visitorHash" } }, { $count: "value" }],
-            duration: [
-              { $project: { milliseconds: { $subtract: ["$lastSeenAt", "$startedAt"] } } },
-              { $group: { _id: null, value: { $avg: "$milliseconds" } } },
-            ],
-          },
+  const [
+    sessionOverview,
+    eventOverview,
+    sources,
+    devices,
+    countries,
+    pages,
+    sections,
+    actions,
+    recentSessions,
+    recentEvents,
+  ] = await Promise.all([
+    AnalyticsSession.aggregate([
+      { $match: { lastSeenAt: { $gte: start } } },
+      {
+        $facet: {
+          sessions: [{ $count: "value" }],
+          visitors: [{ $group: { _id: "$visitorHash" } }, { $count: "value" }],
+          duration: [
+            { $project: { milliseconds: { $subtract: ["$lastSeenAt", "$startedAt"] } } },
+            { $group: { _id: null, value: { $avg: "$milliseconds" } } },
+          ],
         },
-      ]),
-      AnalyticsEvent.aggregate([
-        { $match: { occurredAt: { $gte: start } } },
-        {
-          $facet: {
-            all: [{ $count: "value" }],
-            pageViews: [{ $match: { type: "page_view" } }, { $count: "value" }],
-          },
+      },
+    ]),
+    AnalyticsEvent.aggregate([
+      { $match: { occurredAt: { $gte: start } } },
+      {
+        $facet: {
+          all: [{ $count: "value" }],
+          pageViews: [{ $match: { type: "page_view" } }, { $count: "value" }],
         },
-      ]),
-      AnalyticsSession.aggregate([
-        { $match: { lastSeenAt: { $gte: start } } },
-        { $group: { _id: "$referrerDomain", value: { $sum: 1 } } },
-        { $sort: { value: -1 } },
-        { $limit: 8 },
-      ]),
-      AnalyticsSession.aggregate([
-        { $match: { lastSeenAt: { $gte: start } } },
-        { $group: { _id: "$device", value: { $sum: 1 } } },
-        { $sort: { value: -1 } },
-      ]),
-      AnalyticsSession.aggregate([
-        { $match: { lastSeenAt: { $gte: start } } },
-        { $group: { _id: "$country", value: { $sum: 1 } } },
-        { $sort: { value: -1 } },
-        { $limit: 8 },
-      ]),
-      AnalyticsEvent.aggregate([
-        { $match: { occurredAt: { $gte: start }, type: "page_view" } },
-        { $group: { _id: "$path", value: { $sum: 1 } } },
-        { $sort: { value: -1 } },
-        { $limit: 8 },
-      ]),
-      AnalyticsEvent.aggregate([
-        { $match: { occurredAt: { $gte: start }, type: "section_view" } },
-        { $group: { _id: "$target", value: { $sum: 1 } } },
-        { $sort: { value: -1 } },
-        { $limit: 8 },
-      ]),
-      AnalyticsEvent.aggregate([
-        {
-          $match: {
-            occurredAt: { $gte: start },
-            type: { $nin: ["page_view", "section_view"] },
-          },
+      },
+    ]),
+    AnalyticsSession.aggregate([
+      { $match: { lastSeenAt: { $gte: start } } },
+      { $group: { _id: "$referrerDomain", value: { $sum: 1 } } },
+      { $sort: { value: -1 } },
+      { $limit: 8 },
+    ]),
+    AnalyticsSession.aggregate([
+      { $match: { lastSeenAt: { $gte: start } } },
+      { $group: { _id: "$device", value: { $sum: 1 } } },
+      { $sort: { value: -1 } },
+    ]),
+    AnalyticsSession.aggregate([
+      { $match: { lastSeenAt: { $gte: start } } },
+      { $group: { _id: "$country", value: { $sum: 1 } } },
+      { $sort: { value: -1 } },
+      { $limit: 8 },
+    ]),
+    AnalyticsEvent.aggregate([
+      { $match: { occurredAt: { $gte: start }, type: "page_view" } },
+      { $group: { _id: "$path", value: { $sum: 1 } } },
+      { $sort: { value: -1 } },
+      { $limit: 8 },
+    ]),
+    AnalyticsEvent.aggregate([
+      { $match: { occurredAt: { $gte: start }, type: "section_view" } },
+      { $group: { _id: "$target", value: { $sum: 1 } } },
+      { $sort: { value: -1 } },
+      { $limit: 8 },
+    ]),
+    AnalyticsEvent.aggregate([
+      {
+        $match: {
+          occurredAt: { $gte: start },
+          type: { $nin: ["page_view", "section_view"] },
         },
-        { $group: { _id: "$type", value: { $sum: 1 } } },
-        { $sort: { value: -1 } },
-        { $limit: 10 },
-      ]),
-      AnalyticsSession.find({ lastSeenAt: { $gte: start } })
-        .sort({ lastSeenAt: -1 })
-        .limit(12)
-        .select("sessionId country device referrerDomain eventCount startedAt lastSeenAt")
-        .lean(),
-      AnalyticsEvent.find({ occurredAt: { $gte: start } })
-        .sort({ occurredAt: -1 })
-        .limit(16)
-        .select("type target path occurredAt")
-        .lean(),
-    ]);
+      },
+      { $group: { _id: "$type", value: { $sum: 1 } } },
+      { $sort: { value: -1 } },
+      { $limit: 10 },
+    ]),
+    AnalyticsSession.find({ lastSeenAt: { $gte: start } })
+      .sort({ lastSeenAt: -1 })
+      .limit(12)
+      .select("sessionId country device referrerDomain eventCount startedAt lastSeenAt")
+      .lean(),
+    AnalyticsEvent.find({ occurredAt: { $gte: start } })
+      .sort({ occurredAt: -1 })
+      .limit(16)
+      .select("type target path occurredAt")
+      .lean(),
+  ]);
 
   const sessionData = sessionOverview[0] || {};
   const eventData = eventOverview[0] || {};
